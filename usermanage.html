@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+  <div class="wrapper" id="allcontent">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <!-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul> -->
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="../hcpos" class="nav-link ">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>            
+          </li>
+
+
+          <li class="nav-item">
+            <a href="pos.html" class="nav-link ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-info">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ord.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                
+              </p><span class="right badge badge-info" id="navBadge"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="orderhistory.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manprod.html" class="nav-link">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Manage Product
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticket.html" class="nav-link">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>
+                Customer Tickets
+              </p>
+              <span class="right badge badge-info" id="navBadgeTicket"></span>
+            </a>
+          </li>
+<!-- 
+          <li class="nav-item">
+            <a href="chat.html" class="nav-link">
+              <i class="nav-icon fas fa-comment-dots"></i>
+              <p>
+                Chat
+              </p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="feedback.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="salesreport.html" class="nav-link ">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Sales Report
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="maginv.html" class="nav-link ">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Inventory
+              </p>
+              <span class="right badge text-danger" style="display: none; font-size: 18px;" id="badge-info"><i class="fas fa-exclamation-triangle"></i></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="usermanage.html" class="nav-link active">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Manage User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="audit.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Audit Logs
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <div class="sidebar-custom">
+      <!-- <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a> -->
+      <!-- <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a> -->
+    </div>
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row invisible">`</div>
+        <!-- Info boxes -->
+        <div class="row mt-2" style="justify-content: center">
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning">
+              <div class="btn btn-sm " style="width: 100%; outline: none;" onclick="openTab(event, 'tab1')">Employees</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning"> 
+              <div class="btn btn-sm " style="width: 100%; outline: none;"  onclick="openTab(event, 'tab2')">Customers</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning mb-3">
+              <div class="btn btn-sm " style="width: 100%; outline: none;"  onclick="openTab(event, 'tab4')">Register Employee</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">User Management</h3>                
+              </div>
+              <div class="card-body">
+                
+                <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <div id="tab1" class="tab-content">
+
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th hidden>Role</th>
+                    <th hidden>Address</th>
+                    <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                
+                    </tbody>
+
+                  </table>
+                
+                
+                </div>
+
+                <div id="tab2" class="tab-content " style="display: none;">
+                <table id="example2" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Verification</th>
+                    <th hidden>User ID</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                                                          
+                  </tbody>
+
+                </table>
+
+                </div>
+
+                <div id="tab4" class="tab-content " style="display: none;">
+
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Add Employee Account</h3>
+                    </div>
+                    <form id="employeeForm" method="post" action="php/adduser.php" enctype="multipart/form-data">
+                    <div class="row">
+
+                      
+                      <div class="col-12 col-sm-4 col-md-4">
+                        <img src="dist/img/default-150x150.png" style="width: 100%; background: white;" id="preview">
+                        <input type="file" name="file" id="imgfile" onchange="previewImage(event)" hidden>
+                      <label for="imgfile" class="btn btn-sm btn-warning mt-1" style="width: 100%">Upload</label>
+                      <span id="uploadMessage" class="text-danger" style="display: none;">* Please select an image.</span>
+                      </div>
+
+                      <div class="col-12 col-sm-8 col-md-8">
+                        <input type="text" name="employeeName" class="form-control mb-2" placeholder="Employee Name" autocomplete="off" oninput="convertToTitleCase(this)">
+                        <span id="employeeNameMessage" class="text-danger" style="display: none;">* Employee Name is required.</span>
+
+                        <input type="email" name="employeeEmail" class="form-control mb-2" placeholder="employeemail@example.com" autocomplete="off">
+                        <span id="employeeEmailMessage" class="text-danger" style="display: none;">* Employee Email is required.</span>
+
+                        <div class="input-group mb-2">
+                            <input type="password" name="employeePassword" id="employeePassword" class="form-control" placeholder="••••••••" autocomplete="off">
+                            <span id="employeePasswordMessage" class="text-danger" style="display: none;">
+                                * Strong password is required.
+                                * At least 8 characters.
+                            </span>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><button class="btn btn-tool" type="button" id="showPassword"><i class="fas fa-eye" title="Show Password"></i></button></span>
+                            </div>
+                        </div>
+                        
+
+                        <div class="mb-2">
+                            <span class="mb-2">Role</span>
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="roleCash" name="accrole" value="Cashier" >
+                                <label for="roleCash" class="custom-control-label">Cashier</label>
+                              </div>
+                              <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="roleDeliver" name="accrole" value="Delivery Person" >
+                                <label for="roleDeliver" class="custom-control-label">Delivery Person</label>
+                              </div>
+                              <span id="employeeRoleMessage" class="text-danger" style="display: none;">* Select role of employee.</span>
+                        </div>
+
+                        <div class="mb-2">
+                            <span class="mb-2">Additional Details</span>
+                            <input type="text" name="employeeAddress" class="form-control mb-2" placeholder="Employee Address" autocomplete="off" oninput="convertToTitleCase(this)">
+                            <span id="employeeAddressMessage" class="text-danger" style="display: none;">* Employee Address is required.</span>
+                            <input type="text" name="employeeContact" class="form-control mb-2" placeholder="+63" autocomplete="off" oninput="numberContact(this)">
+
+                            
+                        </div>
+                 
+
+                      </div>
+
+                    
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-4 col-md-4 mb-2 invisible"></div>
+                      <button name="add" class="btn btn-warning btn-sm col-12 col-sm-4 col-md-4 mb-2">Create</button>
+                      <div class="col-12 col-sm-4 col-md-4 mb-2 invisible"></div>
+                    </div>
+
+
+
+                    </form>
+                    
+                  </div>                 
+                  
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+              </div>
+              
+            </div>
+          </div>
+          
+
+
+        </div>
+
+
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">Success</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Data inserted successfully.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Fail Modal -->
+<div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Failed to insert data.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Fail Modal -->
+<div class="modal fade" id="screenModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              You are required to use desktop browser...
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Empty Modal -->
+<div class="modal fade" id="failModal2" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Fill all data neede before submitting.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Are you sure you want to delete this item?
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="updateForm" action="php/updateuser.php" method="post">
+          <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Edit Employee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              
+                <div class="row mb-2">
+                  <div class="col-12 col-sm-6 col-md-6">
+                    <img src="dist/img/default-150x150.png" id="updateImg" alt="" style="width: 100%;">
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-6">
+                    <input type="text" name="updateID" id="updateID" value="" hidden>
+                    <input type="text" name="updateName" id="updateName" class="form-control mb-2" placeholder="Employee Name" oninput="convertToTitleCase(this)">
+                    <input type="email" name="updateEmail" id="updateEmail" class="form-control mb-2" placeholder="Employee Email" >
+                    <input type="password" name="updatePassword" id="updatePassword" class="form-control mb-2" placeholder="••••••••" >
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-12 col-sm-12 col-md-12">
+                  <div class="input-group mb-2">
+                    <div class="input-group-append">
+                      <span class="input-group-text">Role :</span>
+                    </div>
+                    <input type="text" id="updateRole" class="form-control" placeholder="Role" readonly>
+                  </div>
+                  <span>Addtional Details</span><br>
+                  <input type="text" name="updateAddress" id="updateAddress" class="form-control mb-2" placeholder="Employee Address" oninput="convertToTitleCase(this)" >
+                  <input type="text" name="updateContact" id="updateContact" class="form-control" placeholder="Employee Contact" oninput="numberContact(this)" >
+                  </div>
+                </div>
+                              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-warning" id="updateUser">Save Changes</button>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<!-- View Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="customerForm">
+          <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Customer Info</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+
+            
+              
+                <div class="row mb-2">
+                  <div class="col-12 col-sm-12 col-md-12">
+                    <input type="text" name="customerID" id="customerID" hidden>
+                    <input type="text" id="viewName" class="form-control mb-2" placeholder="Customer Name" oninput="convertToTitleCase(this)" readonly>
+                    <input type="email" id="viewEmail" class="form-control mb-2" placeholder="Customer Email" readonly>
+                    <div class="input-group mb-2">
+                      <div class="input-group-append">
+                        <span class="input-group-text">Status :</span>
+                      </div>
+                      <input type="text" id="viewStatus" name="customerStatus" class="form-control" placeholder="Role" readonly>
+                    </div>
+                    <span>Addtional Details</span><br>
+                  <input type="text" id="viewAddress" class="form-control mb-2" placeholder="Customer Address" oninput="convertToTitleCase(this)" readonly>
+                  <input type="text" id="viewContact" class="form-control" placeholder="Customer Contact" oninput="numberContact(this)" readonly>
+
+                  </div>
+                </div>
+                              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-warning" id="banButton">Ban</button>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- Fail Modal -->
+<div class="modal fade" id="logfailModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Session Ended.<br>
+              Login again to use...
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+
+
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<script>
+
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+      if (!role || !userid) {
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#logfailModal').modal('show');
+        // Listen for the modal close event
+        $('#logfailModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#logfailModal').modal('show');
+        // Listen for the modal close event
+        $('#logfailModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();  
+      
+  document.addEventListener('DOMContentLoaded', function () {
+    const previewImage = document.getElementById('preview');
+    const imageInput = document.getElementById('imgfile');
+
+    imageInput.addEventListener('change', function () {
+        const selectedFile = imageInput.files[0];
+        if (selectedFile) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Resize the image
+                resizeImage(e.target.result, 150, 150, function (resizedDataURL) {
+                    previewImage.src = resizedDataURL;
+                });
+            };
+
+            reader.readAsDataURL(selectedFile);
+        }
+    });
+
+    function resizeImage(src, width, height, callback) {
+        const img = new Image();
+        img.src = src;
+
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = width;
+            canvas.height = height;
+          
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const resizedDataURL = canvas.toDataURL('image/jpeg'); // Change to 'image/png' if needed
+
+            if (callback && typeof callback === 'function') {
+                callback(resizedDataURL);
+            }
+        };
+    }
+});
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+      const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+      const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+      const buttonsExample3 = document.querySelectorAll('#example3 .btn-sm');
+      const buttonsExample1d = document.querySelectorAll('#example1 .del');
+      const buttonsExample2d = document.querySelectorAll('#example2 .del');
+      const buttonsExample3d = document.querySelectorAll('#example3 .del');
+    const newButtonClass = switchInput.checked ? 'btn-info' : 'btn-light';
+    const newButtonClassd = switchInput.checked ? 'btn-danger' : 'btn-light';
+    const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+
+    // Update button classes for all examples
+    [buttonsExample1, buttonsExample2, buttonsExample3].forEach(buttons => {
+        buttons.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+    });
+
+    // Update button classes for all examples
+    [buttonsExample1d, buttonsExample2d, buttonsExample3d].forEach(buttons => {
+        buttons.forEach(button => {
+            button.classList.remove('btn-light', 'btn-danger');
+            button.classList.add(newButtonClassd);
+        });
+    });
+
+    // Update the sidebar class
+    sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+    sidebar.classList.add(newSidebarClass);
+
+    // Update body and navbar classes
+    if (switchInput.checked) {
+        body.classList.remove('dark-mode');
+        navbar.classList.remove('navbar-dark');
+        navbar.classList.add('navbar-warning');
+        switchInput.nextElementSibling.hidden = true;
+        switchInput.nextElementSibling.nextElementSibling.hidden = false;
+    } else {
+        body.classList.add('dark-mode');
+        navbar.classList.remove('navbar-warning');
+        navbar.classList.add('navbar-dark');
+        switchInput.nextElementSibling.hidden = false;
+        switchInput.nextElementSibling.nextElementSibling.hidden = true;
+    }
+
+    // Save switch state to localStorage
+    localStorage.setItem('darkMode', switchInput.checked);
+}
+
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+});
+
+</script>
+
+<script>
+  let activeTab = 'tab1'; // Set the default active tab to 'tab1'
+
+  function openTab(evt, tabName) {
+      // Get all tab content elements
+      const tabContents = document.getElementsByClassName('tab-content');
+
+      // Hide all tab contents
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove 'active' class from all tab links
+      const tabLinks = document.getElementsByClassName('tab-link');
+      for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = 'block';
+
+      // Add 'active' class to the clicked tab link
+      evt.currentTarget.classList.add('active');
+
+      // Update the active tab variable
+    activeTab = tabName;
+
+      // Remove focus from the clicked button after a slight delay
+      setTimeout(() => {
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.blur();
+    }
+}, 10);
+    }
+
+
+</script>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const uploadMessage = document.getElementById('uploadMessage');
+    const imgFileInput = document.getElementById('imgfile');
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (!imgFileInput.files.length) {
+            event.preventDefault(); // Prevent form submission
+            uploadMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    // Hide the message when an image is selected
+    imgFileInput.addEventListener('input', function () {
+        uploadMessage.style.display = 'none';
+    });
+});
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const employeeNameMessage = document.getElementById('employeeNameMessage');
+    const employeeNameInput = document.querySelector('input[name="employeeName"]');
+    const employeeAddressInput = document.querySelector('input[name="employeeAddress"]');
+    const employeeAddressMessage = document.querySelector('employeeAddressMessage');
+    const employeePasswordInput = document.querySelector('input[name="employeePassword"]');
+    const employeePasswordMessage = document.querySelector('employeePasswordMessage');
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (employeeNameInput.value.trim() === '') {
+            event.preventDefault(); // Prevent form submission
+            employeeNameMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (employeeAddressInput.value.trim() === '') {
+            event.preventDefault(); // Prevent form submission
+            employeeAddressMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (employeePasswordInput.value.trim() === '') {
+            event.preventDefault(); // Prevent form submission
+            employeePasswordMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    // Hide the message when the user starts typing in the input field
+    employeeNameInput.addEventListener('input', function () {
+        employeeNameMessage.style.display = 'none';
+    });
+
+    // Hide the message when the user starts typing in the input field
+    employeeAddressInput.addEventListener('input', function () {
+        employeeAddressMessage.style.display = 'none';
+    });
+
+    // Hide the message when the user starts typing in the input field
+    employeePasswordInput.addEventListener('input', function () {
+        employeePasswordMessage.style.display = 'none';
+    });
+});
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const employeEmailMessage = document.getElementById('employeeEmailMessage');
+    const employeeEmailInput = document.querySelector('input[name="employeeEmail"]');
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (employeeEmailInput.value.trim() === '') {
+            event.preventDefault(); // Prevent form submission
+            employeeEmailMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    // Hide the message when the user starts typing in the input field
+    employeeEmailInput.addEventListener('input', function () {
+        employeeEmailMessage.style.display = 'none';
+    });
+});
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const employeeRoleMessage = document.getElementById('employeeRoleMessage');
+    const radioButtons = document.querySelectorAll('[name="role"]');
+
+    function validateRadioButtons() {
+            if (!Array.from(radioButtons).some(button => button.checked)) {
+                employeeRoleMessage.style.display = 'block';
+                return false; // Validation failed
+            }
+        
+        employeeRoleMessage.style.display = 'none';
+        return true; // Validation passed
+    }
+
+    // Validate radio buttons when the form is submitted
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (!validateRadioButtons()) {
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+
+    // Hide the message when a radio button is selected
+    radioButtons.forEach(button => {
+        button.addEventListener('change', function () {
+            validateRadioButtons();
+        });
+    });
+
+    
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    function fetchEmployees() {
+      // Destroy the existing DataTable instance
+      if ($.fn.DataTable.isDataTable('#example1')) {
+                $('#example1').DataTable().destroy();
+            }
+    
+    $.ajax({
+        url: 'php/employeefetch.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          console.log("Drink Fetched");
+            data.sort((a, b) => a.fullname.localeCompare(b.fullname));
+            $('#example1 tbody').empty();
+
+            
+
+            $.each(data, function(index, employee) {
+
+                $('#example1 tbody').append(`
+                    <tr>
+                        <td><img src="uploads/${employee.userimg}" style="width: 100px; margin: 0;">
+                          <p hidden>uploads/${employee.userimg}</p></td>
+                        <td>${employee.userid}</td> <!-- Display the formatted prodid -->
+                        <td>${employee.fullname}</td>
+                        <td>${employee.email}</td>
+                        <td>${employee.contactnum}</td>
+                        <td hidden>${employee.accrole}</td>
+                        <td hidden>${employee.address}</td>
+                        <td>
+                            <button class="btn btn-sm pri btn-light rounded-lg edit-button" data-target="#modal-lg"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm del btn-light rounded-lg delete-button" data-prodid="${employee.userid}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i></button>
+                        </td>
+                    </tr>
+                `);
+
+                
+            });
+
+            // Initialize DataTables and Buttons
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+
+    function fetchCustomers() {
+              // Destroy the existing DataTable instance
+              if ($.fn.DataTable.isDataTable('#example2')) {
+                $('#example2').DataTable().destroy();
+            }
+        $.ajax({
+            url: 'php/customerfetch.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+              data.sort((a, b) => a.fullname.localeCompare(b.fullname));
+                $('#example2 tbody').empty();
+                
+                $.each(data, function(index, customer) {
+                
+                    
+                    $('#example2 tbody').append(`
+                        <tr>
+                            <td>${customer.fullname}</td>
+                            <td>${customer.email}</td>
+                            <td>${customer.contactnum}</td>
+                            <td>${customer.address}</td>
+                            <td>${customer.verified}</td>
+                            <td hidden>${customer.userid}</td>
+                            <td><button class="btn btn-sm pri btn-light rounded-lg edit-button"><i class="fas fa-eye"></i>View</button></td>                
+                        </tr>
+                    `);
+                });
+
+            
+                // Initialize DataTables and Buttons
+      $('#example2').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+                console.log(data);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    function fetchData(){
+      fetchEmployees();
+      fetchCustomers();      
+    }
+
+    fetchData();
+
+    let prodidToDelete; // Declare the variable at a higher scope
+
+    // Add a click event handler for the delete button
+    $(document).on('click', '.delete-button', function() {
+        prodidToDelete = $(this).data('prodid'); // Store the prodid in the variable
+        $('#confirmDelete').data('prodid', prodidToDelete); // Store the prodid in the confirmation button's data attribute
+    });
+
+    // Add a click event handler for the confirm delete button
+    $('#confirmDelete').click(function() {
+        // Use the stored prodidToDelete
+        console.log('Sending prodid:', prodidToDelete);
+
+        // Send an AJAX request to delete the item
+        $.ajax({
+            url: 'php/deleteuser.php',
+            type: 'POST',
+            data: { prodid: prodidToDelete },
+            contentType: 'application/x-www-form-urlencoded', // Set content type
+            dataType: 'json', // Set expected data type
+            success: function(response) {
+              console.log(response);
+                if (response.success === true) {
+                    // Item deleted successfully
+                    
+                    fetchData(); // or fetchFood() depending on the context
+                    $('#deleteModal').modal('hide'); // Hide the delete confirmation modal
+                } else {
+                    // Failed to delete
+                    console.error('Failed to delete item.');
+                }
+            },
+            error: function(xhr, status, error) {
+              console.error('XHR Object:', xhr); // Log the entire xhr object
+              console.error('Error:', error); // Log the error message
+              console.error('Response Text:', xhr.responseText); // Log the error response text
+            }
+        });
+    });
+
+    $(document).on('click', '.btn.edit-button', function() {
+    // Get the product data from the row
+    const row = $(this).closest('tr');
+
+    switch (activeTab){
+      case 'tab1':
+        const imgcol = row.find('td:first-child'); // Find the first <td> element
+
+        // Check if an <img> element exists
+        const imgElement = imgcol.find('img');
+        
+        if (imgElement.length > 0) {
+            // Get the src attribute of the <img> element
+            const imgsrc = imgElement.attr('src');
+            console.log("Image Source: ", imgsrc);
+
+            const empID = row.find('td:nth-child(2)').text(); 
+            
+            const empName = row.find('td:nth-child(3)').text(); 
+            const empEmail = row.find('td:nth-child(4)').text(); 
+            const empContact = row.find('td:nth-child(5)').text(); 
+            const empRole = row.find('td:nth-child(6)').text();
+            const empAddress = row.find('td:nth-child(7)').text();
+
+            const imgDisplay = document.getElementById('updateImg');
+            imgDisplay.src = imgsrc;
+
+            $('#updateID').val(empID);
+            $('#updateName').val(empName);
+            $('#updateEmail').val(empEmail);
+            $('#updateRole').val(empRole);
+            $('#updateAddress').val(empAddress);
+            $('#updateContact').val(empContact);
+            
+            // Show the modal
+            $('#updateModal').modal('show');
+        } else {
+            console.log("No <img> element found in the first <td> of the row.");
+              $('#screenModal').modal('show');
+        }
+      break;
+      case 'tab2':          
+          const cusName = row.find('td:nth-child(1)').text(); 
+          const cusEmail = row.find('td:nth-child(2)').text(); 
+          const cusContact = row.find('td:nth-child(3)').text(); 
+          const cusAddress = row.find('td:nth-child(4)').text();
+          const cusVerification = row.find('td:nth-child(5)').text();
+          const cusID = row.find('td:nth-child(6)').text();
+          const banButton = $('#banButton');
+
+          console.log("Customer ID :::::", cusID);
+
+          if (cusVerification !== 'Ban') {
+          // If cusVerification is not "Ban"
+          banButton.text('Ban'); // Set the text to "Ban"
+          } else {
+              // If cusVerification is "Ban"
+              banButton.text('Unban'); // Set the text to "Unban"
+          }
+
+          $('#customerID').val(cusID);
+          $('#viewName').val(cusName);
+          $('#viewEmail').val(cusEmail);
+          $('#viewContact').val(cusContact);
+          $('#viewAddress').val(cusAddress);
+          $('#viewStatus').val(cusVerification);
+          
+          
+          // Show the modal
+          $('#viewModal').modal('show');
+      break;
+    }
+    
+    
+});
+
+
+    
+    $('#employeeForm').submit(function(e) {
+        e.preventDefault();
+
+        // Validate inputs before proceeding
+        if (!validateInputs()) {
+            $('#failModal2').modal('show'); // Show the fail modal
+            return; // Exit the function if validation fails
+        }
+
+        var formData = new FormData(this);
+        var imgfile = $('#imgfile')[0].files[0];
+        formData.append('file', imgfile);
+
+        formData.append('userid', userid);
+        formData.append('role', role);
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Clear the inputs and reset image source
+                $('#imgfile').val(''); // Clear file input
+                $('#preview').attr('src', 'dist/img/default-150x150.png'); // Reset image source
+                $('input[name="employeeName"]').val(''); 
+                $('#input[name="employeePassword"]').val('');
+                $('input[name="role"]').prop('checked', false); 
+                $('input[name="employeeEmail"]').val(''); 
+                $('input[name="employeeAddress"]').val(''); 
+                $('#successModal').modal('show');
+                fetchData();
+                
+                
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                $('#failModal').modal('show');
+            }
+        });
+    });
+
+    $(document).on('click', '#updateUser', function() {
+    // Create a new FormData object
+    const formData = new FormData($('#updateForm')[0]);
+
+    formData.append('userid', userid);
+    formData.append('role', role);
+
+    // Perform an AJAX POST request
+    $.ajax({
+        type: 'POST',
+        url: 'php/updateuser.php', // Specify your PHP script URL
+        data: formData,
+        processData: false, 
+        contentType: false, 
+        success: function(response) {
+          console.log(response);
+            // Handle the success response from the server
+            // You can update the UI or show a success message here
+            console.log('User updated successfully');
+            // Close the modal
+            $('#updateModal').modal('hide');
+            $('#successModal').modal('show');
+                fetchData();
+        },
+        error: function(xhr, status, error) {
+            // Handle any errors that occur during the request
+            console.error('Error:', error);
+            // You can display an error message to the user here
+        }
+    });
+});
+
+$(document).on('click', '#banButton', function() {
+
+    // Create a new FormData object
+    const formData = new FormData($('#customerForm')[0]);
+
+    formData.append('userid', userid);
+    formData.append('role', role);
+
+    // Perform an AJAX POST request
+    $.ajax({
+        type: 'POST',
+        url: 'php/ban.php', // Specify your PHP script URL
+        data: formData,
+        processData: false, 
+        contentType: false, 
+        success: function(response) {
+          console.log(response);
+            // Handle the success response from the server
+            // You can update the UI or show a success message here
+            console.log('User updated successfully');
+            // Close the modal
+            $('#viewModal').modal('hide');
+            $('#successModal').modal('show');
+                fetchData();
+        },
+        error: function(xhr, status, error) {
+            // Handle any errors that occur during the request
+            console.error('Error:', error);
+            // You can display an error message to the user here
+        }
+    });
+});
+    
+});
+
+
+
+
+function validateInputs() {
+    var employeeName = $('input[name="employeeName"]').val();
+    var employeeEmail = $('input[name="employeeEmail"]').val();
+    var employeePassword = $('input[name="employeePassword"]').val();
+    var role = $('input[name="role"]:checked').val();
+    var employeAddress = $('input[name="employeeAddress"]').val();
+    
+    var imgfile = $('#imgfile')[0].files[0];
+
+    if (
+        employeeName.trim() === '' ||
+        employeeEmail.trim() === '' ||
+        employeePassword.trim() === '' ||
+        employeAddress.trim() === '' ||
+        role === '' ||
+        !imgfile
+    ) {
+        return false;
+    }
+
+    return true;
+}
+
+
+
+  </script>
+
+<script>
+    function convertToTitleCase(input) {
+        const words = input.value.toLowerCase().split(' ');
+
+    for (let i = 0; i < words.length; i++) {
+        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
+
+    input.value = words.join(' ');
+    }
+
+    function numberContact(input) {
+    let cleanedInput = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+
+    // Limit the input to 10 digits
+    if (cleanedInput.length > 10) {
+        cleanedInput = cleanedInput.slice(0, 12);
+    }
+
+    // Check if cleaned input starts with "+63"
+    if (cleanedInput.startsWith('63')) {
+        // Remove the "63" prefix if it exists
+        input.value = '+63 ' + cleanedInput.slice(2);
+    } else {
+        input.value = '+63 ' + cleanedInput;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('employeePassword');
+            const showPasswordButton = document.getElementById('showPassword');
+            const icon = showPasswordButton.querySelector('i');
+
+            showPasswordButton.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                    icon.title = 'Hide Password';
+                    passwordInput.placeholder = 'Password';
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                    icon.title = 'Show Password';
+                    passwordInput.placeholder = '••••••••';
+                }
+            });
+        });
+
+
+
+        function fetchNew() {
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadge').text(count);
+      }      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchTicketNew() {
+
+$.ajax({
+  url: 'php/ticketNew.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+
+      console.log(data);
+
+    let countTicketNew = 0;
+    $.each(data, function(index, item) {
+
+
+        countTicketNew++;
+      
+     
+    });      
+    console.log(`Count new ticket:: ${countTicketNew}`);
+    if (countTicketNew > 0){
+    $('#navBadgeTicket').text(countTicketNew);
+    } 
+
+
+    console.log(data);
+  },
+  error: function(xhr, status, error) {
+    console.error(error);
+  }
+});
+}
+
+function fetchInventory() {
+
+$.ajax({
+    url: 'php/inventoryfetch.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        let count = 0;
+        $.each(data, function(index, item) {
+            var status;
+            if (item.productsize <= 25){
+              count++;
+            }
+        });
+
+        if (count > 0){
+          $('#badge-info').css('display', 'block');
+        }
+
+        console.log(data);
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+}
+
+fetchInventory();
+
+  fetchTicketNew();
+
+fetchNew();
+</script>
+
+
+</body>
+</html>

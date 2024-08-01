@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body id="display">
+  <span id="textMeasurementSpan" style="display: none;">NEW MESSAGE REPLIED BY CUSTOMER</span>
+
+  <script>
+      // Get the text content
+      const textToMeasure = document.getElementById('textMeasurementSpan').textContent;
+
+      // Create an inline element to measure text width
+      const span = document.createElement('span');
+      span.style.visibility = 'hidden'; // Hide the element
+
+      // Set the font style (you can adjust this as needed)
+      span.style.font = '16px Arial';
+
+      // Set the text content
+      span.textContent = textToMeasure;
+
+      // Append the span to the body
+      document.body.appendChild(span);
+
+      // Measure the width of the text
+      const textWidth = span.offsetWidth;
+
+      // Remove the measurement element
+      document.body.removeChild(span);
+
+      console.log(`The length of the text "${textToMeasure}" in pixels is: ${textWidth}px`);
+  </script>
+  
+</body>
+</html>

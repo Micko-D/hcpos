@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+  <style>
+    #floatingButton {
+  position: fixed;
+  bottom: 20%;
+  right: 40%;
+  padding: 10px 20px;
+  
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#floatingButton:hover {
+  background-color: #0056b3;
+}
+
+
+  </style>
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+  <div id="allcontent">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="../hcpos" class="nav-link ">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>            
+          </li>
+
+
+          <li class="nav-item">
+            <a href="pos.html" class="nav-link ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ord.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                <span class="right badge badge-danger">3</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="orderhistory.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manprod.html" class="nav-link ">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Manage Product
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticket.html" class="nav-link ">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>
+                Customer Tickets
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticketreply.html" class="nav-link active">
+              <i class="nav-icon fas fa-comment-dots"></i>
+              <p>
+                Chat
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="feedback.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="salesreport.html" class="nav-link ">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Sales Report
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="maginv.html" class="nav-link ">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Inventory
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="usermanage.html" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Manage User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="audit.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Audit Logs
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+
+          
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        
+
+        <div class="row mt-2">
+
+            <div class="col-12 col-sm-12 col-md-12">
+                <!-- DIRECT CHAT -->
+                <div class="card direct-chat direct-chat-warning">
+                  <div class="card-header">
+                    <h3 class="card-title">Messages</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
+                        <i class="fas fa-comments"></i>
+                      </button>
+
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <!-- Conversations are loaded here -->
+                    <div class="direct-chat-messages" id="displayMessage"  style="height: calc(100vh - 200px);">
+                     
+                      <!-- <div class="direct-chat-msg">
+                        <div class="direct-chat-infos clearfix">
+                          <span class="direct-chat-name float-left">User 1</span>
+                          <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                        </div>
+                        <img class="direct-chat-img" src="dist/img/AdminLTELogo.png" alt="message user image">
+                        <div class="direct-chat-text" style="word-wrap: normal; max-width: 500px;">
+                          Is this template really for free? That's unbelievable!
+                        </div>
+                      </div>
+                      <div class="direct-chat-msg right">
+                        <div class="direct-chat-infos clearfix">
+                          <span class="direct-chat-name float-right">User 2</span>
+                          <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                        </div>
+
+                        <div class="direct-chat-msg right" style="float: right;">
+                        <img class="direct-chat-img" src="dist/img/AdminLTELogo.png" alt="message user image">
+                        <div class="direct-chat-text float-right" style="margin-right: 10px; word-wrap: normal; max-width: 500px;">
+                          You better believe it!
+                        </div>
+                        </div>
+                        
+                      </div> -->
+                      
+                    </div>
+                  
+                    
+                    <!-- Contacts are loaded here -->
+                    <div class="direct-chat-contacts" style="height: calc(100vh - 200px);">
+                      <ul class="contacts-list" id="displayContacts">
+                        <li>
+                          <a href="#" data-widget="chat-pane-toggle">
+                            <img class="contacts-list-img" src="dist/img/AdminLTELogo.png" alt="User Avatar">
+
+                            <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                User 3
+                                <small class="contacts-list-date float-right">2/28/2015</small>
+                              </span>
+                              <span class="contacts-list-msg">How have you been? I was...</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" data-widget="chat-pane-toggle">
+                            <img class="contacts-list-img" src="dist/img/AdminLTELogo.png" alt="User Avatar">
+
+                            <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                User 4
+                                <small class="contacts-list-date float-right">2/23/2015</small>
+                              </span>
+                              <span class="contacts-list-msg">I will be waiting for...</span>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" data-widget="chat-pane-toggle">
+                            <img class="contacts-list-img" src="dist/img/AdminLTELogo.png" alt="User Avatar">
+
+                            <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                User 5
+                                <small class="contacts-list-date float-right">2/20/2015</small>
+                              </span>
+                              <span class="contacts-list-msg">I'll call you back at...</span>
+                            </div>
+                            <!-- /.contacts-list-info -->
+                          </a>
+                        </li>
+                        <!-- End Contact Item -->
+                        <li>
+                          <a href="#" data-widget="chat-pane-toggle">
+                            <img class="contacts-list-img" src="dist/img/AdminLTELogo.png" alt="User Avatar">
+
+                            <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                User 6
+                                <small class="contacts-list-date float-right">2/10/2015</small>
+                              </span>
+                              <span class="contacts-list-msg">Where is your new...</span>
+                            </div>
+                            <!-- /.contacts-list-info -->
+                          </a>
+                        </li>
+                        <!-- End Contact Item -->
+                        <li>
+                          <a href="#" data-widget="chat-pane-toggle">
+                            <img class="contacts-list-img" src="dist/img/AdminLTELogo.png" alt="User Avatar">
+
+                            <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                User 7
+                                <small class="contacts-list-date float-right">1/27/2015</small>
+                              </span>
+                              <span class="contacts-list-msg">Can I take a look at...</span>
+                            </div>
+                            <!-- /.contacts-list-info -->
+                          </a>
+                        </li>
+                        <!-- End Contact Item -->
+                        <li>
+                          <a href="#" data-widget="chat-pane-toggle">
+                            <img class="contacts-list-img" src="dist/img/AdminLTELogo.png" alt="User Avatar">
+
+                            <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                User 8
+                                <small class="contacts-list-date float-right">1/4/2015</small>
+                              </span>
+                              <span class="contacts-list-msg">Never mind I found...</span>
+                            </div>
+                            <!-- /.contacts-list-info -->
+                          </a>
+                        </li>
+                        <!-- End Contact Item -->
+                      </ul>
+                      <!-- /.contacts-list -->
+                    </div>
+                    <!-- /.direct-chat-pane -->
+                  </div>
+                  <!-- /.card-body -->
+                  <button id="floatingButton" class="btn-info" style="display: none;">Scroll to Bottom</button>
+                  <div class="card-footer">
+                    <form id="messageForm" method="post">
+                      <div class="input-group">
+                        <input type="text" name="message" id="messageInput" placeholder="Type Message ..." autocomplete="off" class="form-control">
+                        <span class="input-group-append">
+                          <button type="button" class="btn btn-warning" id="messageSendButton">Send</button>
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.card-footer-->
+                </div>
+                <!--/.direct-chat -->
+              </div>
+              <!-- /.col -->
+          
+
+
+        </div>
+
+
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+                  <!-- Fail Modal -->
+                  <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Session Ended.<br>
+                                Login again to use...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+</div>
+
+
+
+<!-- ./wrapper -->
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<script>
+
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      if (!role || !userid) {
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+}
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();  
+
+      document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+    const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+        const newButtonClass = switchInput.checked ? 'btn-warning' : 'btn-light';
+        const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+        
+        sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+        sidebar.classList.add(newSidebarClass);
+
+        buttonsExample1.forEach(button => {
+            button.classList.remove('btn-light', 'btn-warning');
+            button.classList.add(newButtonClass);
+        });
+
+        buttonsExample2.forEach(button => {
+            button.classList.remove('btn-light', 'btn-warning');
+            button.classList.add(newButtonClass);
+        });
+
+        if (switchInput.checked) {
+            body.classList.remove('dark-mode');
+            navbar.classList.remove('navbar-dark');
+            navbar.classList.add('navbar-warning');
+            switchInput.nextElementSibling.hidden = true;
+            switchInput.nextElementSibling.nextElementSibling.hidden = false;
+        } else {
+            body.classList.add('dark-mode');
+            navbar.classList.remove('navbar-warning');
+            navbar.classList.add('navbar-dark');
+            switchInput.nextElementSibling.hidden = false;
+            switchInput.nextElementSibling.nextElementSibling.hidden = true;
+        }
+
+        // Save switch state to localStorage
+        localStorage.setItem('darkMode', switchInput.checked);
+    }
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+});
+
+
+      // Initialize a variable to store the latest message timestamp
+let latestTimestamp = null;
+let newTimestamp = null;
+let stateofmessage = null;
+
+function fetchMessages(){
+
+  const displayMessage = document.getElementById('displayMessage');
+    currentScrollTop = displayMessage.scrollTop;
+  const convoID = getURLParameter('chatID');
+
+  console.log("This is the chat ID" , convoID);
+
+  $.ajax({
+    url: 'php/getMessages.php',
+    type: 'POST',
+    data: {
+      convoID: convoID
+    },
+    success: function(response){
+      console.log(response);
+
+      $('#displayMessage').empty();
+
+      $.each(response, function(index, item) {
+
+      var img = '';
+
+        if (item.userimg === ""){
+          img = 'dist/img/AdminLTELogo.png';
+        }else{
+          img = `uploads/${item.userimg}`;
+        }
+
+        // Input date and time in ISO format
+const inputDate = new Date(item.datetimemess);
+
+// Create an array of month names
+const months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+// Get the day of the month
+const day = inputDate.getDate();
+
+// Get the abbreviated month name
+const month = months[inputDate.getMonth()];
+
+// Get the hours and minutes
+let hours = inputDate.getHours();
+let ampm = "am";
+
+// Convert hours to 12-hour format and set am/pm
+if (hours >= 12) {
+  ampm = "pm";
+  if (hours > 12) {
+    hours -= 12;
+  }
+}
+
+// Get the minutes
+const minutes = inputDate.getMinutes();
+
+// Create the formatted date and time string
+const formattedDate = `${day} ${month} ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
+ 
+
+if (item.state === "Receive") {
+    console.log("Message is Receive");
+
+    // Create a temporary hidden div to measure the content width
+    const tempDiv = document.createElement("div");
+    tempDiv.style.visibility = "hidden";
+    tempDiv.style.position = "absolute";
+    tempDiv.style.width = "auto";
+    tempDiv.style.whiteSpace = "nowrap";
+    tempDiv.textContent = item.message;
+
+    // Append the temporary div to the document body
+    document.body.appendChild(tempDiv);
+
+    // Calculate the content width
+    const contentWidth = tempDiv.clientWidth;
+
+    // Determine the max-width based on the content width
+    let message = '';
+    if (contentWidth > 500) {
+        message = `
+        <div class="direct-chat-text" style="word-wrap: break-word; max-width: 500px;">
+            ${item.message}
+        </div>
+        `;
+    }else{
+      message = `
+        <div class="direct-chat-text" style="word-wrap: break-word; width: fit-content; block-size: fit-content;">
+            ${item.message}
+        </div>
+        `;
+    }
+
+    console.log("Content WIDTH:", contentWidth);
+
+    // Remove the temporary div
+    document.body.removeChild(tempDiv);
+
+    $('#displayMessage').append(`
+    <!-- Message. Default to the left -->
+    <div class="direct-chat-msg">
+        <div class="direct-chat-infos clearfix">
+            <span class="direct-chat-name float-left">${item.fullname}</span>
+            <span class="direct-chat-timestamp" style="margin-left: 10px;">${formattedDate}</span>
+        </div>
+        <!-- /.direct-chat-infos -->
+        <img class="direct-chat-img" src="${img}" alt="message user image">
+        <!-- /.direct-chat-img -->
+        ${message}
+        <!-- /.direct-chat-text -->
+    </div>
+    <!-- /.direct-chat-msg -->
+    `);
+} else {
+    $('#displayMessage').append(`
+    <!-- Message to the right -->
+    <div class="direct-chat-msg right">
+        <div class="direct-chat-infos clearfix">
+            <span class="direct-chat-name float-right">${item.fullname}</span>
+            <span class="direct-chat-timestamp float-right" style="margin-right: 10px;">${formattedDate}</span>
+        </div>
+
+        <div class="direct-chat-msg right" style="float: right;">
+            <!-- /.direct-chat-infos -->
+            <img class="direct-chat-img" src="${img}" alt="message user image">
+            <!-- /.direct-chat-img -->
+            <div class="direct-chat-text float-right" style="margin-right: 10px; word-wrap: break-word; max-width: 500px;">
+                ${item.message}
+            </div>
+            <!-- /.direct-chat-text -->
+        </div>
+    </div>
+    <!-- /.direct-chat-msg -->
+    `);
+}
+
+
+      });
+
+      displayMessage.scrollTop = currentScrollTop;
+
+            // Update the latestTimestamp with the timestamp of the last received message
+            if (response.length > 0) {
+              if (latestTimestamp === null){
+                latestTimestamp = response[response.length - 1].datetimemess;
+                stateofmessage = response[response.length - 1].state;
+              }else{
+                newTimestamp = response[response.length - 1].datetimemess;
+                stateofmessage = response[response.length - 1].state;
+              }
+            }
+
+            if ((newTimestamp === null || latestTimestamp === newTimestamp) || stateofmessage === "Sent"){
+              $('#floatingButton').css('display', 'none');
+            }else{
+              $('#floatingButton').css('display', 'block');
+            }
+
+            
+                       
+
+    },
+    error: function(xhr, status, error){
+      console.error(error);
+    }
+
+  });
+
+  
+
+}
+
+function fetchContacts(){
+  $.ajax({
+    url: 'php/getContacts.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function (response){
+
+      $('#displayContacts').empty();
+      console.log(response);
+
+      const existingConvoID = new Set(); // Set to store existing 'orderid' values
+
+      $.each(response, function(index, item) {
+
+        var name = '';
+        var unread = 0;
+        var textcolor = '';
+        var unreadbadge = '';
+
+        $.each(response, function(index, item){
+          if (item.accrole === "Customer"){
+            name = item.fullname;
+          }
+
+        });
+
+        $.each(response, function(index, item){
+          if (item.readstatus === "Unread"){
+            unread += 1;
+            textcolor = 'text-light text-bold';
+          }
+
+        });
+
+        if (unread === 0){
+          unreadbadge = '';
+          textcolor = '';
+        }else{
+          unreadbadge = `<span class="badge badge-info float-right text-md">${unread}</span>`;
+        }
+
+        console.log("Number of unread messages: ", unread);
+
+
+        if (!existingConvoID.has(item.conversationid)) { // Check if the 'orderid' is already seen
+          existingConvoID.add(item.conversationid); // Add the 'orderid' to the set
+
+          var img = ''
+
+          if (item.userimg === ""){
+            img = "dist/img/AdminLTELogo.png";
+          }else{
+            img = `uploads/${item.userimg}`;
+          }
+
+                        // Input date and time in ISO format
+const inputDate = new Date(item.datetimemess);
+
+// Create an array of month names
+const months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+// Get the day of the month
+const day = inputDate.getDate();
+
+// Get the abbreviated month name
+const month = months[inputDate.getMonth()];
+
+// Get the hours and minutes
+let hours = inputDate.getHours();
+let ampm = "am";
+
+// Convert hours to 12-hour format and set am/pm
+if (hours >= 12) {
+  ampm = "pm";
+  if (hours > 12) {
+    hours -= 12;
+  }
+}
+
+// Get the minutes
+const minutes = inputDate.getMinutes();
+
+// Create the formatted date and time string
+const formattedDate = `${day} ${month} ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
+
+          $('#displayContacts').append(`
+          <li>
+                          <a href="" data-widget="chat-pane-toggle" onclick="redirectToChat('${item.conversationid}')">
+                            <img class="contacts-list-img" src="${img}" alt="User Avatar">
+
+                            <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                ${name}
+                                <small class="contacts-list-date float-right">${formattedDate}</small>
+                              </span>
+                              <span class="contacts-list-msg ${textcolor}">${item.message}</span>
+                              ${unreadbadge}
+                            </div>
+                            <!-- /.contacts-list-info -->
+                          </a>
+                        </li>
+                        `);
+
+
+      }
+
+      });
+
+      console.log(existingConvoID);
+      
+
+
+
+    },
+    error: function(xhr, status, error){
+      console.error(error);
+    }
+
+  });
+}
+
+function redirectToChat(conversationid) {
+  // Get the current URL
+  var currentURL = window.location.href;
+
+  // Check if the URL already contains a chatID parameter
+  if (currentURL.includes('chatID=')) {
+    // Replace the existing chatID parameter with the new one
+    var newURL = currentURL.replace(/chatID=\d+/g, 'chatID=' + conversationid);
+  } else {
+    // If there's no chatID parameter, simply append it
+    var newURL = currentURL + (currentURL.includes('?') ? '&' : '?') + 'chatID=' + conversationid;
+  }
+
+  // Replace the current URL without triggering a page refresh
+  window.history.replaceState(null, null, newURL);
+
+  
+
+  function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function example() {
+  fetchMessages();
+  await sleep(100); // Sleep for 2 seconds (2000 milliseconds)
+  // Scroll to the bottom
+  var displayMessageDiv = $('#displayMessage');
+  displayMessageDiv.scrollTop(displayMessageDiv[0].scrollHeight);
+}
+
+example();
+
+$.ajax({
+  url: 'php/markasread.php',
+  type: 'POST',
+  data: {
+    chatID: conversationid
+  },
+  success: function(response){
+    console.log("This chat is now read updating all in database");
+    fetchContacts();
+  },
+  error: function(xhr, status, error){
+
+  }
+});
+
+  
+}
+
+
+$(document).on('click', '#messageSendButton', function() {
+
+  const convoID = getURLParameter('chatID');
+    // Create a new FormData object
+    const formData = new FormData($('#messageForm')[0]);
+
+    formData.append('chatID', convoID)
+
+    formData.append('userid', userid);
+    
+
+    // Perform an AJAX POST request
+    $.ajax({
+        type: 'POST',
+        url: 'php/sendMessage.php', // Specify your PHP script URL
+        data: formData,
+        processData: false, 
+        contentType: false, 
+        success: function(response) {
+          console.log(response);
+
+          $('messageInput').val('');
+          $('input[name="message"]').val(''); // Clear item name input
+
+          fetchMessages();
+
+           // Scroll to the bottom
+            var displayMessageDiv = $('#displayMessage');
+            displayMessageDiv.scrollTop(displayMessageDiv[0].scrollHeight);
+            
+            // Handle the success response from the server
+            // You can update the UI or show a success message here
+            console.log('Message Sent successfully');
+
+        },
+        error: function(xhr, status, error) {
+            // Handle any errors that occur during the request
+            console.error('Error:', error);
+            // You can display an error message to the user here
+        }
+    });
+});
+
+$(document).on('click', '#floatingButton', function() {
+  console.log('Scroll to bottom is called');
+  // Scroll to the bottom
+  var displayMessageDiv = $('#displayMessage');
+  displayMessageDiv.scrollTop(displayMessageDiv[0].scrollHeight);
+
+  latestTimestamp = newTimestamp;
+  newTimestamp = null;
+  stateofmessage = null;
+});
+
+$(document).ready(function() {
+    // Add an event listener to the input field
+    $('#messageInput').keypress(function(event) {
+        if (event.which === 13) { // 13 is the key code for Enter
+            event.preventDefault(); // Prevent the default form submission behavior
+            const messageInputValue = $('#messageInput').val().trim(); // Get the trimmed input value
+            if (messageInputValue !== '') { // Check if the input is not empty
+                $('#messageSendButton').click(); // Trigger a click event on the Send button
+            }
+        }
+    });
+});
+
+
+setInterval(function() {
+    
+    fetchMessages();
+    fetchContacts();
+
+}, 500); // Check every 60 seconds (adjust as needed)
+</script>
+
+
+
+
+</body>
+</html>

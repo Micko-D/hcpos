@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+  <div class="wrapper" id="allcontent">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <!-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul> -->
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+          <li class="nav-item">
+            <a href="posemployee.html" class="nav-link ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-info">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ordemployee.html" class="nav-link active">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                
+              </p>
+              <span class="right badge badge-info" id="navBadgeOrder"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="empoloyeeorderhistory.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+        </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+          
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <section class="content-header"></section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row mt-2" style="justify-content: center">
+
+          <input id="dummyInput" style="position: absolute; left: -9999px;" />
+          <div class="col-12 col-sm-4 col-md-2">
+            <div class="small-box bg-warning">
+              <div class="btn btn-sm" style="width: 100%" onclick="openTab(event, 'tab1')">New Orders<span class="right badge badge-info" style="float: right" id="tabBadgeOrder"></span></div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-4 col-md-2">
+            <div class="small-box bg-warning"> 
+              <div class="btn btn-sm" style="width: 100%"  onclick="openTab(event, 'tab2')">Confirmed Orders</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-12 col-sm-4 col-md-2">
+            <div class="small-box mb-3 bg-warning">
+              <div class="btn btn-sm" style="width: 100%"  onclick="openTab(event, 'tab3')">Preparing Order</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-4 col-md-2">
+            <div class="small-box bg-warning"> 
+              <div class="btn btn-sm " style="width: 100%"  onclick="openTab(event, 'tab4')">Prepared Orders</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-12 col-sm-4 col-md-2">
+            <div class="small-box mb-3 bg-warning">
+              <div type="submit" class="btn btn-sm" style="width: 100%"  onclick="openTab(event, 'tab5')">Served</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Order Management</h3>                
+              </div>
+              <div class="card-body">
+                
+                <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div id="tab1" class="tab-content active">
+                  <div class="row"><h3 class="card-title">Pending Order</h3> 
+                  </div>
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Order Type</th>
+                    <th>Order Status</th>
+                    <th>Payment Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>000017</td>
+                      <td>Dine-In</td>
+                      <td>Order Submitted</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000018</td>
+                      <td>Take-Away</td>
+                      <td>Order Submitted</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000019</td>
+                      <td>Delivery</td>
+                      <td>Order Submitted</td>
+                      <td><select class="form-control">
+                        <option >Paid</option>
+                        <option selected>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>                  
+                  </tbody>
+                  
+                </table>
+                </div>
+
+                <div id="tab2" class="tab-content " style="display: none;">
+                  <div class="row"><h3 class="card-title">Confirmed Orders</h3> 
+                  </div>
+                <table id="example2" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Order Type</th>
+                    <th>Order Status</th>
+                    <th>Payment Status</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>000017</td>
+                      <td>Dine-In</td>
+                      <td>Order Confirmed</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000018</td>
+                      <td>Take-Away</td>
+                      <td>Order Confirmed</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000019</td>
+                      <td>Delivery</td>
+                      <td>Order Confirmed</td>
+                      <td><select class="form-control">
+                        <option >Paid</option>
+                        <option selected>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>                  
+                  </tbody>
+                 
+                </table>
+
+                </div>
+
+                <div id="tab3" class="tab-content " style="display: none;">
+
+                   <div class="row"><h3 class="card-title">Preparing Orders</h3> 
+                   </div>
+                <table id="example3" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Order Type</th>
+                    <th>Order Status</th>
+                    <th>Payment Status</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>000017</td>
+                      <td>Dine-In</td>
+                      <td>Preparing Order</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000018</td>
+                      <td>Take-Away</td>
+                      <td>Preparing Order</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000019</td>
+                      <td>Delivery</td>
+                      <td>Preparing Order</td>
+                      <td><select class="form-control">
+                        <option >Paid</option>
+                        <option selected>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>                  
+                  </tbody>
+                 
+                </table>
+                  
+                </div>
+
+                <div id="tab4" class="tab-content " style="display: none;">
+                   <div class="row"><h3 class="card-title">Prepared Orders</h3> 
+                   </div>
+                <table id="example4" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Order Type</th>
+                    <th>Order Status</th>
+                    <th>Payment Status</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>000017</td>
+                      <td>Dine-In</td>
+                      <td>Prepared Order</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000018</td>
+                      <td>Take-Away</td>
+                      <td>Prepared Order</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000019</td>
+                      <td>Delivery</td>
+                      <td>Prepared Order</td>
+                      <td><select class="form-control">
+                        <option >Paid</option>
+                        <option selected>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>                  
+                  </tbody>
+                 
+                </table>
+                  
+                </div>
+
+                <div id="tab5" class="tab-content " style="display: none;">
+                   <div class="row"><h3 class="card-title">Served</h3> 
+                   </div>
+                <table id="example5" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Order Type</th>
+                    <th>Order Status</th>
+                    <th>Payment Status</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>000017</td>
+                      <td>Dine-In</td>
+                      <td>Ready for Delivery</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000018</td>
+                      <td>Take-Away</td>
+                      <td>Ready to Claim</td>
+                      <td><select class="form-control">
+                        <option selected>Paid</option>
+                        <option>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>
+
+                    <tr>
+                      <td>000019</td>
+                      <td>Delivery</td>
+                      <td>Ready to Serve</td>
+                      <td><select class="form-control">
+                        <option >Paid</option>
+                        <option selected>Unpaid</option>
+                      </select></td>
+                      <td>PHP 65.00</td>
+                      <td><button class="btn btn-sm btn-light"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-comment-dots"></i></button>
+                        <button class="btn btn-sm btn-light"><i class="fas fa-utensils"></i></button></td>
+                    </tr>                  
+                  </tbody>
+                  
+                </table>
+                  
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+              </div>
+              
+            </div>
+          </div>
+          
+
+
+        </div>
+
+      </div>
+</div>
+
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Add this modal structure to your HTML -->
+<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderModalLabel">Payment Receipt</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="orderModalBody">
+        <!-- Order details will be displayed here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Add this modal structure to your HTML -->
+  <div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" id="orderDetailModalContent">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="orderModalDetailBody">
+          <!-- Order details will be displayed here -->
+        </div>
+        <div class="modal-footer" id="orderModalDetailFooter">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- Fail Modal -->
+<div class="modal fade" id="logfailModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Session Ended.<br>
+              Login again to use...
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<script>
+
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      if (!role || !userid) {
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#logfailModal').modal('show');
+        // Listen for the modal close event
+        $('#logfailModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+
+let globalUserName = '';
+
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+                  globalUserName = user.fullname;
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();  
+
+      function openTab(evt, tabName) {
+      // Get all tab content elements
+      const tabContents = document.getElementsByClassName('tab-content');
+
+      // Hide all tab contents
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove 'active' class from all tab links
+      const tabLinks = document.getElementsByClassName('tab-link');
+      for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = 'block';
+
+      // Add 'active' class to the clicked tab link
+      evt.currentTarget.classList.add('active');
+
+       
+    // Set focus to a different element (e.g., a hidden dummy input)
+    const dummyInput = document.getElementById('dummyInput');
+    dummyInput.focus();
+
+    // After a slight delay, reset focus to the body to remove button focus
+    setTimeout(() => {
+        document.body.focus();
+    }, 100); // Adjust the delay (in milliseconds) as needed
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+    const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+        const newButtonClass = switchInput.checked ? 'btn-info' : 'btn-light';
+        const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+        
+        sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+        sidebar.classList.add(newSidebarClass);
+
+        buttonsExample1.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        buttonsExample2.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        if (switchInput.checked) {
+            body.classList.remove('dark-mode');
+            navbar.classList.remove('navbar-dark');
+            navbar.classList.add('navbar-warning');
+            switchInput.nextElementSibling.hidden = true;
+            switchInput.nextElementSibling.nextElementSibling.hidden = false;
+        } else {
+            body.classList.add('dark-mode');
+            navbar.classList.remove('navbar-warning');
+            navbar.classList.add('navbar-dark');
+            switchInput.nextElementSibling.hidden = false;
+            switchInput.nextElementSibling.nextElementSibling.hidden = true;
+        }
+
+        // Save switch state to localStorage
+        localStorage.setItem('darkMode', switchInput.checked);
+    }
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+});
+</script>
+
+<script>
+ 
+ function populateOrderModal(rfid, ordertype, date, time) {
+  const modalBody = $('#orderModalBody');
+  modalBody.empty();
+
+  let orderDetailsHtml;
+
+  var subs = 0;
+  // Fetch additional data using AJAX
+  $.ajax({
+    url: 'php/ordermodalonline.php', // Replace with your API endpoint
+    type: 'GET',
+    dataType: 'json',
+    data: { rfid: rfid,
+            ordertype: ordertype,
+           orderdate: date,
+      ordertime: time },
+    success: function(ordersData) {
+      console.log(ordersData)
+
+      const orderDate = new Date(ordersData[0].orderdate);
+      const formattedDate = orderDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+   
+  orderDetailsHtml = `
+    <img src="uploads/payment/${ordersData[0].payment}" style="width: 100%"/>
+    
+  `;
+
+  modalBody.html(orderDetailsHtml);
+  $('#orderModal').modal('show');
+
+
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+      modalBody.append('<p>An error occurred while fetching order details.</p>');
+    }
+  });
+}
+
+// Function to shorten the item name
+const shortenedItemName = (itemName) => {
+  if (itemName.includes('pcs') || itemName.includes('pc')) {
+    return itemName.split(/\s+/).map(word => word.charAt(0)).join('');
+  } else {
+    return itemName.replace(/\(\d+\s*(pcs?)\)/i, '($1)');
+  }
+};
+
+function populateOrderDetailModal(rfid, ordertype, date, time) {
+  const modalBody = $('#orderModalDetailBody');
+  modalBody.empty();
+
+  let orderDetailsHtml;
+
+  var subs = 0;
+  // Fetch additional data using AJAX
+  $.ajax({
+    url: 'php/ordermodalonline.php', // Replace with your API endpoint
+    type: 'GET',
+    dataType: 'json',
+    data: { rfid: rfid,
+            ordertype: ordertype,
+           orderdate: date,
+      ordertime: time },
+    success: function(ordersData) {
+      console.log(ordersData)
+
+      const orderDate = new Date(ordersData[0].orderdate);
+      const formattedDate = orderDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+      $('#orderModalDetailFooter').empty();
+      if (ordersData[0].ordertype === 'Pick-up' || ordersData[0].ordertype === 'AR') {
+        $('#orderModalDetailFooter').html(`
+        <button class="right btn btn-info" onclick="prepareAndPrintButton(${ordersData[0].orderid}, 'Preparing Order')">Print</button>
+        <button class="right btn btn-danger" onclick="cancelButton(${ordersData[0].orderid}, 'Cancelled')">Cancel</button>
+        `);
+    } else if (ordersData[0].ordertype === 'Delivery') {
+        // Add Confirm button for Delivery
+
+        $('#orderModalDetailFooter').html(`
+        <button class="right btn btn-info" onclick="prepareAndPrintButton(${ordersData[0].orderid}, 'Preparing Order')">Confirm</button>
+        <button class="right btn btn-danger" onclick="cancelButton(${ordersData[0].orderid}, 'Cancelled')">Cancel</button>
+        `);
+    }
+    
+
+  
+  
+      
+  orderDetailsHtml = `
+
+    <p>${new Date().toLocaleString()}</p>
+    <p><strong>Customer Name:</strong> ${ordersData[0].customername}</p>
+    <p><strong>Order Number:</strong> ${ordersData[0].orderid}</p>
+    <p><strong>Order Type:</strong> ${ordersData[0].ordertype}</p>
+    <p><strong>Address:</strong> ${ordersData[0].address}</p>
+    `;
+
+    if (ordersData[0].type !== 'AR') {
+    orderDetailsHtml += `<p><strong>Instructions:</strong> ${ordersData[0].foodins}</p>`;
+  }
+
+  orderDetailsHtml += `
+  
+    <p>===============================</p>
+    
+    
+    `;
+    orderDetailsHtml += `
+    <!-- Add more order details as needed -->
+
+    <table id="orders-container" class="table">
+    <thead>
+      <td>Item</td>
+      <td></td>
+      <td>Price</td>
+    </thead>
+    <tbody>
+  `;
+
+  const orderType = ordersData[0].type;
+  const foodinsData = ordersData[0].foodins;
+
+// Split the string at each comma and join with newline characters
+const explodedData = foodinsData.split(',').join('<br>');
+
+  
+
+
+  if (orderType === 'AR'){
+            
+            orderDetailsHtml += `
+          <tr>
+            <td>${explodedData}</td>
+            <td>${ordersData[0].quantity}</td>
+            <td>${ordersData[0].subtotal}</td>
+          </tr>
+          <tr>
+              <td colspan="3"></td>
+            </tr>
+          <tr>
+
+ 
+
+        `;
+            
+          }
+
+const productPromises = [];
+  $.each(ordersData, function(index, item) {
+    console.log(`Current Index:::::::::: ${index} &&&&& length ${ordersData.length}`);
+   const currentIndex = index;
+          // Fetch add-on value from addonorders table using item.orderid
+  $.ajax({
+    url: 'php/orderproducts.php', // Replace with your API endpoint for add-on data
+    type: 'GET',
+    dataType: 'json',
+    data: { 
+      productid: item.productid },
+    success: function(productData) {
+      console.log("Products", productData);
+
+                    // Extract the quantity from the item name
+    const match = productData[0].prodname.match(/^(\d+)\s*(pcs?)/i);
+const quantity = match ? match[1] : '';
+
+// Remove the quantity prefix from the item name
+const itemNameWithoutQuantity = productData[0].prodname.replace(/^\d+\s*(pcs?)\s*/i, '');
+
+// Format the string
+let formattedString = `${item.quantity} ${shortenedItemName(productData[0].prodname)} @ ${productData[0].productprice}`;
+
+      // Debug statements
+      console.log("currentIndex:", currentIndex);
+      console.log("productData[currentIndex]:", currentIndex);
+
+
+        // modalBody.html(orderDetailsHtml);
+
+      // Fetch product data from products table using item.productid
+      $.ajax({
+        url: 'php/ordermodaladdon.php', // Replace with your API endpoint for product data
+        type: 'GET',
+        dataType: 'json',
+        data: { productorderid: item.productorderid,
+                orderid: item.orderid },
+        success: function(addonData) {
+          console.log("Add-ons", addonData);
+          // You can use productName in your HTML
+
+          const productRow = `
+          <tr>
+            <td>${formattedString}</td>
+            <td></td>
+            <td>${ordersData[0].subtotal}</td>
+          </tr>
+        `;       
+
+        subs += (productData[0].productprice*item.quantity);
+        console.log("Subs:", subs);
+
+        orderDetailsHtml += productRow;
+
+          $.each(addonData, function(index, item) {
+          const addonRow = `
+                <tr>
+                  <td>${item.addonname}(Add-on)</td>
+                  <td>${item.quantity}x${item.price}</td>
+                  <td>${item.subtotal}</td>
+                </tr>
+              `;
+
+              orderDetailsHtml += addonRow;
+
+            });
+
+            const inviRow = `
+            <tr>
+              <td colspan="3"></td>
+            </tr>
+            `;
+
+            orderDetailsHtml += inviRow;
+        modalBody.html(orderDetailsHtml);
+
+        // If this is the last order, add the accumulated productRows to orderDetailsHtml
+          
+
+        
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+
+
+      
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+
+
+       
+      });
+
+                footerRow = `
+                <tr>
+                  <td>Total Price</td>
+                  <td></td>
+                  <td>${ordersData[0].totalprice}</td>
+                </tr>     
+                <tr>
+              <td colspan="3"></td>
+            </tr>       
+              `;
+     
+
+            orderDetailsHtml += footerRow;    
+
+      
+  modalBody.html(orderDetailsHtml);
+  $('#orderDetailModal').modal('show');
+
+
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+      modalBody.append('<p>An error occurred while fetching order details.</p>');
+    }
+  });
+}
+
+
+
+function printReceiptContent(orderid, updateStatus) {
+  // Get the content of the modal body
+  const modalContent = $('#orderModalDetailBody').html();
+
+  // Create a new window for printing
+  const printWindow = window.open('', '_blank');
+
+  // Write the modal content to the new window
+  printWindow.document.open();
+  printWindow.document.write(`
+  <style>
+    
+      @media print {
+        *{
+      text-align: center;
+    }
+        body {
+          width: 58mm; /* Set the width of the paper */
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 15px;
+        }
+
+        p, .header h3 {
+          margin: 0;
+        }
+        .logo {
+          width: 50px;
+          height: 50px;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        th, td {
+          border: none; /* Remove the border */
+          text-align: left;
+        }
+      }
+    </style>
+
+    <div class="header">
+      <h3>High-Coffee</h3>
+      <p>OPERATED BY: HCPOS UCU</p>
+      <p>RM BUILDING SAN VICENTE WEST, URDANETA CITY, PANGASINAN</p>
+    </div>
+    <p>Cashier: ${globalUserName}</p>
+    <p>===============================</p>      
+      ${modalContent}
+    
+  `);
+
+  printWindow.document.close();
+
+  // Print the content
+  printWindow.print();
+
+  printWindow.close();
+
+
+  $.ajax({
+      url: 'php/onlineorderupdates.php',
+      type: 'POST',
+      data: {
+        orderid: orderid,
+        updateStatus: updateStatus
+      },
+      success: function(response){      
+        console.log("DATA IS UPDATE");
+        $('#orderDetailModal').modal('hide');
+        fetchAllData();
+      },
+      error: function(xhr, status, error){
+
+      }
+    });
+
+
+}
+
+function prepareAndPrintButton(orderid, updateStatus){
+        console.log("Preparation for ::::", orderid, updateStatus);
+        printReceiptContent(orderid, updateStatus); 
+
+        $.ajax({
+      url: 'php/onlineorderupdates.php',
+      type: 'POST',
+      data: {
+        orderid: orderid,
+        updateStatus: updateStatus
+      },
+      success: function(response){     
+        
+        console.log("DATA IS UPDATE");
+        $('#orderDetailModal').modal('hide');
+        fetchAllData();
+      },
+      error: function(xhr, status, error){
+
+      }
+    });
+      }
+
+function prepareButton(orderid, updateStatus){
+        console.log("Preparation for ::::", orderid, updateStatus);
+
+        $.ajax({
+      url: 'php/onlineorderupdates.php',
+      type: 'POST',
+      data: {
+        orderid: orderid,
+        updateStatus: updateStatus
+      },
+      success: function(response){      
+        console.log("DATA IS UPDATE");
+        $('#orderDetailModal').modal('hide');
+        fetchAllData();
+      },
+      error: function(xhr, status, error){
+
+      }
+    });
+      }
+
+
+      function cancelButton(orderid, updateStatus){
+        console.log("Preparation for ::::", orderid, updateStatus);
+
+        $.ajax({
+      url: 'php/onlineorderupdates.php',
+      type: 'POST',
+      data: {
+        orderid: orderid,
+        updateStatus: updateStatus
+      },
+      success: function(response){      
+        console.log("DATA IS UPDATE");
+        $('#orderDetailModal').modal('hide');
+        fetchAllData();
+      },
+      error: function(xhr, status, error){
+
+      }
+    });
+      }
+
+
+      function formatTime(ordertime) {
+  const timeParts = ordertime.split(':');
+  const hours = parseInt(timeParts[0], 10);
+  const minutes = parseInt(timeParts[1], 10);
+
+  const formattedTime = new Intl.DateTimeFormat('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  }).format(new Date(2000, 0, 1, hours, minutes));
+
+  return formattedTime;
+}
+
+function formatDate(orderdate) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date(orderdate));
+  return formattedDate;
+}
+
+
+  function fetchConfirmed() {
+     // Destroy the existing DataTable instance
+     if ($.fn.DataTable.isDataTable('#example2')) {
+                $('#example2').DataTable().destroy();
+            }
+  $.ajax({
+    url: 'php/orderfetchonline2.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Preparing Order",
+      orderStatus2: "Ready"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      $('#example2 tbody').empty();
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          
+          // Format paymentStatus based on item.changepay
+          const paymentStatus = item.payment === ''
+            ? 'COD'
+            : `<button class="btn btn-sm btn-light rounded-lg view-button" data-rfid="${item.rfid}" data-ordertype="${item.ordertype}" data-date="${item.orderdate}" data-time="${item.ordertime}" data-toggle="modal" data-target="#orderModal">
+                  PROOF PAYMENT
+                </button>`;
+          
+
+          // Append row to the table with only 'orderid' displayed
+
+          if (item.ordertype === 'Delivery'){
+          $('#example2 tbody').append(`
+            <tr>
+              <td>${item.orderid}</td>
+              <td>${item.ordertype}</td>
+              <td>${item.orderstatus}</td>
+              <td>${paymentStatus}</td>
+              <td>${item.totalprice}</td>
+
+            </tr>
+          `);
+          }
+        }
+
+       
+      });
+
+       // Open the modal and populate it with order details when the "View" button is clicked
+       $('.view-button').click(function() {
+        const orderid = $(this).data('orderid');
+        populateOrderModal(orderid);
+      });
+
+      
+
+      // Initialize DataTables and Buttons
+      $('#example2').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchNew() {
+   // Destroy the existing DataTable instance
+   if ($.fn.DataTable.isDataTable('#example1')) {
+                $('#example1').DataTable().destroy();
+            }
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $('#example1 tbody').empty();
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          // Format paymentStatus based on item.changepay
+          const paymentStatus = item.payment === ''
+            ? 'COD'
+            : `<button class="btn btn-sm btn-light rounded-lg view-button" data-rfid="${item.rfid}" data-ordertype="${item.ordertype}" data-date="${item.orderdate}" data-time="${item.ordertime}" data-toggle="modal" data-target="#orderModal">
+                  PROOF PAYMENT
+                </button>`;
+
+          // Append row to the table with only 'orderid' displayed
+          $('#example1 tbody').append(`
+            <tr>
+              <td>${item.rfid}</td>
+              <td>${item.ordertype}</td>
+              <td>${item.orderstatus}</td>
+              <td>${paymentStatus}</td>
+              <td>${formatDate(item.orderdate)} ${formatTime(item.ordertime)}</td>
+              <td>
+                <button class="btn btn-sm btn-light rounded-lg view-detail-button" data-rfid="${item.rfid}" data-ordertype="${item.ordertype}" data-date="${item.orderdate}" data-time="${item.ordertime}" data-toggle="modal" data-target="#orderDetailModal">
+                  <i class="fas fa-eye"></i> View
+                </button>
+             
+              </td>
+            </tr>
+          `);
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadgeOrder').text(count);
+      $('#tabBadgeOrder').text(count)
+      }
+
+
+      // Open the modal and populate it with order details when the "View" button is clicked
+      $('.view-detail-button').click(function() {
+        const rfid = $(this).data('rfid');
+        const ordertype = $(this).data('ordertype');
+        const date = $(this).data('date');
+        const time = $(this).data('time');
+        console.log(rfid, ordertype, date, time);
+        populateOrderDetailModal(rfid, ordertype, date, time);
+      });
+
+      
+
+      // Initialize DataTables and Buttons
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "ordering": false,
+        order: [[4, 'desc']],  // Initial sort on column 0 (date) in descending order
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchPrepare() {
+   // Destroy the existing DataTable instance
+   if ($.fn.DataTable.isDataTable('#example3')) {
+                $('#example3').DataTable().destroy();
+            }
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Preparing Order"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      $('#example3 tbody').empty();
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          // Format paymentStatus based on item.changepay
+          const paymentStatus = item.payment === ''
+            ? 'COD'
+            : `<button class="btn btn-sm btn-light rounded-lg view-button" data-rfid="${item.rfid}" data-ordertype="${item.ordertype}" data-date="${item.orderdate}" data-time="${item.ordertime}" data-toggle="modal" data-target="#orderModal">
+                  PROOF PAYMENT
+                </button>`;
+
+          let btnAction = ``;
+
+          if (item.ordertype === 'Pick-up'){
+            btnAction = `
+            <button class="btn btn-sm btn-light rounded-lg prepare-button" onclick="prepareButton(${item.orderid}, 'Ready to Pickup')">
+              <i class="fas fa-send"></i> Prepared
+                </button>
+                `;
+          }else if (item.ordertype === 'AR'){
+            btnAction = `
+            <button class="btn btn-sm btn-light rounded-lg prepare-button" onclick="prepareButton(${item.orderid}, 'Ready to Serve')">
+              <i class="fas fa-send"></i> Prepared
+                </button>
+                `;
+          }else if (item.ordertype === 'Delivery' && item.riderid !== ''){
+            btnAction = `
+            <button class="btn btn-sm btn-light rounded-lg prepare-button" onclick="prepareButton(${item.orderid}, 'Ready to Deliver')">
+              <i class="fas fa-send"></i> Prepared
+                </button>
+                `;
+          }
+
+          // Append row to the table with only 'orderid' displayed
+          $('#example3 tbody').append(`
+            <tr>
+              <td hidden>${item.orderid}</td>
+              <td>${item.ordertype}</td>
+              <td>${item.orderstatus}</td>
+              <td>${paymentStatus}</td>
+              <td>${item.totalprice}</td>
+              <td>${btnAction}
+                
+              </td>
+            </tr>
+          `);
+        }
+
+       
+      });
+
+       // Open the modal and populate it with order details when the "View" button is clicked
+       $('.view-button').click(function() {
+        const rfid = $(this).data('rfid');
+        const ordertype = $(this).data('ordertype');
+        const date = $(this).data('date');
+        const time = $(this).data('time');
+        populateOrderModal(rfid, ordertype, date, time);
+      });
+
+      
+
+      // Initialize DataTables and Buttons
+      $('#example3').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+
+function fetchPrepared() {
+   // Destroy the existing DataTable instance
+   if ($.fn.DataTable.isDataTable('#example4')) {
+                $('#example4').DataTable().destroy();
+            }
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Ready"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      $('#example4 tbody').empty();
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          // Format paymentStatus based on item.changepay
+          const paymentStatus = item.payment === ''
+            ? 'COD'
+            : `<button class="btn btn-sm btn-light rounded-lg view-button" data-rfid="${item.rfid}" data-ordertype="${item.ordertype}" data-date="${item.orderdate}" data-time="${item.ordertime}" data-toggle="modal" data-target="#orderModal">
+                  PROOF PAYMENT
+                </button>`;
+
+          let btnAction = ``;
+
+          if (item.ordertype === 'Pick-up' || item.ordertype === 'AR'){
+            btnAction = `
+            <button class="btn btn-sm btn-light rounded-lg prepare-button" onclick="prepareButton(${item.orderid}, 'Done')">
+              <i class="fas fa-check-circle"></i> Done
+                </button>
+                `;
+          }
+            
+
+          // Append row to the table with only 'orderid' displayed
+          $('#example4 tbody').append(`
+            <tr>
+              <td hidden>${item.orderid}</td>
+              <td>${item.ordertype}</td>
+              <td>${item.orderstatus}</td>
+              <td>${paymentStatus}</td>
+              <td>${item.totalprice}</td>
+              <td>
+                ${btnAction}
+              </td>
+            </tr>
+          `);
+        }
+
+       
+      });
+
+       // Open the modal and populate it with order details when the "View" button is clicked
+       $('.view-button').click(function() {
+        const rfid = $(this).data('rfid');
+        const ordertype = $(this).data('ordertype');
+        const date = $(this).data('date');
+        const time = $(this).data('time');
+        populateOrderModal(rfid, ordertype, date, time);
+      });
+
+      
+
+      // Initialize DataTables and Buttons
+      $('#example4').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+
+
+
+function fetchReady() {
+   // Destroy the existing DataTable instance
+   if ($.fn.DataTable.isDataTable('#example5')) {
+                $('#example5').DataTable().destroy();
+            }
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Done"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      $('#example5 tbody').empty();
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          // Format paymentStatus based on item.changepay
+          const paymentStatus = item.payment === ''
+            ? 'COD'
+            : `<button class="btn btn-sm btn-light rounded-lg view-button" data-rfid="${item.rfid}" data-ordertype="${item.ordertype}" data-date="${item.orderdate}" data-time="${item.ordertime}" data-toggle="modal" data-target="#orderModal">
+                  PROOF PAYMENT
+                </button>`;
+
+          // Append row to the table with only 'orderid' displayed
+          $('#example5 tbody').append(`
+            <tr>
+              <td hidden>${item.orderid}</td>
+              <td>${item.ordertype}</td>
+              <td>${item.orderstatus}</td>
+              <td>${paymentStatus}</td>
+              <td>${item.totalprice}</td>
+              <td>${item.orderstatus}
+                
+              </td>
+            </tr>
+          `);
+        }
+
+       
+      });
+
+       // Open the modal and populate it with order details when the "View" button is clicked
+       $('.view-button').click(function() {
+        const rfid = $(this).data('rfid');
+        const ordertype = $(this).data('ordertype');
+        const date = $(this).data('date');
+        const time = $(this).data('time');
+        populateOrderModal(rfid, ordertype, date, time);
+      });
+
+      
+
+      // Initialize DataTables and Buttons
+      $('#example5').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example5_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchTicketNew() {
+
+  $.ajax({
+    url: 'php/ticketNew.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+
+        console.log(data);
+
+      let countTicketNew = 0;
+      $.each(data, function(index, item) {
+
+
+          countTicketNew++;
+        
+       
+      });      
+      console.log(`Count new ticket:: ${countTicketNew}`);
+      if (countTicketNew > 0){
+      $('#navBadgeTicket').text(countTicketNew);
+      } 
+
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchAllData(){
+  $('#navBadgeOrder').text('');
+  $('#navBadgeTicket').text('');
+  $('#tabBadgeOrder').text('');
+
+  // Destroy the existing DataTable instance
+  if ($.fn.DataTable.isDataTable('#example1')) {
+                $('#example1').DataTable().destroy();
+                fetchNew();
+            }
+  if ($.fn.DataTable.isDataTable('#example2')) {
+                $('#example2').DataTable().destroy();
+                fetchConfirmed();
+            }
+
+
+  if ($.fn.DataTable.isDataTable('#example3')) {
+                $('#example3').DataTable().destroy();
+                fetchPrepare();
+            }
+  if ($.fn.DataTable.isDataTable('#example4')) {
+                $('#example4').DataTable().destroy();
+                fetchPrepared();
+            }
+
+  if ($.fn.DataTable.isDataTable('#example5')) {
+                $('#example5').DataTable().destroy();
+                fetchReady();
+            }
+  
+    fetchTicketNew();
+    
+}
+
+// Periodically check for date changes and update sales data
+setInterval(function() {
+  console.log("Update fetch");
+    fetchAllData();
+}, 60000); // Check every 60 seconds (adjust as needed)
+
+function fetchInventory() {
+
+$.ajax({
+    url: 'php/inventoryfetch.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        let count = 0;
+        $.each(data, function(index, item) {
+            var status;
+            if (item.productsize <= 50){
+              count++;
+            }
+        });
+
+        if (count > 0){
+          $('#badge-info').css('display', 'block');
+        }
+
+        console.log(data);
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+}
+
+fetchInventory();
+
+fetchNew();
+fetchConfirmed();
+fetchPrepare();
+fetchPrepared();
+fetchReady();
+
+fetchAllData();
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <title>Login</title>
+</head>
+<body style="user-select: none; background-image: url('dist/img/bglogin.jpg'); 
+background-position: center; 
+background-repeat: no-repeat; background-size: cover;">
+
+    <section class="vh-100 text-dark">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem; background-color: black;">
+                <div class="card-header rounded-pill text-center" style="background-color: black; color: #F9BA00;">
+                  <h4>Login</h4>
+                </div>
+                <div class="card-body p-5 text-center bg-warning">
+      
+                  <!-- <img src="dist/img/AdminLTELogo.png" alt="LOGO" style="width: 30%;"> -->
+                  <!-- <div id="message" class="badge-danger mt-2"></div> -->
+                  <form id="loginForm">
+                  <div class="form-outline mb-4">
+                    <input type="text" id="username" name="username" class="form-control form-control-lg mt-2" autocomplete="off" />
+                    <label class="form-label" for="username">Username</label>
+                  </div>
+      
+                  <div class="form-outline mb-4">
+                    <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                    <label class="form-label" for="password" name="password">Password</label>
+                  </div>
+      
+                  <button class="btn btn-info rounded-pill text-warning" type="submit" style="width: 120px; background-color: black;">Login</button>
+                </form>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+              <!-- Fail Modal -->
+<div class="modal fade text-dark" id="failModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Login Failed</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <strong id="message"></strong>
+              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+      <script>
+        $(document).ready(function () {
+          $('#loginForm').submit(function (e) {
+            e.preventDefault(); // Prevent the default form submission
+      
+            // Get the form data
+            var formData = {
+              username: $('#username').val(),
+              password: $('#password').val()
+            };
+
+            // console.log(formData);
+      
+            // Send an AJAX request to your login endpoint
+            $.ajax({
+              type: 'POST',
+              url: 'php/login.php', // Replace with your actual login endpoint URL
+              data: formData,
+              success: function (response) {
+                console.log(response);
+                var result = JSON.parse(response);
+                if (result.success === true && result.role === 'Cashier') {
+                  // Redirect to a success page or perform any necessary actions
+                  window.location.href = 'posemployee?role=' + result.role + '&userid='+result.userid; // Replace with your success page URL
+                }else if (result.success === true && (result.role === 'Admin' || result.role === 'Sub-Admin')){
+                  window.location.href = 'index?role=' + result.role + '&userid='+result.userid; // Replace with your success page URL
+                } else {
+                  // Display an error message or perform other error handling
+                  // alert('Login failed. Please try again.');
+
+                  $('#failModal').modal('show');
+
+                  var messageElement = document.getElementById("message");
+
+                  // Set the message text
+                  messageElement.textContent = result.message;
+
+
+                }
+              },
+              error: function () {
+                // Handle errors (e.g., server not reachable)
+                alert('An error occurred. Please try again later.');
+              }
+            });
+          });
+        });
+      </script>
+      
+    
+</body>
+</html>

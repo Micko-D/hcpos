@@ -1,0 +1,2200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee: POS</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <style>
+    /* CSS class to hide elements */
+    .hidden {
+        display: none;
+    }
+</style>
+</head>
+<body class="hold-transition dark-mode sidebar-mini sidebar-collapse layout-fixed layout-navbar-fixed layout-footer-fixed" style="user-select: none;">
+
+                    <!-- Fail Modal -->
+<div class="modal fade" id="logfailModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Session Ended.<br>
+              Login again to use...
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- Site wrapper -->
+<div class="wrapper" id="allcontent">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <!-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      
+    </ul> -->
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">High-Coffee</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           
+          <li class="nav-item">
+            <a href="posemployee.html" class="nav-link active">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-danger">New</span> -->
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ordemployee.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                
+              </p>
+              <span class="right badge badge-info" id="navBadgeOrder"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="empoloyeeorderhistory.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+          
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+
+    </section>
+
+    <div id="message" class="hidden" style="text-align: center; font-size: 24px;">
+      This content is only accessible on larger screens.
+  </div>
+  
+  <!-- Your content that you want to hide on smaller screens -->
+  <div id="content">
+      <!-- Main content -->
+    <section class="content">
+
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Categories -->
+          <div class="col-2">
+            <div class="col-12 col-sm-12 col-md-12">
+            <div class="card mb-2">
+              <div class="card-header" style="text-align: center;" onclick="openTab(event, 'tab1')">
+                
+                <!-- <img src="dist/img/nachos.png" class="card-img"> -->
+                <p class="text-lg"><b>Foods</b></p>
+              </div>
+            </div>
+
+            <div class="card mb-2">
+              <div class="card-header" style="text-align: center;" onclick="openTab(event, 'tab2')">
+                <!-- <img src="dist/img/icecoffee.png" class="card-img"> -->
+                <p class="text-lg"><b>Drinks</b></p>
+              </div>
+            </div>
+
+            <!-- <div class="card mb-2">
+              <div class="card-header" style="text-align: center;" onclick="openTab(event, 'tab3')">
+                <img src="dist/img/avatar2.png" class="card-img"><p class="text-sm"><b>Category 3</b></p>
+              </div>
+            </div> -->
+
+            </div>
+          </div>
+
+          <!-- Selection Box -->
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">High-Coffee: POS</h3>
+              </div>
+
+              <div class="card-body">
+                
+                <div class="row" id="itemList">
+
+                  <!-- Category 1 -->
+
+                  <div id="tab1" class="tab-content active"> 
+
+                  <h3 class="card-title" id="cat1">Foods</h3><br>
+                  <div class="row mb-2 food" style="justify-content: center">
+
+                  <!-- <div class="col-12 col-sm-12 col-md-12">
+                    <div class="card" style="text-align: center; margin: 5px">
+                       
+                      <div class="card-header"><img src="dist/img/wings.jpg" class="card-img" ></div>
+                      
+                      <div class="card-body"><p style="margin: 0" class="info-box-text"><b>Chicken Wings</b></p>
+                  <p style="margin: 0"><b>PHP 100</b></p>
+                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+
+                </div>
+                
+                    </div>
+                  </div> -->
+
+                    <!-- <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card" style="text-align: center; margin: 5px">
+                      
+                      <div class="card-header"><img src="dist/img/nacho.jpg" class="card-img"></div>
+                      
+                      <div class="card-body"><p style="margin: 0" class="info-box-text"><b>Nacho</b></p>
+                  <p style="margin: 0"><b>PHP 75</b></p>
+                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                </div>
+                
+                    </div>
+                    </div> -->
+
+                    <!-- <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card" style="text-align: center; margin: 5px">
+                      
+                      <div class="card-header"><img src="dist/img/default-150x150.png" class="card-img"></div>
+                      
+                      <div class="card-body"><p style="margin: 0" class="info-box-text"><b>Coming Soon</b></p>
+   <p style="margin: 0"><b>PHP 50</b></p>
+                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+
+                </div>
+                
+                    </div>
+
+                    </div> -->
+                  </div>
+
+                  <div class="row" id="foodSizeSelection">
+
+                  </div>
+
+                  </div>
+
+
+                  <!-- Category 2 -->
+
+                  <div id="tab2" class="tab-content" style="display: none"> 
+
+                  <h3 class="card-title" id="cat2">Drinks</h3><br>
+
+                  <div class="row drinkscard" style="justify-content: center">
+
+                    
+
+                  </div>
+
+                  <div class="row" id="cupSizeSection">
+
+                    <!--
+
+                      SHOW CUPSIZE HERE WHEN ITEM IS CLICKED
+
+                    -->
+                    
+                  </div>
+
+                </div>
+                    
+                  <!-- Category 3 -->
+
+                  <!-- <div id="tab3" class="tab-content" style="display: none"> 
+
+                  <h3 class="card-title" id="cat3">Category 3</h3><br>
+
+                  <div class="row" style="justify-content: center;">
+                    <div class="col-12 col-sm-6 col-md-4">
+        <div class="drinks card" style="text-align: center; margin: 5px">
+                       
+                      <div class="itembtn card-header"><img src="dist/img/avatar4.png" class="itembtn card-img"></div>
+                      
+                      <div class="itembtn card-body"><p style="margin: 0"><b>Food 1</b></p>
+                  <p style="margin: 0"><b>PHP 25</b></p>
+                </div>
+              </div>
+                
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-md-4">
+        <div class="drinks card" style="text-align: center; margin: 5px">
+                      
+                      <div class="itembtn card-header"><img src="dist/img/avatar4.png" class="itembtn card-img"></div>
+                      
+                      <div class="itembtn card-body"><p style="margin: 0"><b>Food 2</b></p>
+                  <p style="margin: 0"><b>PHP 55</b></p>
+                </div>
+                </div>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-md-4">
+        <div class="drinks card" style="text-align: center; margin: 5px">
+                      
+                      <div class="itembtn card-header"><img src="dist/img/avatar4.png" class="itembtn card-img"></div>
+                      
+                      <div class="itembtn card-body"><p style="margin: 0"><b>Food 3</b></p>
+                  <p style="margin: 0"><b>PHP 75</b></p>
+                </div>
+              </div>
+                
+                    </div>
+                  </div>
+
+                </div> -->
+
+                  <!-- End of Category -->
+
+                </div>
+                
+
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+
+          <div class="col-4">
+<!-- 
+            <form>
+              <div class="input-group mb-2">
+              <input type="text" name="idsearch" placeholder="ID No." class="form-control">
+              <span class="input-group-append">
+                <button type="button" class="btn btn-info">Search</button>
+              </span>
+            </div>
+            </form> -->
+
+
+<div id="printContent">
+              <input type="text" name="customername" placeholder="Enter Name" class="form-control mb-2" autocomplete="off">
+              <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="dinein" name="dine" value="Dine-In">
+                          <label for="dinein" class="custom-control-label">Dine-In</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="takeout" name="dine" value="Take-Out">
+                          <label for="takeout" class="custom-control-label">Take-Out</label>
+                        </div>
+                        <!-- <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="other" name="dine" value="Other">
+                          <label for="other" class="custom-control-label">Other</label>
+                        </div> -->
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Selected Items</h3>
+              </div>
+              <div class="card-body" id="selectedItemsCard">
+                
+                
+                
+
+              
+              </div>
+              <div class="card-footer">
+
+                Subotal: <p id="totalValue" style="float: right; margin: 0">PHP 0.00</p><br> 
+                Discount:
+                 <div class="custom-control custom-checkbox" style="float: right;">
+                          <input class="custom-control-input" type="checkbox" id="senior" name="senior" value="0.20" >
+                          <label for="senior" class="custom-control-label">Senior Citizen</label>
+                        </div><br>
+                Payment: <input type="number" name="payment" style="float: right; margin: 0" min=0 placeholder="0.00" class="form-control form-control-sm col-12 col-sm-6 col-md-4"><br><br>
+                Total: <p id="finalTotal" style="float: right; margin: 0">PHP 0.00</p> <br>
+                Change: <p id="change" style="float: right; margin: 0">PHP 0.00</p>
+                            <div style="margin-top: 10px; text-align: center;">
+                             <button id="clearButton" class="btn btn-danger" style="float: left">Clear List</button>
+                             <button id="printButton" class="btn btn-primary" style="float: right">Print</button>
+                           </div>
+              </div>
+
+            </div>
+            </div>
+            <!-- End Print -->
+
+
+ 
+          </div>
+        </div>
+
+                <!-- Fail Modal -->
+<div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Session Ended.<br>
+              Login again to use...
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+        <!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<script>
+
+
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      if (!role || !userid) {
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#logfailModal').modal('show');
+        // Listen for the modal close event
+        $('#logfailModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+          
+
+function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();  
+
+
+      function openTab(evt, tabName) {
+      // Get all tab content elements
+      const tabContents = document.getElementsByClassName('tab-content');
+
+      // Hide all tab contents
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove 'active' class from all tab links
+      const tabLinks = document.getElementsByClassName('tab-link');
+      for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = 'block';
+
+      // Add 'active' class to the clicked tab link
+      evt.currentTarget.classList.add('active');
+    }
+
+// Function to generate a random order number between 1 and 100
+function generateOrderNumber() {
+  return Math.floor(Math.random() * 100) + 1;
+}
+
+    // Function to generate a random 11-digit number
+function generateRfidNumber() {
+  const min = 10000000000; // Minimum 11-digit number
+  const max = 99999999999; // Maximum 11-digit number
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Function to get the value of the selected radio button
+function getSelectedRadioValue() {
+  const radioButtons = document.getElementsByName("dine");
+  for (const radioButton of radioButtons) {
+    if (radioButton.checked) {
+      return radioButton.value;
+    }
+  }
+  return null; // Return null if no radio button is selected
+}
+
+// Function to get the value of the selected radio button
+function getSelectedRadioValue() {
+  const radioButtons = document.getElementsByName("dine");
+  for (const radioButton of radioButtons) {
+    if (radioButton.checked) {
+      return radioButton.value;
+    }
+  }
+  return null; // Return null if no radio button is selected
+}
+
+function submitDataToSQL(data) {
+    $.ajax({
+        url: 'php/orderentry.php', // Replace with your server-side script URL
+        type: 'POST',
+        data: JSON.stringify(data), // Serialize the data as JSON
+        contentType: 'application/json', // Set the content type to JSON
+        success: function(response) {
+            console.log('Data submitted to SQL successfully:', response);
+            // Reload the page or perform any other action you need
+            location.reload(true);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error submitting data to SQL:', error);
+        }
+    });
+}
+
+
+
+function printReceiptContent(customerName, orderNumber, rfid, selectedDineValue, totalValue, seniorDiscount, paymentValue, finalTotalValue, changeValue, selectedItems, ordertime) {
+  let printContent = `
+  <style>
+    *{
+      text-align: center;
+    }
+      @media print {
+        body {
+          width: 58mm; /* Set the width of the paper */
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 15px;
+        }
+
+        p, .header h3 {
+          margin: 0;
+        }
+        .logo {
+          width: 50px;
+          height: 50px;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        th, td {
+          border: none; /* Remove the border */
+          text-align: left;
+        }
+      }
+    </style>
+
+    <div class="header">
+      <h3>High-Coffee</h3>
+      <p>OPERATED BY: HCPOS UCU</p>
+      <p>RM BUILDING SAN VICENTE WEST, URDANETA CITY, PANGASINAN</p>
+    </div>
+    <p>Cashier: ${userid}-${globalUserName}</p>
+    <p>RFID: ${rfid}</p>
+    <p>===============================</p>
+    <p>${ordertime}</p>
+    <p>Customer Name: ${customerName}<p>
+    <p>Order Number: ${orderNumber}</p>
+    <p>Selected Dine: ${selectedDineValue}</p>
+    <p>===============================</p>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th></th>
+        <th>Price</th>
+      </tr>
+  `;
+
+  let itemNumber = 0;
+  // Loop through each selected item and fetch its data
+  selectedItems.forEach((selectedItem) => {
+    const itemName = selectedItem.querySelector(".input-group-text").textContent;
+    const itemPrice = selectedItem.querySelector(".item-price").value;
+    const itemQuantity = selectedItem.querySelector(".item-quantity").value;
+    itemPriceClean = parseFloat(itemPrice);
+
+    
+
+    // Extract the quantity from the item name
+const match = itemName.match(/^(\d+)\s*(pcs?)/i);
+const quantity = match ? match[1] : '';
+
+// Remove the quantity prefix from the item name
+const itemNameWithoutQuantity = itemName.replace(/^\d+\s*(pcs?)\s*/i, '');
+
+// Function to shorten the item name
+const shortenedItemName = (itemName) => {
+  if (itemName.includes('pcs') || itemName.includes('pc')) {
+    return itemName.split(/\s+/).map(word => word.charAt(0)).join('');
+  } else {
+    return itemName.replace(/\(\d+\s*(pcs?)\)/i, '($1)');
+  }
+};
+
+// Format the string
+let formattedString = `${itemQuantity} ${shortenedItemName(itemName)} @ ${itemPrice}`;
+
+
+    // Add a new row to the table for each item
+    printContent += `
+      <tr>
+        <td>${formattedString}</td>
+        <td></td>
+        <td>${itemPrice * itemQuantity}</td>
+      </tr>
+    `;
+
+    // Fetch and include add-ons data for the current selected item
+    const addonContainer = selectedItem.querySelector(".addon-container");
+    if (addonContainer) {
+      const addonOptions = addonContainer.querySelectorAll(".addon-checkbox:checked");
+      addonOptions.forEach((addonOption) => {
+        const addonName = addonOption.nextElementSibling.textContent;
+        const addonPrice = addonOption.nextElementSibling.nextElementSibling.nextElementSibling.value;
+        const addonQuantity = addonOption.parentNode.querySelector(".add-on-quantity").value;
+        const addonSubtotal = (parseFloat(addonPrice) * parseInt(addonQuantity)).toFixed(2);
+
+        // Check if this is the "Chicken Wings" addon
+        const isChickenWingsAddon = addonOption.getAttribute('id').startsWith('chickenWings');
+            // If it's the "Chicken Wings" addon, fetch the selected value from the <select>
+            if (isChickenWingsAddon) {
+                const addonSelect = addonOption.parentNode.querySelector('select[name="addOnWings"]');
+                const selectedValue = addonSelect ? addonSelect.value : ''; // Check if the element exists
+                printContent += `
+          <tr>
+            <td>${addonPrice} ${selectedValue}(Add-On)</td>
+            <td></td>
+            <td>${addonSubtotal}</td>
+          </tr>
+        `;
+            } else {
+              printContent += `
+          <tr>
+            <td>${addonPrice} ${addonName} (Add-On)</td>
+            <td></td>
+            <td>${addonSubtotal}</td>
+          </tr>
+        `;
+            }
+        
+      });
+    }
+
+    // Add an empty row as a separator
+  printContent += `
+    <tr>
+      <td colspan="3">&nbsp;</td>
+    </tr>
+  `;
+
+  itemNumber++;
+  });
+
+  // Continue adding printing content
+
+  printContent += `
+  <tr>
+    <td style="font-size: 12px"><strong>${itemNumber}</strong> Item(s)</td>
+    <td></td>
+    <td style="font-size: 12px">${totalValue}</td>
+  </tr>
+
+  <tr>
+    <td>Total Due</td>
+    <td></td>
+    <td>${totalValue}</td>
+  </tr>`;
+
+  console.log(seniorDiscount);
+
+  if (seniorDiscount){
+    printContent += `
+      <tr>
+        <td>Discount</td>
+        <td></td>
+        <td>20%</td>
+      </tr>
+    `;
+  }
+
+  printContent += `
+
+      <tr>
+        <td>Payment</td>
+        <td></td>
+        <td>PHP ${paymentValue}</td>
+      </tr>
+
+      <tr>
+        <td>Total Cost</td>
+        <td></td>
+        <td>${finalTotalValue}</td>
+      </tr>
+
+      <tr>
+        <td>Change</td>
+        <td></td>
+        <td>${changeValue}</td>
+      </tr>
+
+      <tr>
+      <td colspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="3">&nbsp;</td>
+    </tr>
+      <tr>
+        <td>VAT</td>
+        <td></td>
+        <td>12%</td>
+      </tr>
+  
+    </table>
+    <h3>THANK YOU COME AGAIN!!!</h3>
+    
+  `;
+
+  // Create a new window for printing
+  const printWindow = window.open("", "width=1,height=1");
+  printWindow.document.open();
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+
+  // Print the content
+  printWindow.print();
+
+  printWindow.close();
+}
+
+function printReceiptAndSubmit() {
+  const customerName = document.querySelector("input[name=customername]").value;
+  const selectedItems = document.querySelectorAll("#selectedItemsCard .item");
+  const orderNumber = generateOrderNumber();
+  const rfid = generateRfidNumber();
+  const selectedDineValue = getSelectedRadioValue();
+  const seniorDiscount = document.getElementById("senior").checked ? true : false;
+  const paymentValue = parseFloat(document.querySelector("input[name=payment]").value);
+  const finalTotalValue = document.getElementById("finalTotal").textContent;
+  const changeValue = document.getElementById("change").textContent;
+  const idCardNumber = document.querySelector("input[name=idcardnumber]").value;
+
+  const ordertime = new Date().toLocaleString();
+
+
+
+
+
+  // Remove "PHP" and convert the remaining value to a number
+const numericValue = parseFloat(changeValue.replace("PHP", ""));
+
+// Check if the numeric value is below 0
+if (numericValue < 0 ) {
+  alert("Please check payment.");
+    return;
+}
+
+if (seniorDiscount && (customerName === '' || idCardNumber === '')){
+  alert("Customer Name and Card Number is required.")
+  return;
+}
+
+  if (!selectedDineValue || isNaN(paymentValue)) {
+    alert("Please fill in all required fields.");
+    return; // Stop execution if validation fails
+  }
+
+  const totalValue = document.getElementById("totalValue").textContent;
+
+  const itemDetailsArray = [];
+selectedItems.forEach((selectedItem) => {
+    const prodidElement = selectedItem.querySelector(".prodid-val");
+    if (prodidElement) {
+        const prodid = prodidElement.value;
+        const quantity = selectedItem.querySelector(".item-quantity").value;
+        const itemPrice = selectedItem.querySelector(".item-price").value.replace("PHP ", "");
+        const subtotal = (parseFloat(itemPrice) * parseInt(quantity)).toFixed(2);
+        const prodSize = selectedItem.querySelector(".prodsize-val").value;;
+
+        // Fetch add-ons data for the current selected item
+        const addonOptions = selectedItem.querySelectorAll(".addon-checkbox:checked");
+        const addonsArray = [];
+        addonOptions.forEach((addonOption) => {
+            const addonName = addonOption.nextElementSibling.textContent;
+            const addonPrice = addonOption.nextElementSibling.nextElementSibling.nextElementSibling.value;
+            const addonQuantity = addonOption.parentNode.querySelector(".add-on-quantity").value;
+            const addonSubtotal = (parseFloat(addonPrice) * parseInt(addonQuantity)).toFixed(2);
+
+            // Check if this is the "Chicken Wings" addon
+            const isChickenWingsAddon = addonOption.getAttribute('id').startsWith('chickenWings');
+            // If it's the "Chicken Wings" addon, fetch the selected value from the <select>
+            if (isChickenWingsAddon) {
+                const addonSelect = addonOption.parentNode.querySelector('select[name="addOnWings"]');
+                const selectedValue = addonSelect ? addonSelect.value : ''; // Check if the element exists
+                addonsArray.push({ name: selectedValue, price: addonPrice, quantity: addonQuantity, subtotal: addonSubtotal });
+            } else {
+            addonsArray.push({ name: addonName, price: addonPrice, quantity: addonQuantity, subtotal: addonSubtotal });
+            }
+        });
+
+        itemDetailsArray.push({ prodid: prodid, productsize: prodSize, quantity: quantity, subtotal: subtotal, addons: addonsArray });
+    } else { 
+        console.error("Unable to find element with class 'prodid-val'", selectedItem);
+    }
+});
+
+
+if (itemDetailsArray.length === 0){
+  alert("No items added yet!");
+  return;
+}
+
+  // Print the receipt with provided details
+  printReceiptContent(
+    customerName,
+    orderNumber,
+    rfid,
+    selectedDineValue,
+    totalValue,
+    seniorDiscount,
+    paymentValue,
+    finalTotalValue,
+    changeValue,
+    selectedItems,
+    ordertime
+  );
+
+  // Prepare the data object
+  const data = {
+    userid: userid,
+    customerName: customerName,
+    orderNumber: orderNumber,
+    rfid: rfid,
+    selectedDineValue: selectedDineValue,
+    seniorDiscount: seniorDiscount,
+    paymentValue: paymentValue,
+    finalTotalValue: finalTotalValue,
+    changeValue: changeValue,
+    orderTime: ordertime,
+    cardNumber: idCardNumber,
+
+    itemDetailsArray: itemDetailsArray, //////// <-------------------------- ITEM DATA
+  };
+
+
+  // Submit data to SQL
+  submitDataToSQL(data);
+}
+
+// Add click event listener to the print button
+const printButton = document.getElementById("printButton");
+printButton.addEventListener("click", printReceiptAndSubmit);
+
+
+
+
+// Function to print the selected items and total
+function printReceipt() {
+
+  printReceiptAndSubmit();
+}
+
+
+  </script>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const itemList = document.getElementById("itemList");
+    const selectedItemsCard = document.getElementById("selectedItemsCard");
+    const calculateTotalButton = document.getElementById("calculateTotalButton");
+    let newItemCount = 0; // Counter for newly added item cards
+
+    // Function to calculate and update total
+    function updateTotal() {
+      const subtotalInputs = document.querySelectorAll(".item-subtotal");
+      let total = 0;
+
+      subtotalInputs.forEach((subtotalInput) => {
+        const subtotalValue = parseFloat(subtotalInput.value.replace("PHP ", ""));
+        if (!isNaN(subtotalValue)) {
+          total += subtotalValue;
+        }
+      });
+
+      const totalValueElement = document.getElementById("totalValue");
+      totalValueElement.textContent = `PHP ${total.toFixed(2)}`;
+    }
+
+// Function to generate addon options HTML with checkboxes
+function generateAddonOptionsHTML(addonItems, productSize, hasChicken, hasAddons, itemProdid) {
+  const addonOptions = [];
+
+  if (productSize === '2pcs' || productSize === 'Regular') {
+    addonOptions.push(`
+      <div class="addon-options">
+        <div class="form-check">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="form-check-input addon-checkbox custom-control-input" id="chickenWings${itemProdid}" value="chickenWings">
+            <label for="chickenWings${itemProdid}" class="custom-control-label">
+              <select class="form-control form-control-sm float-left" style="width: 100px" name="addOnWings">
+              <option value="Buttered Chicken Chicken Wings">Buttered Chicken Chicken Wings</option>
+              <option value="Vietnamese Chicken Wings">Vietnamese Chicken Wings</option>
+              <option value="Salted Egg Chicken Wings">Salted Egg Chicken Wings</option>
+              <option value="Spicy Korean Chicken Wings">Spicy Korean Chicken Wings</option>
+              <option value="Teriyaki Chicken Wings">Teriyaki Chicken Wings</option>
+            </select>
+            </label>
+            <input type="number" class="add-on-quantity form-control form-control-sm col-12 col-sm-3 col-md-2 text-right" min=1 max=2 value=1 style="float:right"> 
+            <input type="text" class="add-on-price form-control form-control-sm col-12 col-sm-3 col-md-2" value="40" style="float:right" readonly>
+            <span class="input-group-text" style="float: right; height:30px">PHP</span>
+          </div>
+          <input type="hidden" class="add-on-subtotal" readonly> 
+        </div>
+      </div>
+      <br>`
+    );
+  }
+
+  if (hasAddons) {
+    addonItems.forEach(item => {
+      addonOptions.push(`
+        <div class="addon-options">
+          <div class="form-check">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="form-check-input addon-checkbox custom-control-input" id="${item.prodname}x${itemProdid}" value="${item.prodid}">
+              <label for="${item.prodname}x${itemProdid}" class="custom-control-label">${item.prodname}</label>
+              <input type="number" class="add-on-quantity form-control form-control-sm col-12 col-sm-3 col-md-2 text-right" min=1 value=1 style="float:right" readonly hidden> 
+              <input type="text" class="add-on-price form-control form-control-sm col-12 col-sm-3 col-md-2" value="${item.productprice}" style="float:right" readonly>
+              <span class="input-group-text" style="float: right; height:30px">PHP </span>
+            </div>
+            <input type="hidden" class="add-on-subtotal" readonly> 
+          </div>
+        </div>
+        <br>`
+      );
+    });
+  }
+
+  return addonOptions.join("");
+}
+
+// Function to fetch addon data and then generate addon options
+function fetchAddonDataAndGenerateOptions(productType, productSize, selectedDiv, itemName, itemProdid) {
+    fetch(`php/addonfetch.php?productType=${productType}`)
+      .then(response => response.json())
+      .then(addonItems => {
+        const hasChicken = itemName.includes("Chicken");
+        const addonOptionsContainer = selectedDiv.querySelector(".addon-container");
+
+        // Check if add-ons already exist to prevent duplication
+        const existingAddons = addonOptionsContainer.querySelectorAll(".addon-checkbox");
+        const hasAddons = addonItems.some(item => !Array.from(existingAddons).find(checkbox => checkbox.value === item.prodid));
+
+        addonOptionsContainer.innerHTML = generateAddonOptionsHTML(addonItems, productSize, hasChicken, hasAddons, itemProdid);
+
+        // Attach addon listeners to the newly added options
+        attachAddonListeners(selectedDiv);
+
+        // Update subtotal and total after generating addon options
+        calculateSubtotal(selectedDiv);
+        updateTotal();
+      })
+      .catch(error => {
+        console.error("Error fetching addon data:", error);
+      });
+}
+
+
+    // Add a click event listener to the itemList to handle button clicks
+itemList.addEventListener("click", function (event) {
+  // Check if the clicked element is a button
+  if (event.target.classList.contains("itembtn")) {
+    // Get the clicked button
+    const button = event.target.closest(".card");
+
+    // Get the item name and price from the button
+    const itemName = button.querySelector(".card-body p:nth-of-type(1) b").textContent;
+    let itemPrice = button.querySelector(".card-body p:nth-of-type(2) b").textContent;
+    let itemProdid = button.querySelector(".card-body p:nth-of-type(3) b").textContent;
+    let itemProducttype = button.querySelector(".card-body p:nth-of-type(4) b").textContent;
+    let itemProductsize = button.querySelector(".card-body p:nth-of-type(5) b").textContent;
+    let remaining = button.querySelector(".card-body p:nth-of-type(6) b").textContent;
+
+            console.log("Item Name:", itemName);
+            console.log("Item Price:", itemPrice);
+            console.log("Item Prodid:", itemProdid);
+            console.log("Item Type:", itemProducttype);
+            console.log("Item Product Size:", itemProductsize);
+            if (itemProductsize === '2pcs'){
+              remaining = parseInt(remaining / 2);
+            }else if(itemProductsize === 'Carte'){
+              remaining = parseInt(remaining / 6);
+            }
+            console.log("Remaining:", remaining);
+
+    // Remove "PHP " from the item price
+    itemPrice = itemPrice.replace("PHP ", "");
+
+    // Check if the item already exists in the selected items
+    const existingItem = Array.from(selectedItemsCard.getElementsByClassName("input-group-text")).find(item => item.textContent === itemName);
+    
+    if (!existingItem || existingItem) {
+      // Create a new div to represent the selected item
+      var unid = `${itemProdid}-${Date.now()}`;
+
+      const selectedDiv = document.createElement("div");
+      selectedDiv.className = "card item";
+        selectedDiv.innerHTML += `
+          <div class="input-group">
+                    <div class="input-group-prepend" style="min-width: 20%; max-width: 40%">
+                    <span class="input-group-text">${itemName}</span>
+                  </div>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">PHP </span>
+                  </div>
+                  <input type="text" name="price" readonly min=1 value="${itemPrice}" class="form-control item-price" style="width: 10%;">
+                  <input type="number" name="count" min="1" value="1" max="${remaining}" class="form-control  item-quantity text-right style="width: 10%;" onkeypress="return event.keyCode >= 37 && event.keyCode <= 40;">
+                  <input type="hidden" name="subtotal" class="form-control item-subtotal" readonly>
+                  <input type="hidden" name="prodid" class="prodid-val" value="${unid}" readonly>
+                  <input type="hidden" name="prodtype" class="prodtype-val" value="${itemProducttype}" readonly>
+                  <input type="hidden" name="productsize" class="prodsize-val" value="${itemProductsize}" readonly>
+                  <span class="input-group-append">
+                     <button type="button" class="btn btn-sm" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                  </span>
+                 
+                </div>
+                
+                <div class="card collapsed-card" >
+                  <div class="card-header">
+                  <h3 class="card-title">Add-ons</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                  </button>
+                </div>
+                </div>
+                <div class="addon-container card-body">
+                ${fetchAddonDataAndGenerateOptions(itemProducttype, itemProductsize, selectedDiv, itemName, unid)} <!-- Append addon options here -->
+                </div>
+                </div>
+
+        `;
+
+              
+
+        // Append the selected item to the selectedItemsCard
+      selectedItemsCard.appendChild(selectedDiv);
+
+      // Attach event listeners to the newly added item card
+      attachItemCardEventListeners(selectedDiv);
+      attachAddonListeners(selectedDiv);
+
+      // Update subtotal and total when a new item is added
+      calculateSubtotal(selectedDiv);
+      updateTotal();
+      
+
+      // Add event listener to update the subtotal when quantity changes
+      const quantityInput = selectedDiv.querySelector(".item-quantity");
+      quantityInput.addEventListener("input", () => calculateSubtotal(selectedDiv));
+
+    }
+    
+  }  
+});
+
+function checkMaxValue(input) {
+    if (input.value > input.max) {
+        input.value = input.max;
+    }
+}
+
+
+    // Function to calculate the subtotal for each item
+function calculateSubtotal(itemCard) {
+  const priceInput = itemCard.querySelector(".item-price");
+  const quantityInput = itemCard.querySelector(".item-quantity");
+  const subtotalInput = itemCard.querySelector(".item-subtotal");
+
+  const price = parseFloat(priceInput.value);
+  const quantity = parseInt(quantityInput.value);
+
+  let addonSubtotal = 0;
+  let displaySubtotal;
+
+  // Calculate addon subtotals
+  const addonCheckboxes = itemCard.querySelectorAll(".addon-checkbox");
+  const addonSubtotalInputs = itemCard.querySelectorAll(".add-on-subtotal");
+
+  addonCheckboxes.forEach((checkbox, index) => {
+    if (checkbox.checked) {
+      addonSubtotal += parseFloat(addonSubtotalInputs[index].value);
+    }
+  });
+
+  if (isNaN(price) || isNaN(quantity)) {
+    displaySubtotal = "0.00";
+  } else {
+    const mainSubtotal = (price * quantity).toFixed(2);
+
+    if (addonSubtotal === 0) {
+      displaySubtotal = mainSubtotal;
+    } else {
+      const totalSubtotal = (parseFloat(mainSubtotal) + addonSubtotal).toFixed(2);
+      displaySubtotal = totalSubtotal;
+    }
+  }
+
+  subtotalInput.value = `PHP ${displaySubtotal}`;
+  updateTotal(); // Update the total value whenever the subtotal changes
+}
+
+
+    // Encapsulated function to attach event listeners to an item card
+function attachItemCardEventListeners(itemCard) {
+  const quantityInput = itemCard.querySelector(".item-quantity");
+  quantityInput.addEventListener("input", () => calculateSubtotal(itemCard));
+
+  const removeButton = itemCard.querySelector(".btn-sm");
+  removeButton.addEventListener("click", () => {
+    const subtotalInput = itemCard.querySelector(".item-subtotal");
+    const subtotalValue = parseFloat(subtotalInput.value.replace("PHP ", ""));
+    if (!isNaN(subtotalValue)) {
+      const totalValueElement = document.getElementById("totalValue");
+      const currentTotal = parseFloat(totalValueElement.textContent.replace("PHP ", ""));
+      const newTotal = currentTotal - subtotalValue;
+      totalValueElement.textContent = `PHP ${newTotal.toFixed(2)}`;
+    }
+
+    itemCard.remove();
+    updateTotal();
+  });
+
+  // Attach event listeners to update addon subtotal when checkbox changes
+  const addonCheckboxes = itemCard.querySelectorAll(".addon-checkbox");
+    addonCheckboxes.forEach((checkbox) => {
+      const addonDiv = checkbox.closest(".addon-options");
+      const addonQuantityInput = addonDiv.querySelector(".add-on-quantity");
+      const addonPriceInput = addonDiv.querySelector(".add-on-price");
+      const addonSubtotalInput = addonDiv.querySelector(".add-on-subtotal");
+
+      checkbox.addEventListener("change", function () {
+        updateAddonSubtotal(addonQuantityInput, addonPriceInput, addonSubtotalInput);
+        calculateSubtotal(itemCard);
+        updateTotal();
+      });
+
+      addonQuantityInput.addEventListener("input", function () {
+        updateAddonSubtotal(addonQuantityInput, addonPriceInput, addonSubtotalInput);
+        calculateSubtotal(itemCard);
+        updateTotal();
+      });
+    });
+}
+
+// Define the updateAddonSubtotal function within the same scope
+function updateAddonSubtotal(addonQuantityInput, addonPriceInput, addonSubtotalInput) {
+    const addonPrice = parseFloat(addonPriceInput.value);
+    const addonQuantity = parseInt(addonQuantityInput.value);
+    const addonSubtotal = addonPrice * addonQuantity;
+
+    addonSubtotalInput.value = addonSubtotal.toFixed(2);
+  }
+
+function attachAddonListeners(itemCard) {
+  const addonCheckboxes = itemCard.querySelectorAll(".addon-checkbox");
+
+  addonCheckboxes.forEach((checkbox) => {
+    const addonDiv = checkbox.closest(".addon-options");
+    const addonQuantityInput = addonDiv.querySelector(".add-on-quantity");
+    const addonPriceInput = addonDiv.querySelector(".add-on-price");
+    const addonSubtotalInput = addonDiv.querySelector(".add-on-subtotal");
+
+    checkbox.addEventListener("change", function () {
+      updateAddonSubtotal(addonQuantityInput, addonPriceInput, addonSubtotalInput);
+      calculateSubtotal(itemCard);
+      updateTotal();
+    });
+
+    addonQuantityInput.addEventListener("input", function () {
+      updateAddonSubtotal(addonQuantityInput, addonPriceInput, addonSubtotalInput);
+      calculateSubtotal(itemCard);
+      updateTotal();
+    });
+  });
+}
+
+
+    // Get all item cards
+    const itemCards = document.querySelectorAll(".card .input-group");
+
+    // Calculate the initial subtotals
+    itemCards.forEach(calculateSubtotal);
+
+    // Function to update the total value
+function updateTotal() {
+  const subtotalInputs = document.querySelectorAll(".item-subtotal");
+  let total = 0;
+
+  subtotalInputs.forEach((subtotalInput) => {
+    const subtotalValue = parseFloat(subtotalInput.value.replace("PHP ", ""));
+    if (!isNaN(subtotalValue)) {
+      total += subtotalValue;
+    }
+  });
+
+  const totalValueElement = document.getElementById("totalValue");
+  totalValueElement.textContent = `PHP ${total.toFixed(2)}`;
+
+  // Recalculate the final total based on the updated total value
+  calculateFinalTotal();
+}
+
+    // Add event listeners to update subtotals when quantity changes
+    itemCards.forEach((itemCard) => {
+    const quantityInput = itemCard.querySelector(".item-quantity");
+    quantityInput.addEventListener("input", () => calculateSubtotal(itemCard));
+
+    // Add event listener to remove the item card
+    const removeButton = itemCard.querySelector(".btn-sm");
+    removeButton.addEventListener("click", () => {
+      const subtotalInput = itemCard.querySelector(".item-subtotal");
+      const subtotalValue = parseFloat(subtotalInput.value.replace("PHP ", ""));
+      if (!isNaN(subtotalValue)) {
+        // Subtract the subtotal of the removed item from the total
+        const totalValueElement = document.getElementById("totalValue");
+        const currentTotal = parseFloat(totalValueElement.textContent.replace("PHP ", ""));
+        const newTotal = currentTotal - subtotalValue;
+        totalValueElement.textContent = `PHP ${newTotal.toFixed(2)}`;
+      }
+
+      // Remove the item card from the DOM
+      itemCard.parentElement.remove();
+      updateTotal();
+    });
+
+    const addonCheckboxes = itemCard.querySelectorAll(".addon-checkbox");
+  addonCheckboxes.forEach((checkbox) => {
+    const addonDiv = checkbox.closest(".addon-options");
+    const addonQuantityInput = addonDiv.querySelector(".add-on-quantity");
+    const addonPriceInput = addonDiv.querySelector(".add-on-price");
+    const addonSubtotalInput = addonDiv.querySelector(".add-on-subtotal");
+
+    // Add event listener to update addon subtotal when checkbox changes
+    checkbox.addEventListener("change", function () {
+      updateAddonSubtotal(addonQuantityInput, addonPriceInput, addonSubtotalInput);
+      calculateSubtotal(itemCard);
+      updateTotal();
+    });
+
+    // Add event listener to update addon subtotal when quantity changes
+    addonQuantityInput.addEventListener("input", function () {
+      updateAddonSubtotal(addonQuantityInput, addonPriceInput, addonSubtotalInput);
+      calculateSubtotal(itemCard);
+      updateTotal();
+    });
+  });
+
+  function updateAddonSubtotal(checkbox) {
+  const addonDiv = checkbox.closest(".addon-options");
+  const addonQuantityInput = addonDiv.querySelector(".add-on-quantity");
+  const addonPriceInput = addonDiv.querySelector(".add-on-price");
+  const addonSubtotalInput = addonDiv.querySelector(".add-on-subtotal");
+
+  const addonPrice = parseFloat(addonPriceInput.value);
+  const addonQuantity = parseInt(addonQuantityInput.value);
+  const addonSubtotal = addonPrice * addonQuantity;
+
+  addonSubtotalInput.value = addonSubtotal.toFixed(2);
+}
+
+   });
+
+    // Add event listener to the discount checkbox
+const discountCheckbox = document.getElementById("senior");
+discountCheckbox.addEventListener("change", () => calculateFinalTotal());
+
+// Function to calculate the final total
+function calculateFinalTotal() {
+  const totalValueElement = document.getElementById("totalValue");
+  const finalTotalElement = document.getElementById("finalTotal");
+  const discountCheckbox = document.getElementById("senior");
+  const paymentInput = document.getElementsByName("payment")[0];
+
+  if (discountCheckbox.checked){
+    $('#idcardinput').css('display', 'block');
+  }else{
+    $('#idcardinput').css('display', 'none');
+  }
+  
+  const discount = discountCheckbox.checked ? parseFloat(discountCheckbox.value) : 0;
+  const totalValue = parseFloat(totalValueElement.textContent.replace("PHP ", ""));
+  const payment = parseFloat(paymentInput.value);
+  const finalTotal = (totalValue - (totalValue * discount)).toFixed(2);
+
+  finalTotalElement.textContent = `PHP ${finalTotal}`;
+
+  if (!isNaN(payment)) {
+    const changeElement = document.getElementById("change");
+    const change = (payment - finalTotal).toFixed(2);
+    changeElement.textContent = `PHP ${change}`;
+  }
+}
+
+// Add event listener to payment input
+const paymentInput = document.getElementsByName("payment")[0];
+paymentInput.addEventListener("input", () => calculateFinalTotal());
+
+// Call calculateFinalTotal initially to set the final total and change to default values
+calculateFinalTotal();
+
+    // Call the updateTotal function initially to set the total to 0.00
+    updateTotal();
+  });
+
+// Function to clear the selected items list
+function clearList() {
+  location.reload(true);
+}
+// Add click event listener to the clear button
+const clearButton = document.getElementById("clearButton");
+clearButton.addEventListener("click", clearList);
+
+document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+    const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+        const newButtonClass = switchInput.checked ? 'btn-info' : 'btn-light';
+        const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+        
+        sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+        sidebar.classList.add(newSidebarClass);
+
+        buttonsExample1.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        buttonsExample2.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        if (switchInput.checked) {
+            body.classList.remove('dark-mode');
+            navbar.classList.remove('navbar-dark');
+            navbar.classList.add('navbar-warning');
+            switchInput.nextElementSibling.hidden = true;
+            switchInput.nextElementSibling.nextElementSibling.hidden = false;
+        } else {
+            body.classList.add('dark-mode');
+            navbar.classList.remove('navbar-warning');
+            navbar.classList.add('navbar-dark');
+            switchInput.nextElementSibling.hidden = false;
+            switchInput.nextElementSibling.nextElementSibling.hidden = true;
+        }
+    
+        // Save switch state to localStorage
+        localStorage.setItem('darkMode', switchInput.checked);
+    }
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+});
+</script>
+
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<script>
+  function fetchDrink() {
+    $.ajax({
+        url: 'php/drinkfetch.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            const drinkContainer = $('#tab2 .drinkscard');
+            drinkContainer.empty();
+
+            data.sort((a, b) => a.productvariant.localeCompare(b.productvariant));
+
+
+            const uniqueVariants = {}; // Object to store unique drink variants
+
+            $.each(data, function(index, item) {
+                const variant = item.productvariant;
+                if (!uniqueVariants[variant] && variant!=='Inventory') {
+                    drinkContainer.append(`
+                        <div class="col-12 col-sm-6 col-md-4" style="width: 150px;">
+                            <div class="itembtn drinks card" style="text-align: center; margin: 5px">
+                                <!-- <div class="itembtn card-header"><img src="dist/img/AdminLTELogo.png" class="itembtn card-img"></div> -->
+                                <div class="itembtn card-body">
+                                    <p style="margin: 0;"><b>${variant}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+
+                    uniqueVariants[variant] = true; // Mark the drink variant as encountered
+                }
+            });
+
+            // Add invisible cards for missing drink items
+            const numInvisibleCards = Math.max(3 - Object.keys(uniqueVariants).length, 0);
+            for (let i = 0; i < numInvisibleCards; i++) {
+                drinkContainer.append(`
+                    <div class="col-12 col-sm-6 col-md-4 invisible">
+                        <div class="card-header"><p style="margin: 0; width: 150px;"><b>-----</b></p></div>
+                        <div class="itembtn drinks card " style="margin: 5px"></div>
+                    </div>
+                `);
+            }
+
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+
+
+// Call the function to populate drink items
+fetchDrink();
+
+</script>
+
+<script>
+  // Get the container for cup size choices
+const cupSizeSection = document.getElementById("cupSizeSection");
+
+// Function to show cup size choices
+function showCupSizeChoices(itemName) {
+    $.ajax({
+        url: 'php/drinkfetch.php', // Replace with your cup size data source
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            const filteredCupSizes = data.filter(item => item.productvariant === itemName);
+
+            // Initialize an array to store Inventory items
+            let inventoryItemsd = [];
+
+            // Iterate through the 'data' array and filter 'Inventory' items
+            $.each(data, function(index, item) {
+                if (item.producttype === "Inventory") {
+                  console.log(`Found Item ${item}` );
+                    inventoryItemsd.push(item);
+                }
+            });
+
+            // The 'inventoryItems' array now contains all items with product type 'Inventory'
+            console.log(inventoryItemsd);
+
+
+            let cupSizeOptions = '';
+            cupSizeOptions += `<h3 class="card-title">${itemName} > Menu</h3>`;
+            cupSizeOptions += '<div class="row" style="justify-content: center">';
+
+            filteredCupSizes.sort((a, b) => a.productsize.localeCompare(b.productsize)); // Sort ascending
+            filteredCupSizes.sort((a, b) => a.prodname.localeCompare(b.prodname)); // Sort ascending
+
+            filteredCupSizes.forEach(cupSize => {
+
+                cupSizeOptions += `
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="drinks card" style="text-align: center; margin: 5px">
+                          <div class="card-header"><img src="uploads/${cupSize.productimg}" style="height:150px; width: 100%;" class="card-img"></div>
+                            <div class="card-body">
+                                <p style="margin: 0"><b>${cupSize.productsize} ${cupSize.prodname}</b></p>
+                                <p style="margin: 0"><b>PHP ${cupSize.productprice}</b></p>
+                                <p hidden><b> ${cupSize.prodid} </b></p>
+                                <p hidden><b>${cupSize.producttype}</b></p>
+                                <p hidden><b>${cupSize.productsize}</b></p>
+
+                                `;
+
+                                if (cupSize.productsize === '12Oz.'){
+
+                                  let smallcup = 0;
+              const smallIndex = inventoryItemsd.findIndex(item => item.prodname === "12Oz. Small Cup");
+              if (smallIndex !== -1) {
+                smallcup = inventoryItemsd[smallIndex].productsize;
+                            console.log(`Small Cup' in inventoryItems: ${smallIndex}`);
+                        } else {
+                            console.log("'Chicken Wings' not found in inventoryItems.");
+                        }
+                                  
+
+                        console.log(`Small Cups Available::::::::: ${smallcup}`);
+                                  
+
+                                  if(smallcup > 50){
+                                    cupSizeOptions += `
+                                  <p hidden><b>${smallcup}</b></p>
+                                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                                  `;
+                                  }else if(smallcup > 0){
+                                    cupSizeOptions += `
+                                  <p hidden><b>${smallcup}</b></p>
+                                  <p class="text-danger">Remaining: ${smallcup}</p>
+                                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                                  `;
+                                  }else{
+                                    cupSizeOptions += `
+                                    <p hidden><b>${smallcup}</b></p>
+                                  <p class="text-danger">Remaining: ${smallcup}</p>
+                                  <button class="itembtn btn btn-success btn-sm" disabled>Add Item</button>
+                                  `;
+                                  }
+
+                                  
+                                
+                                }else if (cupSize.productsize === '16Oz.'){
+              let largecup = 0;
+              const largeIndex = inventoryItemsd.findIndex(item => item.prodname === "16Oz. Large Cup");
+                        if (largecup !== -1) {
+                largecup = inventoryItemsd[largeIndex].productsize;
+                            console.log(`Large Cup' in inventoryItems: ${largeIndex}`);
+                        } else {
+                            console.log("'Chicken Wings' not found in inventoryItems.");
+                        }
+
+                        console.log(`Large Cups Available::::::::: ${largecup}`);
+
+                        if(largecup > 50){
+                                    cupSizeOptions += `
+                                  <p hidden><b>${largecup}</b></p>
+                                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                                  `;
+                                  }else if(largecup > 0){
+                                    cupSizeOptions += `
+                                  <p hidden><b>${largecup}</b></p>
+                                  <p class="text-danger">Remaining: ${largecup}</p>
+                                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                                  `;
+                                  }else{
+                                    cupSizeOptions += `
+                                    <p hidden><b>${largecup}</b></p>
+                                  <p class="text-danger">Remaining: ${largecup}</p>
+                                  <button class="itembtn btn btn-success btn-sm" disabled>Add Item</button>
+                                  `;
+                                  }
+
+                                
+                                }else if (cupSize.productsize === '22Oz.' || cupSize.productsize === '20Oz.'){
+
+                                  let xlargecup = 0;
+
+              const xlargeIndex = inventoryItemsd.findIndex(item => item.prodname === "22Oz. Extra Large Cup");
+
+                        if (xlargecup !== -1) {
+                          xlargecup = inventoryItemsd[xlargeIndex].productsize;
+                            console.log(`XLarge Cup' in inventoryItems: ${xlargeIndex}`);
+                        } else {
+                            console.log("'Chicken Wings' not found in inventoryItems.");
+                        }
+
+                        if(xlargecup > 50){
+                                    cupSizeOptions += `
+                                  <p hidden><b>${xlargecup}</b></p>
+                                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                                  `;
+                                  }else if(xlargecup > 0){
+                                    cupSizeOptions += `
+                                  <p hidden><b>${xlargecup}</b></p>
+                                  <p class="text-danger">Remaining: ${xlargecup}</p>
+                                  <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                                  `;
+                                  }else{
+                                    cupSizeOptions += `
+                                    <p hidden><b>${xlargecup}</b></p>
+                                  <p class="text-danger">Remaining: ${xlargecup}</p>
+                                  <button class="itembtn btn btn-success btn-sm" disabled>Add Item</button>
+                                  `;
+                                  }
+
+                                }
+
+
+                                cupSizeOptions += `
+                                <!-- <button class="itembtn btn btn-success btn-sm">Add Item</button> -->
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const numItems = filteredCupSizes.length;
+            const numInvisibleCards = Math.max(3 - numItems, 0);
+
+            // Add invisible cards for missing items
+            for (let i = 0; i < numInvisibleCards; i++) {
+                cupSizeOptions += `
+                    <div class="col-12 col-sm-6 col-md-4 invisible">
+                      <div class="card-header"><img src="dist/img/default-150x150.png" class="card-img"></div>
+                        <div class="food card " style="margin: 5px"></div>
+                    </div>
+                `;
+            }
+            cupSizeOptions += '</div>';
+
+            
+            cupSizeSection.innerHTML = cupSizeOptions;
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+// Add click event listeners to item cards
+$(document).on('click', '.itembtn.card.drinks', function() {
+    const itemName = $(this).find('.itembtn.card-body p b').text();
+    showCupSizeChoices(itemName);
+});
+
+</script>
+
+
+<!-- Food -->
+
+<script>
+  function fetchFood() {
+    $.ajax({
+        url: 'php/foodvariantdisplay.php', // Replace with the appropriate URL for fetching food items
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            const foodContainer = $('#tab1 .food');
+            foodContainer.empty();
+
+            // Sort the data array by the prodvariant property alphabetically
+            data.sort((a, b) => a.productvariant.localeCompare(b.productvariant));
+
+            const uniqueNames = {}; // Object to store unique food names
+
+            $.each(data, function(index, item) {
+                const itemName = item.prodname + item.productvariant;
+                if (!uniqueNames[itemName]) {
+                    foodContainer.append(`
+                        <div class="col-12 col-sm-4 col-md-4" style="width: 150px;">
+                            <div class="itembtn food card" style="text-align: center; margin: 5px">
+                                <!-- <div class="itembtn card-header"><img src="dist/img/AdminLTELogo.png" style="height:0px; width: 100%;" class="itembtn card-img"></div> -->
+                                <div class="itembtn card-body">
+                                    <p style="margin: 0;"><b>${item.productvariant}</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+
+                    uniqueNames[itemName] = true; // Mark the combination of prodname and productvariant as encountered
+                }
+            });
+
+            // Add invisible cards for missing food items
+            const numInvisibleCards = Math.max(3 - Object.keys(uniqueNames).length, 0);
+            for (let i = 0; i < numInvisibleCards; i++) {
+                foodContainer.append(`
+                    <div class="col-12 col-sm-4 col-md-4 invisible">
+                      <div class="card-header"><img src="dist/img/default-150x150.png" class="card-img"></div>
+                        <div class="itembtn food card " style="margin: 5px"></div>
+                    </div>
+                `);
+            }
+
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+function fetchNew() {
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadge').text(count);
+      $('#navBadge').css('display', 'block');
+      }else{
+        $('#navBadge').css('display', 'none');
+      }
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchTicketNew() {
+
+$.ajax({
+  url: 'php/ticketNew.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+
+      console.log(data);
+
+    let countTicketNew = 0;
+    $.each(data, function(index, item) {
+
+
+        countTicketNew++;
+      
+     
+    });      
+    console.log(`Count new ticket:: ${countTicketNew}`);
+    if (countTicketNew > 0){
+    $('#navBadgeTicket').text(countTicketNew);
+    } 
+
+
+    console.log(data);
+  },
+  error: function(xhr, status, error) {
+    console.error(error);
+  }
+});
+}
+
+function fetchInventory() {
+
+    $.ajax({
+        url: 'php/inventoryfetch.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            let count = 0;
+            $.each(data, function(index, item) {
+                var status;
+                if (item.productsize <= 50){
+                  count++;
+                }
+            });
+
+            if (count > 0){
+              $('#badge-info').css('display', 'block');
+            }
+
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+fetchInventory();
+
+  fetchTicketNew();
+
+fetchNew();
+// Call the function to populate food items
+fetchFood();
+
+</script>
+
+
+<script>
+  // Get the container for food size choices
+const foodSizeSection = document.getElementById("foodSizeSelection");
+
+// Function to show food size choices
+function showFoodSizeChoices(itemName, isFoodSection) {
+    $.ajax({
+        url: 'php/foodfetch.php', // Replace with your food size data source
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            const filteredFoodSizes = data.filter(item => item.productvariant === itemName);
+
+            // Sort the data array by the prodvariant property alphabetically
+            data.sort((a, b) => a.prodname.localeCompare(b.prodname));
+
+            // Initialize an array to store Inventory items
+            let inventoryItems = [];
+
+            // Iterate through the 'data' array and filter 'Inventory' items
+            $.each(data, function(index, item) {
+                if (item.producttype === "Inventory") {
+                  console.log(`Found Item ${item}` );
+                    inventoryItems.push(item);
+                }
+            });
+
+            // The 'inventoryItems' array now contains all items with product type 'Inventory'
+            console.log(inventoryItems);
+
+            let foodSizeOptions = '';
+
+            if (isFoodSection) {
+                foodSizeOptions += `<h3 class="card-title">${itemName} > Menu</h3>`;
+            }
+
+            const numItems = filteredFoodSizes.length;
+            const numInvisibleCards = Math.max(3 - numItems, 0);
+
+            foodSizeOptions += '<div class="row" style="justify-content: center">';
+              
+
+            filteredFoodSizes.forEach(foodSize => {
+
+              let quantityWings = 0;
+
+              const inventoryItemIndex = inventoryItems.findIndex(item => item.prodname === "Chicken Wings");
+
+                        if (inventoryItemIndex !== -1) {
+                            quantityWings = inventoryItems[inventoryItemIndex].productsize;
+                            console.log(`Index of 'Chicken Wings' in inventoryItems: ${inventoryItemIndex}`);
+                        } else {
+                            console.log("'Chicken Wings' not found in inventoryItems.");
+                        }
+
+                foodSizeOptions += `
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="food card" style="text-align: center; margin: 5px">
+                          <div class="itembtn card-header"><img src="uploads/${foodSize.productimg}" style="height:150px; width: 100%;" class="itembtn card-img"></div>
+                            <div class="card-body">
+
+                              `;
+
+                          if (foodSize.productsize === '1pc' || foodSize.productsize === '2pcs'){
+
+                            foodSizeOptions += `
+                            <p style="margin: 0"><b>${foodSize.productsize +" " + foodSize.prodname}</b></p>
+                            `;
+                          }else{
+                            foodSizeOptions += `
+                            <p style="margin: 0"><b>${foodSize.prodname}</b></p>
+                            `;
+                          }
+
+                      foodSizeOptions += `
+                                <p style="margin: 0"><b>PHP ${foodSize.productprice}</b></p>
+                                <p hidden><b>${foodSize.prodid}</b></p>
+                                <p hidden><b>${foodSize.producttype}</b></p>
+                                <p hidden><b>${foodSize.productsize}</b></p>`;
+                          
+
+                        if (foodSize.productsize === "Regular"){
+                          foodSizeOptions +=`
+                              <p hidden><b>500</b></p>
+                                <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                            </div>
+                        </div>
+                    </div>
+                        `;
+
+                        }else if (foodSize.productsize === '1pc' && quantityWings > 0) {
+                            
+                            
+                            if (quantityWings > 50){
+                              foodSizeOptions +=`
+                              <p hidden><b>${quantityWings}</b></p>
+                                <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                            </div>
+                        </div>
+                    </div>
+                        `;
+
+                            }else{
+                        foodSizeOptions +=`
+                        <p hidden><b>${quantityWings}</b></p>
+                                <p class="text-danger">Remaining: ${quantityWings}</p>
+
+                                <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                            </div>
+                        </div>
+                    </div>
+                        `;
+                  }
+                        }else if (foodSize.productsize === '2pcs' && parseInt(quantityWings / 2) > 0){
+
+                          if ((quantityWings / 2) > 50){
+                              foodSizeOptions +=`
+                              <p hidden><b>${quantityWings}</b></p>
+
+                                <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                            </div>
+                        </div>
+                    </div>
+                        `;
+
+                            }else{
+                        foodSizeOptions +=`
+                        <p hidden><b>${quantityWings}</b></p>
+                                <p class="text-danger">Remaining: ${parseInt(quantityWings/2)}</p>
+
+                                <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                            </div>
+                        </div>
+                    </div>
+                        `;
+                  }
+                        }else if (foodSize.productsize === 'Carte' && parseInt(quantityWings / 6) > 0){
+
+                if ((quantityWings / 6) > 50){
+                    foodSizeOptions +=`
+                    <p hidden><b>${quantityWings}</b></p>
+
+                      <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                  </div>
+                </div>
+                </div>
+                `;
+
+                  }else{
+                foodSizeOptions +=`
+                <p hidden><b>${quantityWings}</b></p>
+                      <p class="text-danger">Remaining: ${parseInt(quantityWings/6)}</p>
+
+                      <button class="itembtn btn btn-success btn-sm">Add Item</button>
+                  </div>
+                </div>
+                </div>
+                `;
+                }
+                }else{
+                  foodSizeOptions +=`
+                      <p class="text-danger">Remaining: 0</p>
+
+                      <button class="itembtn btn btn-success btn-sm" disabled>Add Item</button>
+                  </div>
+                </div>
+                </div>
+                `;
+                }
+
+          });
+            
+
+            // Add invisible cards for missing items
+            for (let i = 0; i < numInvisibleCards; i++) {
+                foodSizeOptions += `
+                    <div class="col-12 col-sm-6 col-md-4 invisible">
+                      <div class="card-header"><img src="dist/img/default-150x150.png" class="card-img"></div>
+                        <div class="food card " style="margin: 5px"></div>
+                    </div>
+                `;
+            }
+
+            
+
+            foodSizeOptions += '</div>';
+
+            foodSizeSection.innerHTML = foodSizeOptions;
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+// Add click event listeners to food item cards
+$(document).on('click', '.itembtn.food', function() {
+    const itemName = $(this).find('.itembtn.card-body p b').text();
+    showFoodSizeChoices(itemName, true); // Pass 'true' to indicate it's the food section
+});
+
+</script>
+  </div>
+
+  <script>
+      // Function to check screen size and toggle CSS class
+      function checkScreenSize() {
+    const messageElement = document.getElementById('message');
+    const contentElement = document.getElementById('content');
+    const screenSize = window.innerWidth;
+
+    if (screenSize < 768) { // Adjust the screen size threshold as needed
+        // Add the 'hidden' class to hide the content
+        messageElement.classList.remove('hidden');
+        contentElement.classList.add('hidden');
+        
+        // Set the height and width of the message element to match the screen size
+        messageElement.style.width = screenSize + 'px';
+        messageElement.style.height = window.innerHeight + 'px';
+    } else {
+        // Remove the 'hidden' class to show the content
+        messageElement.classList.add('hidden');
+        contentElement.classList.remove('hidden');
+        
+        // Reset the height and width styles
+        messageElement.style.width = 'auto';
+        messageElement.style.height = 'auto';
+    }
+}
+
+      // Initial check when the page loads
+      window.onload = checkScreenSize;
+
+      // Check when the window is resized
+      window.onresize = checkScreenSize;
+  </script>
+
+</body>
+</html>

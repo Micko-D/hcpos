@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+  <style>
+/* CSS for larger screens */
+@media (min-width: 768px) {
+    /* Show the modal-body content */
+    #updateModal .modal-body {
+        display: block !important; /* Use !important to override Bootstrap's default styles if necessary */
+    }
+}
+
+/* CSS for mobile screens */
+@media (max-width: 767px) {
+    /* Hide the modal-body content */
+    #updateModal .modal-body {
+        display: none !important; /* Hide the modal body on mobile screens */
+    }
+    /* Display "Not Available" text */
+    #updateModal .modal-content::before {
+        content: "Not Available";
+        display: block;
+        text-align: center;
+        padding: 10px;
+    }
+}
+
+  </style>
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+  <!-- Fail Modal -->
+  <div class="modal fade" id="logfailModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Session Ended.<br>
+                                Login again to use...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+  <div class="wrapper" id="allcontent">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <!-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul> -->
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="../hcpos" class="nav-link ">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>            
+          </li>
+
+
+          <li class="nav-item">
+            <a href="pos.html" class="nav-link ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-info">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ord.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                </p>
+              </p><span class="right badge badge-info" id="navBadge"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="orderhistory.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manprod.html" class="nav-link">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Manage Product
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticket.html" class="nav-link">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>
+                Customer Tickets
+              </p>
+              <span class="right badge badge-info" id="navBadgeTicket"></span>
+            </a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a href="chat.html" class="nav-link">
+              <i class="nav-icon fas fa-comment-dots"></i>
+              <p>
+                Chat
+              </p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="feedback.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="salesreport.html" class="nav-link ">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Sales Report
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="maginv.html" class="nav-link active">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Inventory
+              </p>
+
+            </p>
+            <span class="right badge text-danger" style="display: none; font-size: 18px;" id="badge-info"><i class="fas fa-exclamation-triangle"></i></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="usermanage.html" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Manage User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="audit.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Audit Logs
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+          
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row invisible">`</div>
+        <!-- Info boxes -->
+        <div class="row mt-2" style="justify-content: center">
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning">
+              <div class="btn btn-sm" style="width: 100%; outline: none;" onclick="openTab(event, 'tab1')">Materials</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning"> 
+              <div class="btn btn-sm" style="width: 100%; outline: none;"  onclick="openTab(event, 'tab2')">Generate Report</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box mb-3 bg-warning">
+              <div class="btn btn-sm" style="width: 100%; outline: none;"  onclick="openTab(event, 'tab3')">Analytical Graph</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- <div class="col-12 col-sm-3 col-md-3">
+            <div class="small-box mb-3 bg-warning">
+              <div class="btn btn-sm" style="width: 100%; outline: none;"  onclick="openTab(event, 'tab4')">Create new Material</div>
+              /.info-box-content 
+            </div>
+           /.info-box 
+          </div> -->
+          
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title" id="cardtitle-id">Inventory</h3>                
+              </div>
+              <div class="card-body">
+                
+                <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <div id="tab1" class="tab-content">
+
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                
+                    </tbody>
+                  
+                  </table>
+                
+                
+                </div>
+
+                <div id="tab2" class="tab-content " style="display: none;">
+                  <div class="form-group">
+                    
+ 
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                      <select name="dateControl" id="dateControl" class="form-control">
+                        <option value="Daily" selected>Daily</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Monthly">Monthly</option>
+                      </select>
+                      </div>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="far fa-calendar-alt"></i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control " id="reservation2">
+                      <button class="btn btn-sm btn-warning col-2" id="printTable"><i class="fas fa-print"></i></button>
+                      
+                      
+                    </div>
+                    <!-- /.input group -->
+                  </div>
+                  <div class="input-group">
+                
+                
+                </div>
+
+                <br>
+
+                <table id="example2" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Date</th>
+                    <th>Stocks In</th>
+                    <th>Stocks Out</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                                                          
+                  </tbody>
+                 
+                </table>
+
+                </div>
+
+                <div id="tab3" class="tab-content " style="display: none;">
+                  <div class="row">
+                    <div class="col-10 col-sm-10 col-md-10">
+                      <!-- BAR CHART -->
+                                  <div class="card card-secondary">
+                                    <div class="card-header">
+                                      <h3 class="card-title" id="barChartTitle">Average Use Monthly</h3>
+                                    </div>
+                                    <div class="card-body">
+                                      <div class="chart barArea">
+                                        <!-- <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
+                                      </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                  </div>
+                                  <!-- /.card -->
+
+                                  <!-- LINE CHART -->
+            <div class="card card-secondary">
+              <div class="card-header">
+                <h3 class="card-title">Line Chart</h3>
+
+                <div class="card-tools">
+                  <div class="form-group">
+ 
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="far fa-calendar-alt"></i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control " id="reservation">
+                      
+                      
+                    </div>
+                    <!-- /.input group -->
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart lineArea">
+                  <!-- <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+                                        
+                    </div>
+
+                    
+
+
+                    
+
+                    <div class="col-2 col-sm-2 col-md-2">
+                      <div class="controller">
+                        Controller
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="Daily" name="salesControl" value="Daily">
+                          <label for="Daily" class="custom-control-label">Daily</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="Monthly" name="salesControl" value="Monthly" checked>
+                          <label for="Monthly" class="custom-control-label">Monthly</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input class="custom-control-input" type="radio" id="Yearly" name="salesControl" value="Yearly">
+                          <label for="Yearly" class="custom-control-label">Yearly</label>
+                        </div>
+                
+                        <hr>
+                
+                        Chart Display
+                        <div class="custom-control custom-checkbox" >
+                          <input class="custom-control-input category-checkbox" type="checkbox" id="esc" name="esc" value="12Oz. Small Cup" checked>
+                          <label for="esc" class="custom-control-label">Small Cup</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input category-checkbox" type="checkbox" id="sc" name="sc" value="16Oz. Large Cup" checked>
+                          <label for="sc" class="custom-control-label">Large Cup</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input category-checkbox" type="checkbox" id="lc" name="lc" value="22Oz. Extra Large Cup" checked>
+                          <label for="lc" class="custom-control-label">Extra Large Cup</label>
+                        </div>
+                        <div class="custom-control custom-checkbox" >
+                          <input class="custom-control-input category-checkbox" type="checkbox" id="parchment" name="parchment" value="Parchment Paper" checked>
+                          <label for="parchment" class="custom-control-label">Parchment Paper</label>
+                        </div>
+                        <div class="custom-control custom-checkbox" >
+                          <input class="custom-control-input category-checkbox" type="checkbox" id="Styro" name="Styro" value="Styro" checked>
+                          <label for="Styro" class="custom-control-label">Styro</label>
+                        </div>
+                
+                
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  
+  
+                  </div>
+
+                <div id="tab4" class="tab-content " style="display: none;">
+
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Add Product</h3>
+                    </div>
+                    <form id="itemForm" method="post" action="php/insertItem.php" enctype="multipart/form-data">
+                    <div class="row">
+
+                      
+                      <div class="col-12 col-sm-4 col-md-4">
+                        <img src="dist/img/default-150x150.png" style="width: 100%; background: white;" id="preview">
+                        <input type="file" name="file" id="imgfile" onchange="previewImage(event)" hidden>
+                      <label for="imgfile" class="btn btn-sm btn-warning mt-1" style="width: 100%">Upload</label>
+                      <span id="uploadMessage" class="text-danger" style="display: none;">* Please select an image.</span>
+                      </div>
+
+                      <div class="col-12 col-sm-8 col-md-8">
+                        <input type="text" name="itemName" class="form-control mb-2" placeholder="Product Name" autocomplete="off">
+                        <span id="itemNameMessage" class="text-danger" style="display: none;">* Item Name is required.</span>
+                        <input type="number" name="itemQuantity" class="form-control mb-2" placeholder="Quantity Value" autocomplete="off">
+                        <span id="itemQuantityMessage" class="text-danger" style="display: none;">* Item Quantity is required.</span>
+
+                      <div class="row">
+                        <div class="col-12 col-sm-4 col-md-4 mb-2 invisible"></div>
+                      <button name="add" class="btn btn-warning btn-sm col-12 col-sm-4 col-md-4 mb-2">Add Item</button>
+                      <div class="col-12 col-sm-4 col-md-4 mb-2 invisible"></div>
+                    </div>
+
+
+                 
+                      </div>
+
+                    
+                      
+                    </div>
+                    </form>
+                    
+                  </div>                 
+                  
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+              </div>
+              
+            </div>
+          </div>
+          
+
+
+        </div>
+
+
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">Success</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Data inserted successfully.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Fail Modal -->
+<div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Failed to insert data.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Empty Modal -->
+<div class="modal fade" id="failModal2" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Fill all data neede before submitting.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Are you sure you want to delete this item?
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="updateForm" action="php/updatematerial.php" method="post">
+          <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Purchase Additional Material</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              
+                <div class="form-group">
+                  <label for="productId">Material ID</label>
+                  <input type="text" class="form-control" id="productId" name="prodid" readonly>
+              </div>
+                  <div class="form-group">
+                      <label for="productName">Material Name</label>
+                      <input type="text" class="form-control" id="productName" name="prodname" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label for="productSize">Material Quantity</label>
+                    <input type="text" class="form-control" id="productSize" name="currentQuantity" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="productSizeAdd">Quantity Increased</label>
+                  <input type="number" class="form-control" id="productSizeAdd" name="addQuantity">
+              </div>
+              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="updateProduct">Save Changes</button>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<script>
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      if (!role || !userid) {
+        // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#logfailModal').modal('show');
+        // Listen for the modal close event
+        $('#logfailModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+let globalUserName = '';
+
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+                  globalUserName = user.fullname;
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();  
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const previewImage = document.getElementById('preview');
+    const imageInput = document.getElementById('imgfile');
+
+    imageInput.addEventListener('change', function () {
+        const selectedFile = imageInput.files[0];
+        if (selectedFile) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Resize the image
+                resizeImage(e.target.result, 150, 150, function (resizedDataURL) {
+                    previewImage.src = resizedDataURL;
+                });
+            };
+
+            reader.readAsDataURL(selectedFile);
+        }
+    });
+
+    function resizeImage(src, width, height, callback) {
+        const img = new Image();
+        img.src = src;
+
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = width;
+            canvas.height = height;
+          
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const resizedDataURL = canvas.toDataURL('image/jpeg'); // Change to 'image/png' if needed
+
+            if (callback && typeof callback === 'function') {
+                callback(resizedDataURL);
+            }
+        };
+    }
+});
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+    const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+        const newButtonClass = switchInput.checked ? 'btn-info' : 'btn-light';
+        const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+        
+        sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+        sidebar.classList.add(newSidebarClass);
+
+        buttonsExample1.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        buttonsExample2.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        if (switchInput.checked) {
+            body.classList.remove('dark-mode');
+            navbar.classList.remove('navbar-dark');
+            navbar.classList.add('navbar-warning');
+            switchInput.nextElementSibling.hidden = true;
+            switchInput.nextElementSibling.nextElementSibling.hidden = false;
+        } else {
+            body.classList.add('dark-mode');
+            navbar.classList.remove('navbar-warning');
+            navbar.classList.add('navbar-dark');
+            switchInput.nextElementSibling.hidden = false;
+            switchInput.nextElementSibling.nextElementSibling.hidden = true;
+        }
+    
+        // Save switch state to localStorage
+        localStorage.setItem('darkMode', switchInput.checked);
+    }
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+});
+
+</script>
+
+<script>
+function barChart(){
+
+  $('#barChart').remove();
+
+      // Create a new canvas for the donut chart
+      $('.barArea').append('<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+
+  var selectedSalesType = $('input[name="salesControl"]:checked').val();
+  var selectedCategories = [];
+
+  $('#barChartTitle').text('Average ' + selectedSalesType + ' Usage');
+
+
+$('input.category-checkbox:checked').each(function() {
+    selectedCategories.push($(this).val());
+});
+
+if (selectedCategories.length === 0) {
+    selectedCategories = []; // Clear the array if no checkboxes are selected
+}
+
+    console.log(selectedSalesType);
+    console.log(selectedCategories);
+
+
+  $.ajax({
+    url: 'php/barChartFetch.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      salesType: selectedSalesType,
+      categories: selectedCategories
+    },
+    success: function(response){
+
+    // Create a bar chart with the provided data
+  var barChartCanvas = $('#barChart').get(0).getContext('2d');
+  var barChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    datasetFill: false,
+    legend: { // Remove the legend
+          display: false,
+        },
+    plugins: {
+          legend: {
+            display: false, // Hide the chart legends
+          },
+        },
+    
+  };
+
+  var barChartData = {
+    labels: response.labels,
+            datasets: [{
+                data: response.datasets[0].data,
+                backgroundColor: response.datasets[0].backgroundColor,
+            }]  
+  };
+
+  new Chart(barChartCanvas, {
+    type: 'bar',
+    data: barChartData,
+    options: barChartOptions
+  });
+
+
+    },
+    error: function(xhr, status, error){
+
+    }
+    
+  });
+}
+
+// Add a click event handler for the "Print" button
+$('#printTable').click(function () {
+  // Create a new window for printing
+  const printWindow = window.open("", "width=1,height=1");
+  printWindow.document.open();
+  printWindow.document.write('<html><head><title>Table Print</title>');
+  printWindow.document.write(`<style>
+      * {
+        text-align: center;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      /* Add any other print-specific styles you need */
+    </style>
+  `);
+  printWindow.document.write('</head><body>');
+  printWindow.document.write(`
+  <img src="dist/img/AdminLTELogo.png" style="width: 50px;">
+  <h2>Hi-Coffee Inventory Report</h2>
+  <p>${new Date().toLocaleString()}</p>
+  `);
+
+  // Get DataTable instance
+  var table = $('#example2').DataTable();
+
+ // Add the table content dynamically
+printWindow.document.write('<table>');
+printWindow.document.write('<thead>');
+printWindow.document.write('<tr>');
+
+// Add table header, excluding the first column
+table.columns().every(function (colIdx) {
+  if (colIdx !== 0) {
+    printWindow.document.write('<th>' + this.header().innerHTML + '</th>');
+  }
+});
+
+printWindow.document.write('</tr>');
+printWindow.document.write('</thead>');
+printWindow.document.write('<tbody>');
+
+// Add table rows, excluding the first cell in each row
+table.rows().data().each(function (row) {
+  printWindow.document.write('<tr>');
+  row.forEach(function (cell, cellIdx) {
+    if (cellIdx !== 0) {
+      printWindow.document.write('<td>' + cell + '</td>');
+    }
+  });
+  printWindow.document.write('</tr>');
+});
+
+printWindow.document.write('</tbody>');
+printWindow.document.write('</table>');
+
+
+
+  printWindow.document.write(`
+  <div style="margin-top: 20px; border-top: 1px solid #000; padding-top: 10px;">
+    <p style="margin-bottom: 0px; font-size: 18px;"><strong><u>${globalUserName}</u></strong></p>
+      <p style="text-align: center;">Signature Over Printed Name</p>
+    </div>
+  
+  </body></html>`);
+  printWindow.document.close();
+
+  // Print the content
+  printWindow.print();
+
+  // Close the print window
+  printWindow.close();
+});
+
+
+
+// Assuming you have an input field with the id 'reservation'
+const reservationInput = $('#reservation');
+const reservationInput2 = $('#reservation2');
+
+// Function to fetch data when the input value changes
+reservationInput.on('change', function () {
+    fetchDateRangeData();
+});
+reservationInput2.on('change', function () {
+    fetchRecords();
+});
+
+// Alternatively, you can use the 'input' event for real-time updates as the user types
+reservationInput.on('input', function () {
+    fetchDateRangeData();
+});
+reservationInput2.on('input', function () {
+    fetchRecords();
+});
+
+
+function fetchDateRangeData() {
+  $('#lineChart').remove();
+
+// Create a new canvas for the donut chart
+$('.lineArea').append('<canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+
+  var selectedCategories = [];
+
+
+$('input.category-checkbox:checked').each(function() {
+    selectedCategories.push($(this).val());
+});
+
+if (selectedCategories.length === 0) {
+    selectedCategories = []; // Clear the array if no checkboxes are selected
+}
+
+    
+    console.log("Selected Categories", selectedCategories);
+
+  console.log("Fetching");
+  const dateRange = $('#reservation').val(); // Get the selected date range
+
+// Split the date range into start and end dates
+const [startDateStr, endDateStr] = dateRange.split(' - ');
+
+// Split the start and end date strings into parts
+const [startMonth, startDay, startYear] = startDateStr.split('/');
+    const [endMonth, endDay, endYear] = endDateStr.split('/');
+
+    // Create Date objects using the parts
+    const startDate = new Date(`${startYear}-${startMonth}-${startDay}`);
+    const endDate = new Date(`${endYear}-${endMonth}-${endDay}`);
+// Format the dates to the 'YYYY-MM-DD' format for SQL
+const formattedStartDate = startDate.toISOString().split('T')[0];
+const formattedEndDate = endDate.toISOString().split('T')[0];
+
+    // Make an AJAX request to fetch data for the selected date range
+    $.ajax({
+        url: 'php/lineChartFetch.php', // Replace with the correct PHP script
+        type: 'POST', // You may need to change the HTTP method based on your implementation
+        data: {
+          startDate: formattedStartDate,
+            endDate: formattedEndDate,
+            categories: selectedCategories
+        },
+        dataType: 'json',
+        success: function (data) {
+    console.log("Fetched ", data);
+
+    // Extract data from the JSON response
+    var labels = []; // X-axis labels
+    var datasets = {}; // Data sets for the line chart, using prodname as keys
+
+    // Create an object to keep track of all unique month_year values
+    var uniqueMonths = {};
+
+    data.forEach(function (item, index) {
+        var prodname = item.prodname;
+        var month_year = item.month_year;
+
+
+        // Parse the month_year string into a Date object
+    var dateParts = month_year.split('-');
+    var monthYearDate = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, 1); // Subtract 1 from month because months are zero-based
+        // Store the month_year in the uniqueMonths object
+        uniqueMonths[month_year] = true;
+
+        if (!datasets[prodname]) {
+            // Create a new dataset for the prodname
+            datasets[prodname] = {
+                label: prodname,
+                data: [],
+                backgroundColor: item.backgroundColor[index],
+                borderColor: item.backgroundColor[index],
+                borderWidth: 1,
+                fill: false
+            };
+        }
+
+        datasets[prodname].data.push(parseInt(item.released));
+    });
+
+    // Convert the uniqueMonths object into an array of unique month_year values
+    var uniqueMonthYears = Object.keys(uniqueMonths);
+
+    // Use the sorted unique month_year values as labels
+    labels = uniqueMonthYears;
+
+    // Fill in missing data points with zeros for each dataset
+    Object.values(datasets).forEach(function (dataset) {
+        for (var i = 0; i < uniqueMonthYears.length; i++) {
+            var month_year = uniqueMonthYears[i];
+            if (dataset.data[i] === undefined) {
+                dataset.data[i] = 0;
+            }
+        }
+    });
+
+    // Convert the datasets object into an array
+    var chartDatasets = Object.values(datasets);
+
+    // Create a chart
+    var ctx = document.getElementById('lineChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: chartDatasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            elements: {
+            line: {
+                borderWidth: 10, // Adjust this value to make the lines thicker
+            },
+          },
+        }
+    });
+},
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+$(document).ready(function() {
+    // Attach event listener to radio buttons
+    $('input[name="salesControl"]').change(function() {
+        barChart(); // Fetch and update data when radio button changes
+    });
+
+    // Attach event listener to checkboxes
+    $('input[type="checkbox"]').change(function() {
+        barChart(); // Fetch and update data when checkbox changes
+        fetchDateRangeData();
+    });
+    
+});
+
+$(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    $('#reservation2').daterangepicker()
+    
+
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+  })
+
+  $(document).ready(function() {
+  // Calculate the current date
+var today = new Date();
+
+// Calculate the date 5 months ago
+var fiveMonthsAgo = new Date();
+fiveMonthsAgo.setMonth(today.getMonth() - 5);
+
+// Format the dates as "MM/DD/YYYY"
+var formattedToday = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+var formattedFiveMonthsAgo = (fiveMonthsAgo.getMonth() + 1) + '/' + fiveMonthsAgo.getDate() + '/' + fiveMonthsAgo.getFullYear();
+
+// Set the value of the input field
+$('#reservation').val(formattedFiveMonthsAgo + ' - ' + formattedToday);
+$('#reservation2').val(formattedFiveMonthsAgo + ' - ' + formattedToday);
+
+
+});
+  
+
+  function openTab(evt, tabName) {
+      // Get all tab content elements
+      const tabContents = document.getElementsByClassName('tab-content');
+
+      // Hide all tab contents
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove 'active' class from all tab links
+      const tabLinks = document.getElementsByClassName('tab-link');
+      for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = 'block';
+      if (tabName === 'tab3'){
+        barChart()
+        fetchDateRangeData();
+      }
+
+      // Add 'active' class to the clicked tab link
+      evt.currentTarget.classList.add('active');
+
+      // Remove focus from the clicked button after a slight delay
+      setTimeout(() => {
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.blur();
+    }
+}, 10);
+    }
+
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const uploadMessage = document.getElementById('uploadMessage');
+    const imgFileInput = document.getElementById('imgfile');
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (!imgFileInput.files.length) {
+            event.preventDefault(); // Prevent form submission
+            uploadMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    // Hide the message when an image is selected
+    imgFileInput.addEventListener('input', function () {
+        uploadMessage.style.display = 'none';
+    });
+});
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const itemNameMessage = document.getElementById('itemNameMessage');
+    const itemNameInput = document.querySelector('input[name="itemName"]');
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (itemNameInput.value.trim() === '') {
+            event.preventDefault(); // Prevent form submission
+            itemNameMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    // Hide the message when the user starts typing in the input field
+    itemNameInput.addEventListener('input', function () {
+        itemNameMessage.style.display = 'none';
+    });
+});
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const itemPriceMessage = document.getElementById('itemQuantityMessage');
+    const itemPriceInput = document.querySelector('input[name="itemQuantity"]');
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (itemPriceInput.value.trim() === '') {
+            event.preventDefault(); // Prevent form submission
+            itemPriceMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    // Hide the message when the user starts typing in the input field
+    itemPriceInput.addEventListener('input', function () {
+        itemPriceMessage.style.display = 'none';
+    });
+});
+
+function formatProdid(prodid) {
+        // Pad the prodid with leading zeros to make it 6 digits
+        return prodid.toString().padStart(6, '0');
+    }
+
+function fetchInventory() {
+  // Destroy the existing DataTable instance
+  if ($.fn.DataTable.isDataTable('#example1')) {
+                $('#example1').DataTable().destroy();
+            }
+    $.ajax({
+        url: 'php/inventoryfetch.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            data.sort((a, b) => a.prodname.localeCompare(b.prodname));
+            $('#example1 tbody').empty();
+
+            let count = 0;
+
+            $.each(data, function(index, item) {
+                const formattedProdid = formatProdid(item.prodid); // Format the prodid
+
+                var status;
+                
+                if (item.productsize <= 25){
+                  status = `<span class="badge badge-danger" style="width:100%">Critical</span>`
+                  count++;
+                }else if (item.productsize > 25 & item.productsize <= 50){
+                  status = `<span class="badge badge-warning" style="width:100%">Bad</span>`
+                }else if (item.productsize > 50 & item.productsize <= 75){
+                  status = `<span class="badge badge-primary" style="width:100%">Good</span>`
+                }else{
+                  status = `<span class="badge badge-success" style="width:100%">Excellent</span>`
+                }
+
+                $('#example1 tbody').append(`
+                    <tr>
+                        <td><img src="uploads/${item.productimg}" style="width: 100px; margin: 0;"></td>
+                        <td>${formattedProdid}</td> <!-- Display the formatted prodid -->
+                        <td>${item.prodname}</td>
+                        <td>${item.productsize}</td>
+                        <td>${status}</td>
+                        <td>
+                            <button class="btn btn-sm btn-light rounded-lg edit-button" data-prodid="${item.prodid}"><i class="fas fa-plus"></i></button>
+                        </td>
+                    </tr>
+                `);
+            });
+
+            if (count > 0){
+              $('#badge-info').css('display', 'block');
+            }
+
+            
+
+            // Initialize DataTables and Buttons
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+function fetchRecords() {
+          // Destroy the existing DataTable instance
+          if ($.fn.DataTable.isDataTable('#example2')) {
+                $('#example2').DataTable().destroy();
+            }
+
+            var selectedValue = $('#dateControl').val();
+            const dateRange = $('#reservation2').val(); // Get the selected date range
+
+            // Split the date range into start and end dates
+const [startDateStr, endDateStr] = dateRange.split(' - ');
+
+// Split the start and end date strings into parts
+const [startMonth, startDay, startYear] = startDateStr.split('/');
+    const [endMonth, endDay, endYear] = endDateStr.split('/');
+
+    // Create Date objects using the parts
+    const startDate = new Date(`${startYear}-${startMonth}-${startDay}`);
+    const endDate = new Date(`${endYear}-${endMonth}-${endDay}`);
+// Format the dates to the 'YYYY-MM-DD' format for SQL
+const formattedStartDate = startDate.toISOString().split('T')[0];
+const formattedEndDate = endDate.toISOString().split('T')[0];
+
+
+            console.log(selectedValue);
+        $.ajax({
+            url: 'php/fetchinventory.php',
+            type: 'POST',
+            data: {
+              startDate: formattedStartDate,
+              endDate: formattedEndDate,
+              dateControl: selectedValue
+            },
+            success: function(data) {
+              // data.sort((a, b) => a.prodname.localeCompare(b.prodname));
+                $('#example2 tbody').empty();
+                
+                $.each(data, function(index, item) {
+                    const formattedProdid = formatProdid(item.prodid); // Format the prodid
+                    // Assuming item.dateentry is in the format 'YYYY-MM-DD'
+                    const formattedDateEntry = new Date(item.dateentry);
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = formattedDateEntry.toLocaleDateString('en-US', options);
+
+
+
+                    if (selectedValue === 'Daily'){
+                    $('#example2 tbody').append(`
+                        <tr>
+                            <td><img src="uploads/${item.productimg}" style="width: 100px; margin: 0;"></td>
+                            <td>${formattedProdid}</td> <!-- Display the formatted prodid -->
+                            <td>${item.prodname}</td>
+                            <td>${formattedDate} - ${item.timeentry}</td>
+                            <td>${item.purchased}</td>
+                            <td>${item.released}</td>
+                            
+                        </tr>
+                    `);
+                      }else{
+                        $('#example2 tbody').append(`
+                        <tr>
+                            <td><img src="uploads/${item.productimg}" style="width: 100px; margin: 0;"></td>
+                            <td>${formattedProdid}</td> <!-- Display the formatted prodid -->
+                            <td>${item.prodname}</td>
+                            <td>${item.dateentry}</td>
+                            <td>${item.purchased}</td>
+                            <td>${item.released}</td>
+                            
+                        </tr>
+                    `);
+                      }
+                });
+
+            
+                // Initialize DataTables and Buttons
+      $('#example2').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+                console.log(data);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    $('#dateControl').on('change', function() {
+        fetchRecords(); // Call the fetchRecords function
+    });
+
+function fetchData(){
+  fetchInventory();
+  fetchRecords();
+}
+
+
+
+fetchData();
+
+    $(document).on('click', '.btn.edit-button', function() {
+      
+    // Get the product data from the row
+    const row = $(this).closest('tr');
+    const productId = row.find('td:nth-child(2)').text();
+    const productName = row.find('td:nth-child(3)').text(); // Adjust the index as needed
+    const productSize = row.find('td:nth-child(4').text(); // Adjust the index as needed
+
+    $('#productId').val(productId);
+    $('#productName').val(productName); // Update with other fields as needed
+    $('#productSize').val(productSize); // Update with other fields as needed
+
+    // Show the modal
+    $('#updateModal').modal('show');
+});
+
+$('#itemForm').submit(function(e) {
+  e.preventDefault(); // Prevent the default form submission behavior
+    console.log('Form submitted via AJAX'); // Add this line for debugging
+
+        // Validate inputs before proceeding
+        if (!validateInputs()) {
+            $('#failModal2').modal('show'); // Show the fail modal
+            return; // Exit the function if validation fails
+        }
+
+        var formData = new FormData(this);
+        var imgfile = $('#imgfile')[0].files[0];
+        formData.append('file', imgfile);
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Clear the inputs and reset image source
+                $('#imgfile').val(''); // Clear file input
+                $('#preview').attr('src', 'dist/img/default-150x150.png'); // Reset image source
+                $('input[name="itemName"]').val(''); // Clear item name input
+                $('input[name="itemQuantity"]').val(''); // Clear item price input
+                $('#successModal').modal('show');
+                fetchData();
+
+                
+                
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                $('#failModal').modal('show');
+            }
+        });
+    });
+
+    $(document).on('click', '#updateProduct', function() {
+    // Create a new FormData object
+    const formData = new FormData($('#updateForm')[0]);
+
+    formData.append('userid', userid);
+    formData.append('role', role);
+
+    console.log("FORM BEING SUBMITTED:::::::", formData);
+
+    // Perform an AJAX POST request
+    $.ajax({
+        type: 'POST',
+        url: 'php/updatematerial.php', // Specify your PHP script URL
+        data: formData,
+        processData: false, 
+        contentType: false, 
+        success: function(response) {
+            // Handle the success response from the server
+            // You can update the UI or show a success message here
+            console.log(response);
+            console.log('Product updated successfully');
+            // Close the modal
+            $('#updateModal').modal('hide');
+            $('#successModal').modal('show');
+                fetchData();
+        },
+        error: function(xhr, status, error) {
+            // Handle any errors that occur during the request
+            console.error('Error:', error);
+            // You can display an error message to the user here
+        }
+    });
+});
+
+
+
+function validateInputs() {
+    var itemName = $('input[name="itemName"]').val();
+    var itemQuantity = parseFloat($('input[name="itemQuantity"]').val());
+    var imgfile = $('#imgfile')[0].files[0];
+
+    if (
+        itemName.trim() === '' ||
+        isNaN(itemQuantity) ||
+        itemQuantity < 1 ||
+        !imgfile
+    ) {
+        return false;
+    }
+
+    return true;
+}
+
+
+function fetchNew() {
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadge').text(count);
+      }      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchTicketNew() {
+
+$.ajax({
+  url: 'php/ticketNew.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+
+      console.log(data);
+
+    let countTicketNew = 0;
+    $.each(data, function(index, item) {
+
+
+        countTicketNew++;
+      
+     
+    });      
+    console.log(`Count new ticket:: ${countTicketNew}`);
+    if (countTicketNew > 0){
+    $('#navBadgeTicket').text(countTicketNew);
+    } 
+
+
+    console.log(data);
+  },
+  error: function(xhr, status, error) {
+    console.error(error);
+  }
+});
+}
+
+  fetchTicketNew();
+  
+fetchNew();
+</script>
+
+
+</body>
+</html>

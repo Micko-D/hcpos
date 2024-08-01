@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+  <style>
+    /* CSS for larger screens */
+    @media (min-width: 768px) {
+        /* Show the modal-body content */
+        #updateModal .modal-body {
+            display: block !important; /* Use !important to override Bootstrap's default styles if necessary */
+        }
+    }
+    
+    /* CSS for mobile screens */
+    @media (max-width: 767px) {
+        /* Hide the modal-body content */
+        #updateModal .modal-body {
+            display: none !important; /* Hide the modal body on mobile screens */
+        }
+        /* Display "Not Available" text */
+        #updateModal .modal-content::before {
+            content: "Not Available";
+            display: block;
+            text-align: center;
+            padding: 10px;
+        }
+    }
+    
+      </style>
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+   <!-- Fail Modal -->
+   <div class="modal fade" id="logfailModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Session Ended.<br>
+                                Login again to use...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+
+  <div class="wrapper" id="allcontent">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="../hcpos" class="nav-link ">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>            
+          </li>
+
+
+          <li class="nav-item">
+            <a href="pos.html" class="nav-link ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-info">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ord.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                
+              </p><span class="right badge badge-info" id="navBadge"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="orderhistory.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manprod.html" class="nav-link active">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Manage Product
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticket.html" class="nav-link">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>
+                Customer Tickets
+              </p>
+              <span class="right badge badge-info" id="navBadgeTicket"></span>
+            </a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a href="chat.html" class="nav-link">
+              <i class="nav-icon fas fa-comment-dots"></i>
+              <p>
+                Chat
+              </p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="feedback.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="salesreport.html" class="nav-link ">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Sales Report
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="maginv.html" class="nav-link ">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Inventory
+              </p>
+              <span class="right badge text-danger" style="display: none; font-size: 18px;" id="badge-info"><i class="fas fa-exclamation-triangle"></i></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="usermanage.html" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Manage User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="audit.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Audit Logs
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row invisible">`</div>
+        <!-- Info boxes -->
+        <div class="row mt-2" style="justify-content: center">
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning">
+              <div class="btn btn-sm" style="width: 100%; outline: none;" onclick="openTab(event, 'tab1')">Drinks</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning"> 
+              <div class="btn btn-sm" style="width: 100%; outline: none;"  onclick="openTab(event, 'tab2')">Foods</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- <div class="col-12 col-sm-3 col-md-3">
+            <div class="small-box mb-3 bg-warning">
+              <div class="btn btn-sm" style="width: 100%; outline: none;"  onclick="openTab(event, 'tab3')">List</div>
+            </div>
+          </div> -->
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box mb-3 bg-warning">
+              <div class="btn btn-sm" style="width: 100%; outline: none;"  onclick="openTab(event, 'tab4')">Create Item</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Item Management</h3>                
+              </div>
+              <div class="card-body">
+                
+                <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <div id="tab1" class="tab-content">
+
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                    <th>Item Name</th>
+                    <th>Variant</th>
+                    <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                
+                    </tbody>
+                   
+                  </table>
+                
+                
+                </div>
+
+                <div id="tab2" class="tab-content " style="display: none;">
+                <table id="example2" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+
+                    <th>Item Name</th>
+                    <th>Variant</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                                                          
+                  </tbody>
+                 
+                </table>
+
+                </div>
+<!-- 
+                <div id="tab3" class="tab-content " style="display: none;">
+                    <div class="row">
+                        <div class="col-6 col-md-6 col-sm-6" id="drinkCatList" style="justify-content: center;">
+                            Test
+                        </div>
+                        <div class="col-6 col-md-6 col-sm-6" id="foodCatList" style="justify-content: center;">
+                            Test
+                        </div>
+
+                    </div>
+                    
+  
+                  </div> -->
+
+                <div id="tab4" class="tab-content " style="display: none;">
+
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Add Variant</h3>
+                    </div>
+                    <form id="productForm" method="post" action="php/insertc.php" enctype="multipart/form-data">
+                    <div class="row">
+
+                      <div class="col-12 col-sm-12 col-md-12">
+                        <input type="text" name="itemName" class="form-control mb-2" placeholder="Product Name" autocomplete="off">
+                        <span id="itemNameMessage" class="text-danger" style="display: none;">* Item Name is required.</span>
+                        <select id="productTypeSelect" class="form-control mb-2" name="itemType">
+                          <option hidden disabled selected value="">Product Type Select</option>
+                          <option value="Drink">Drink</option>
+                          <option value="Food">Food</option>
+                        </select>
+                        <span id="itemTypeMessage" class="text-danger" style="display: none;">* Product Type must be selected</span>
+
+                        <div id="itemServings" class="mb-2">
+
+
+                          
+                        </div>
+
+                      <div class="row">
+                        <div class="col-12 col-sm-4 col-md-4 mb-2 invisible"></div>
+                      <button name="add" class="btn btn-warning btn-sm col-12 col-sm-4 col-md-4 mb-2">Create</button>
+                      <div class="col-12 col-sm-4 col-md-4 mb-2 invisible"></div>
+                    </div>
+
+
+                 
+                      </div>
+
+                    
+                      
+                    </div>
+                    </form>
+                    
+                  </div>                 
+                  
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+              </div>
+              
+            </div>
+          </div>
+          
+
+
+        </div>
+
+
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="successModalLabel">Success</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Data inserted successfully.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Fail Modal -->
+<div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Failed to insert data.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Empty Modal -->
+<div class="modal fade" id="failModal2" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body" id="failModalBody">
+              Fill all data needed before submitting.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Are you sure you want to delete this item?
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="updateForm" action="php/updateprod.php" method="post">
+          <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Edit Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              
+                <div class="form-group">
+                  <label for="productId">Product ID</label>
+                  <input type="text" class="form-control" id="productId" name="prodid" readonly>
+              </div>
+                  <div class="form-group">
+                      <label for="productName">Product Name</label>
+                      <input type="text" class="form-control" id="productName" name="prodname">
+                  </div>
+                  <div id="drinkVariant" class="mt-2 mb-2">
+                    
+                  </div>
+
+                  <div id="sizes">
+
+                  </div>
+                  
+              <div class="form-group">
+                <label for="productPrice">Product Price</label>
+                <input type="text" class="form-control" id="productPrice" name="productprice" >
+            </div>
+              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="updateProduct">Save Changes</button>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<script>
+
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+      if (!role || !userid) {
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#logfailModal').modal('show');
+        // Listen for the modal close event
+        $('#logfailModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();   
+      
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+      const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+      const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+      const buttonsExample1d = document.querySelectorAll('#example1 .del');
+      const buttonsExample2d = document.querySelectorAll('#example2 .del');
+    const newButtonClass = switchInput.checked ? 'btn-info' : 'btn-light';
+    const newButtonClassd = switchInput.checked ? 'btn-danger' : 'btn-light';
+    const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+
+    // Update button classes for all examples
+    [buttonsExample1, buttonsExample2].forEach(buttons => {
+        buttons.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+    });
+
+    // Update button classes for all examples
+    [buttonsExample1d, buttonsExample2d].forEach(buttons => {
+        buttons.forEach(button => {
+            button.classList.remove('btn-light', 'btn-danger');
+            button.classList.add(newButtonClassd);
+        });
+    });
+
+    // Update the sidebar class
+    sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+    sidebar.classList.add(newSidebarClass);
+
+    // Update body and navbar classes
+    if (switchInput.checked) {
+        body.classList.remove('dark-mode');
+        navbar.classList.remove('navbar-dark');
+        navbar.classList.add('navbar-warning');
+        switchInput.nextElementSibling.hidden = true;
+        switchInput.nextElementSibling.nextElementSibling.hidden = false;
+    } else {
+        body.classList.add('dark-mode');
+        navbar.classList.remove('navbar-warning');
+        navbar.classList.add('navbar-dark');
+        switchInput.nextElementSibling.hidden = false;
+        switchInput.nextElementSibling.nextElementSibling.hidden = true;
+    }
+
+    // Save switch state to localStorage
+    localStorage.setItem('darkMode', switchInput.checked);
+}
+
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+});
+
+</script>
+
+<script>
+  let activeTab = 'tab1'; // Set the default active tab to 'tab1'
+
+  function openTab(evt, tabName) {
+      // Get all tab content elements
+      const tabContents = document.getElementsByClassName('tab-content');
+
+      // Hide all tab contents
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove 'active' class from all tab links
+      const tabLinks = document.getElementsByClassName('tab-link');
+      for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = 'block';
+
+      // Add 'active' class to the clicked tab link
+      evt.currentTarget.classList.add('active');
+
+      // Update the active tab variable
+    activeTab = tabName;
+
+      // Remove focus from the clicked button after a slight delay
+      setTimeout(() => {
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.blur();
+    }
+}, 10);
+    }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const itemNameMessage = document.getElementById('itemNameMessage');
+    const itemNameInput = document.querySelector('input[name="itemName"]');
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (itemNameInput.value.trim() === '') {
+            event.preventDefault(); // Prevent form submission
+            itemNameMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    // Hide the message when the user starts typing in the input field
+    itemNameInput.addEventListener('input', function () {
+        itemNameMessage.style.display = 'none';
+    });
+});
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const itemTypeMessage = document.getElementById('itemTypeMessage');
+    const productTypeSelect = document.getElementById('productTypeSelect');
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (productTypeSelect.value === "") {
+            event.preventDefault(); // Prevent form submission
+            itemTypeMessage.style.display = 'block'; // Display the message
+        }
+    });
+
+    // Hide the message when a product type is selected
+    productTypeSelect.addEventListener('input', function () {
+        itemTypeMessage.style.display = 'none';
+    });
+});
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const itemSizeMessage = document.getElementById('itemSizeMessage');
+    const radioButtons = document.querySelectorAll('[name="serving"]');
+    const productTypeSelect = document.getElementById('productTypeSelect');
+
+    function validateRadioButtons() {
+        if (productTypeSelect.value === 'Food' || productTypeSelect.value === 'Drink') {
+            if (!Array.from(radioButtons).some(button => button.checked)) {
+                itemSizeMessage.style.display = 'block';
+                return false; // Validation failed
+            }
+        }
+        itemSizeMessage.style.display = 'none';
+        return true; // Validation passed
+    }
+
+    // Validate radio buttons when the form is submitted
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (!validateRadioButtons()) {
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+
+    // Hide the message when a radio button is selected
+    radioButtons.forEach(button => {
+        button.addEventListener('change', function () {
+            validateRadioButtons();
+        });
+    });
+    
+});
+
+
+$(document).ready(function() {
+  $('#productTypeSelect').on('change', function() {
+    const selectedProduct = $(this).val();
+    $('#itemServings').empty();
+    if (selectedProduct === 'Drink'){
+      $('#itemServings').append(`
+      <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="HotCoffee" value="Hot Coffee">
+          <label for="HotCoffee" class="custom-control-label">Hot Coffee</label>
+        </div>
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="IceCoffee" value="Iced Coffee">
+          <label for="IceCoffee" class="custom-control-label">Iced Coffee</label>
+        </div>
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="Milkshake" value="Milkshake">
+          <label for="Milkshake" class="custom-control-label">Milkshake</label>
+        </div>
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="YakultBlend" value="Yakult Blend">
+          <label for="YakultBlend" class="custom-control-label">Yakult Blend</label>
+        </div>
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="Frappe" value="Frappe">
+          <label for="Frappe" class="custom-control-label">Frappe</label>
+        </div>
+        <br>
+      `);
+    }else{
+      $('#itemServings').append(`
+      <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="1pc" value="1pc">
+          <label for="1pc" class="custom-control-label">1pc</label>
+        </div>
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="2pcs" value="2pcs">
+          <label for="2pcs" class="custom-control-label">2pcs</label>
+        </div>
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="AlaCarte" value="Ala Carte">
+          <label for="AlaCarte" class="custom-control-label">Ala Carte</label>
+        </div>
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input variant-checkbox" type="checkbox" id="Regular" value="Regular">
+          <label for="Regular" class="custom-control-label">Regular</label>
+        </div>
+
+        <br>
+      `);
+    }
+});
+
+// Assuming you have checkboxes with the class "variant-checkbox"
+$(document).on('change', '.variant-checkbox', function() {
+    var selectedValues = [];
+
+    // Iterate over each checkbox with class "variant-checkbox"
+    $('.variant-checkbox:checked').each(function() {
+        // If the checkbox is checked, add its value to the selectedValues array
+        selectedValues.push($(this).val());
+    });
+
+    // Log or do something with the selected values
+    console.log('Selected values:', selectedValues);
+});
+
+
+
+
+
+
+    function fetchDrink() {
+      // Destroy the existing DataTable instance
+      if ($.fn.DataTable.isDataTable('#example1')) {
+                $('#example1').DataTable().destroy();
+            }
+    $.ajax({
+        url: 'php/categoryfetch.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          console.log("Drink Fetched");
+            data.sort((a, b) => a.itemname.localeCompare(b.itemname));
+            $('#example1 tbody').empty();
+
+            $.each(data, function(index, item) {
+                if (item.itemtype === 'Drink'){
+
+                $('#example1 tbody').append(`
+                    <tr>
+                        <td>${item.itemname}</td>
+                        <td>${item.itemvariant}</td>
+                        <td>
+                            <button class="btn btn-sm del btn-light rounded-lg delete-button" data-prodid="${item.id}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i></button>
+                        </td>
+                    </tr>
+                `);
+                }
+            });
+
+                 // Initialize DataTables and Buttons
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+
+    function fetchFood() {
+          // Destroy the existing DataTable instance
+          if ($.fn.DataTable.isDataTable('#example2')) {
+                $('#example2').DataTable().destroy();
+            }
+        $.ajax({
+            url: 'php/categoryfetch.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+              data.sort((a, b) => a.itemname.localeCompare(b.itemname));
+                $('#example2 tbody').empty();
+                
+                $.each(data, function(index, item) {
+                if (item.itemtype === 'Food'){
+
+                $('#example2 tbody').append(`
+                    <tr>
+                        <td>${item.itemname}</td>
+                        <td>${item.itemvariant}</td>
+                        <td>
+                            <button class="btn btn-sm del btn-light rounded-lg delete-button" data-prodid="${item.id}" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i></button>
+                        </td>
+                    </tr>
+                `);
+                }
+            });
+
+            // Initialize DataTables and Buttons
+      $('#example2').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+                console.log(data);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+var checkBoxState = false;
+    
+function checkboxClicked(id, checkbox) {
+  // Handle the checkbox click event here
+  checkBoxState = $(checkbox).prop('checked'); // Set it to true if checked, false if unchecked.
+
+  $.ajax({
+    url: 'php/updatec.php',
+    type: 'POST',
+    data: {
+        categoryId: id,
+        isChecked: checkBoxState
+    },
+    success: function(response){
+
+        console.log(response);
+        fetchData();
+
+    },
+    error: function(xhr, status, error){
+        console.error(error);
+
+    }
+  })
+
+  
+  // You can also perform other actions like sending data to the server.
+}
+
+    function fetchData(){
+      fetchDrink();
+      fetchFood();
+    }
+
+    fetchData();
+
+
+
+    let prodidToDelete; // Declare the variable at a higher scope
+
+    // Add a click event handler for the delete button
+    $(document).on('click', '.delete-button', function() {
+        prodidToDelete = $(this).data('prodid'); // Store the prodid in the variable
+        $('#confirmDelete').data('prodid', prodidToDelete); // Store the prodid in the confirmation button's data attribute
+    });
+
+    // Add a click event handler for the confirm delete button
+    $('#confirmDelete').click(function() {
+        // Use the stored prodidToDelete
+        console.log('Sending prodid:', prodidToDelete);
+
+        // Send an AJAX request to delete the item
+        $.ajax({
+            url: 'php/deletec.php',
+            type: 'POST',
+            data: { prodid: prodidToDelete },
+            contentType: 'application/x-www-form-urlencoded', // Set content type
+            dataType: 'json', // Set expected data type
+            success: function(response) {
+              console.log(response);
+                if (response.success === true) {
+                    // Item deleted successfully
+                    
+                    fetchData(); // or fetchFood() depending on the context
+                    $('#deleteModal').modal('hide'); // Hide the delete confirmation modal
+                } else {
+                    // Failed to delete
+                    console.error('Failed to delete item.');
+                }
+            },
+            error: function(xhr, status, error) {
+              console.error('XHR Object:', xhr); // Log the entire xhr object
+              console.error('Error:', error); // Log the error message
+              console.error('Response Text:', xhr.responseText); // Log the error response text
+            }
+        });
+    });
+    
+    $('#productForm').submit(function(e) {
+        e.preventDefault();
+
+        var selectedCategories = [];
+
+$('input.variant-checkbox:checked').each(function() {
+    selectedCategories.push($(this).val());
+});
+
+console.log(`Selected Variants ::::: ${JSON.stringify(selectedCategories)}`);
+
+        // Validate inputs before proceeding
+        if (!validateInputs() || selectedCategories.length === 0) {
+            $('#failModal2').modal('show'); // Show the fail modal
+            return; // Exit the function if validation fails
+        }
+
+        var formData = new FormData(this);
+        formData.append('variants', JSON.stringify(selectedCategories));
+
+        console.log(`FORM DATA ::::::: ${formData}`);
+        formData.forEach((value, key) => {
+  console.log(`${key}: ${value}`);
+});
+
+        
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+              console.log(response);
+                $('input[name="itemName"]').val(''); // Clear item name input
+                $('#productTypeSelect').val(''); // Clear product type select
+                $('#itemServings').empty();
+                $('#successModal').modal('show');
+                fetchData();
+                
+                
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                $('#failModal').modal('show');
+            }
+        });
+    });
+    
+});
+
+function validateInputs() {
+    var itemName = $('input[name="itemName"]').val();
+    var productType = $('#productTypeSelect').val();
+
+    if (
+    itemName.trim() === '' ||
+    productType === ''
+) {
+    return false;
+}
+
+if (['Hot', 'Iced', '1pc', '2pcs', 'Ala Carte', 'Regular'].includes(itemName)){
+  $('#failModalBody').empty();
+  let varArea = '';
+
+  if (itemName === 'Hot' || itemName === 'Iced'){
+    varArea = 'Drink'
+  }else{
+    varArea = 'Food';
+  }
+  $('#failModalBody').append(`The variant you are trying to add is default ${itemName} for ${varArea}`);
+  return false;
+}
+
+    return true;
+}
+
+function fetchNew() {
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadge').text(count);
+      }      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchTicketNew() {
+
+$.ajax({
+  url: 'php/ticketNew.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+
+      console.log(data);
+
+    let countTicketNew = 0;
+    $.each(data, function(index, item) {
+
+
+        countTicketNew++;
+      
+     
+    });      
+    console.log(`Count new ticket:: ${countTicketNew}`);
+    if (countTicketNew > 0){
+    $('#navBadgeTicket').text(countTicketNew);
+    } 
+
+
+    console.log(data);
+  },
+  error: function(xhr, status, error) {
+    console.error(error);
+  }
+});
+}
+
+function fetchInventory() {
+
+$.ajax({
+    url: 'php/inventoryfetch.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        let count = 0;
+        $.each(data, function(index, item) {
+            var status;
+            if (item.productsize <= 50){
+              count++;
+            }
+        });
+
+        if (count > 0){
+          $('#badge-info').css('display', 'block');
+        }
+
+        console.log(data);
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+}
+
+fetchInventory();
+
+  fetchTicketNew();
+
+fetchNew();
+
+
+  </script>
+
+
+</body>
+</html>

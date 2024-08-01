@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+ <!-- Fail Modal -->
+ <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              Session Ended.<br>
+                              Login again to use...
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+  <div class="wrapper" id="allcontent">
+    
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <!-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul> -->
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="../hcpos" class="nav-link  ">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>            
+          </li>
+
+
+          <li class="nav-item">
+            <a href="pos.html" class="nav-link  ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-info">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ord.html" class="nav-link ">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                
+              </p>
+              <span class="right badge badge-info" id="navBadge"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="orderhistory.html" class="nav-link  active">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manprod.html" class="nav-link ">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Manage Product
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticket.html" class="nav-link ">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>
+                Customer Tickets
+                
+              </p>
+              <span class="right badge badge-info" id="navBadgeTicket"></span>
+            </a>
+          </li>
+<!-- 
+          <li class="nav-item">
+            <a href="chat.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment-dots"></i>
+              <p>
+                Chat
+              </p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="feedback.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="salesreport.html" class="nav-link ">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Sales Report
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="maginv.html" class="nav-link ">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Inventory
+              </p>
+              <span class="right badge text-danger" style="display: none; font-size: 18px;" id="badge-info"><i class="fas fa-exclamation-triangle"></i></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="usermanage.html" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Manage User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="audit.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Audit Logs
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+
+          
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <section class="content-header"></section>
+    
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+        <!-- Info boxes -->
+        <!-- <div class="row mt-2" style="justify-content: center">
+
+          <div class="input-group mb-2" style="justify-content: center">
+          <input type="text" name="idsearch" class="form-control col-8 col-sm-8 col-md-8" placeholder="ID No.">
+          <span class="input-group-append"><button class="btn btn-primary">Search</button></span>
+        </div>
+          
+        </div> -->
+        <!-- /.row -->
+        
+        <div class="row mt-2">
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Order History</h3>                
+              </div>
+              <div class="card-body">
+                
+                <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div id="tab1" class="tab-content active">
+                  
+                <table id="example1" class="table table-bordered table-striped text-center">
+                  <thead>
+                  <tr>
+                    <th>ID.</th>
+                    <th>Order Type</th>
+                    <th>Order Status</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                                      
+                  </tbody>
+                 
+                </table>
+                </div>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+              </div>
+              
+            </div>
+          </div>
+          
+
+
+        </div>
+
+
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="orderModalBody">
+        <!-- Order details will be displayed here -->
+      </div>
+      <div class="modal-footer">
+        <button class="right btn btn-info" id="printButton">Print</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<script>
+
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      if (!role || !userid) {
+        // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+      
+
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed.
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();  
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+    const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+        const newButtonClass = switchInput.checked ? 'btn-warning' : 'btn-light';
+        const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+        
+        sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+        sidebar.classList.add(newSidebarClass);
+
+        buttonsExample1.forEach(button => {
+            button.classList.remove('btn-light', 'btn-warning');
+            button.classList.add(newButtonClass);
+        });
+
+        buttonsExample2.forEach(button => {
+            button.classList.remove('btn-light', 'btn-warning');
+            button.classList.add(newButtonClass);
+        });
+
+        if (switchInput.checked) {
+            body.classList.remove('dark-mode');
+            navbar.classList.remove('navbar-dark');
+            navbar.classList.add('navbar-warning');
+            switchInput.nextElementSibling.hidden = true;
+            switchInput.nextElementSibling.nextElementSibling.hidden = false;
+        } else {
+            body.classList.add('dark-mode');
+            navbar.classList.remove('navbar-warning');
+            navbar.classList.add('navbar-dark');
+            switchInput.nextElementSibling.hidden = false;
+            switchInput.nextElementSibling.nextElementSibling.hidden = true;
+        }
+
+        // Save switch state to localStorage
+        localStorage.setItem('darkMode', switchInput.checked);
+    }
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+});
+
+</script>
+
+<script>
+
+
+function populateOrderModal(rfid, ordertype, orderdate, ordertime) {
+  const modalBody = $('#orderModalBody');
+  modalBody.empty();
+
+  let url = '';
+
+  if (ordertype === "Dine-In" || ordertype === "Take-Out"){
+    url = 'php/ordermodal.php';
+  }else{
+    url = 'php/ordermodalonline.php'
+  }
+
+  let orderDetailsHtml;
+
+  var subs = 0;
+  // Fetch additional data using AJAX
+  $.ajax({
+    url: url, // Replace with your API endpoint
+    type: 'GET',
+    dataType: 'json',
+    data: { 
+    rfid: rfid,
+    ordertype: ordertype,
+    orderdate: orderdate,
+    ordertime: ordertime
+   },
+    success: function(ordersData) {
+      console.log(ordersData)
+
+      const orderDate = new Date(ordersData[0].orderdate);
+      const formattedDate = orderDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+   
+  orderDetailsHtml = `
+    <p><strong>Order Number:</strong> ${ordersData[0].orderid}</p>
+    <p><strong>Customer Name:</strong> ${ordersData[0].customername}</p>
+    <p><strong>Order Type:</strong> ${ordersData[0].ordertype}</p>
+    <p><strong>Order Date:</strong> ${formattedDate}</p>
+    <p>===============================</p>  
+    <!-- Add more order details as needed -->
+
+    <table id="orders-container" class="table">
+    <thead>
+      <td>Item</td>
+      <td>Quantity</td>
+      <td>Subtotal</td>
+    </thead>
+    <tbody>
+    </tbody>
+  `;
+
+
+  const productPromises = [];
+
+  $.each(ordersData, function(index, item) {
+
+    console.log(`Current Index:::::::::: ${index} &&&&& length ${ordersData.length}`);
+
+    const currentIndex = index;
+          // Fetch add-on value from addonorders table using item.orderid
+  $.ajax({
+    url: 'php/orderproducts.php', // Replace with your API endpoint for add-on data
+    type: 'GET',
+    dataType: 'json',
+    data: { productid: item.productid },
+    success: function(productData) {
+      console.log("Products", productData);
+
+      // Debug statements
+      console.log("currentIndex:", currentIndex);
+      console.log("productData[currentIndex]:", currentIndex);
+
+
+        // modalBody.html(orderDetailsHtml);
+
+      // Fetch product data from products table using item.productid
+      $.ajax({
+        url: 'php/ordermodaladdon.php', // Replace with your API endpoint for product data
+        type: 'GET',
+        dataType: 'json',
+        data: { productorderid: item.productorderid,
+                orderid: item.orderid },
+        success: function(addonData) {
+          console.log("Add-ons", addonData);
+          // You can use productName in your HTML
+
+          const productRow = `
+          <tr>
+            <td>${productData[0].prodname}</td>
+            <td>${item.quantity}</td>
+            <td>${item.subtotal}</td>
+          </tr>
+        `;
+
+        subs += (productData[0].productprice*item.quantity);
+        console.log("Subs:", subs);
+
+        orderDetailsHtml += productRow;
+
+          $.each(addonData, function(index, item) {
+          const addonRow = `
+                <tr>
+                  <td>${item.addonname}(Add-on)</td>
+                  <td>${item.quantity}x${item.price}</td>
+                  <td>${item.subtotal}</td>
+                </tr>
+              `;
+
+              orderDetailsHtml += addonRow;
+
+            });
+
+            const inviRow = `
+            <tr>
+              <td colspan="3"></td>
+            </tr>
+            `;
+
+            orderDetailsHtml += inviRow;
+        modalBody.html(orderDetailsHtml);
+
+        // If this is the last order, add the accumulated productRows to orderDetailsHtml
+        if (index === ordersData.length - 1 && (ordertype === 'Dine-In' || ordertype === 'Take-Out')) {
+                let footerRow = `
+                <tr>
+                  <td>Subtotal</td>
+                  <td></td>
+                  <td>PHP ${subs.toFixed(2)}</td>
+                </tr>
+              `;
+              console.log("DISCOUNT ", item.discount);
+              if (item.discount === ''){
+
+              }else{
+                footerRow += `
+                <tr>
+                  <td>Discount</td>
+                  <td></td>
+                  <td>20%</td>
+                </tr>
+              `;
+              }
+              footerRow += `
+                <tr>
+                  <td>Payment</td>
+                  <td></td>
+                  <td>PHP ${parseFloat(item.payment).toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td>Total Price</td>
+                  <td></td>
+                  <td>${item.totalprice}</td>
+                </tr>
+                <tr>
+                  <td>Change</td>
+                  <td></td>
+                  <td>${item.changepay}</td>
+                </tr>
+                
+                
+              `;
+
+              orderDetailsHtml += footerRow;
+              modalBody.html(orderDetailsHtml);
+              $('#orderModal').modal('show');
+            }
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+
+
+       
+      });
+
+
+
+  modalBody.html(orderDetailsHtml);
+  $('#orderModal').modal('show');
+
+
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+      modalBody.append('<p>An error occurred while fetching order details.</p>');
+    }
+  });
+}
+  
+
+  function fetchOrderHistory() {
+  $.ajax({
+    url: 'php/orderfetch.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      dataget = data;
+      const existingRfIdsAndDate = {}; // Object to store existing 'rfid' and 'date' values
+
+$('#example1 tbody').empty();
+
+$.each(data, function(index, item) {
+  const key = `${item.rfid}_${item.orderdate}`; // Create a unique key using 'rfid' and 'date'
+
+  if (!existingRfIdsAndDate[key]) {
+    existingRfIdsAndDate[key] = true; // Mark this 'rfid' and 'date' as seen
+
+          // // Format paymentStatus based on item.changepay
+          // const paymentStatus = item.changepay < 0
+          //   ? '<span class="badge badge-info" style="font-size: 24px">Unpaid</span>'
+          //   : '<span class="badge badge-success" style="font-size: 16px">Paid</span>';
+
+          // Append row to the table with only 'rfid' displayed
+
+          if (item.orderstatus === 'Cancelled'){
+          $('#example1 tbody').append(`
+            <tr style="background: #FF6B65">
+              <td>${item.rfid}</td>
+              <td>${item.ordertype}</td>
+              <td>${item.orderstatus}</td>
+              <td>${item.orderdate}-${item.ordertime}</td>
+              <td>${item.totalprice}</td>
+              <td>
+                <button class="btn btn-sm btn-light rounded-lg view-button" data-rfid="${item.rfid}" data-type="${item.ordertype}" data-date="${item.orderdate}" data-time="${item.ordertime}" data-toggle="modal" data-target="#orderModal">
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </td>
+            </tr>
+          `);
+          }else{
+            $('#example1 tbody').append(`
+            <tr>
+              <td>${item.rfid}</td>
+              <td>${item.ordertype}</td>
+              <td>${item.orderstatus}</td>
+              <td>${item.orderdate}-${item.ordertime}</td>
+              <td>${item.totalprice}</td>
+              <td>
+                <button class="btn btn-sm btn-light rounded-lg view-button"  data-rfid="${item.rfid}" data-type="${item.ordertype}" data-date="${item.orderdate}" data-time="${item.ordertime}" data-toggle="modal" data-target="#orderModal">
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </td>
+            </tr>
+          `);
+          }
+        }
+
+       
+      });
+
+       // Open the modal and populate it with order details when the "View" button is clicked
+       $('.view-button').click(function() {
+        // const orderid = $(this).data('orderid');
+        const rfid = $(this).data('rfid');
+        const ordertype = $(this).data('type');
+        const orderdate = $(this).data('date');
+        const ordertime = $(this).data('time');
+
+        console.log(rfid, ordertype, orderdate, ordertime);
+        populateOrderModal(rfid, ordertype, orderdate, ordertime);
+      });
+
+      
+
+      // Initialize DataTables and Buttons
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+    fetchOrderHistory();
+</script>
+
+
+
+
+<script>
+
+function printReceiptContent() {
+  // Get the content of the modal body
+  const modalContent = $('#orderModalBody').html();
+
+  // Create a new window for printing
+  const printWindow = window.open('', '_blank');
+
+  // Write the modal content to the new window
+  printWindow.document.open();
+  printWindow.document.write(`
+  <style>
+    
+    @media print {
+      *{
+    text-align: center;
+  }
+      body {
+        width: 58mm; /* Set the width of the paper */
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      p, .header h3 {
+        margin: 0;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: none; /* Remove the border */
+        text-align: left;
+      }
+    }
+  </style>
+
+  <div class="header">
+    <h3>High-Coffee</h3>
+    <p>OPERATED BY: HCPOS UCU</p>
+    <p>RM BUILDING SAN VICENTE WEST, URDANETA CITY, PANGASINAN</p>
+  </div>
+  <p>===============================</p>    
+      ${modalContent}
+
+  `);
+
+  printWindow.document.close();
+
+  // Print the content
+  printWindow.print();
+
+  printWindow.close();
+}
+
+// Add click event listener to the print button
+const printButton = document.getElementById("printButton");
+printButton.addEventListener("click", printReceiptContent);
+
+
+function fetchNew() {
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadge').text(count);
+      }      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+function fetchTicketNew() {
+
+$.ajax({
+  url: 'php/ticketNew.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+
+      console.log(data);
+
+    let countTicketNew = 0;
+    $.each(data, function(index, item) {
+
+
+        countTicketNew++;
+      
+     
+    });      
+    console.log(`Count new ticket:: ${countTicketNew}`);
+    if (countTicketNew > 0){
+    $('#navBadgeTicket').text(countTicketNew);
+    } 
+
+
+    console.log(data);
+  },
+  error: function(xhr, status, error) {
+    console.error(error);
+  }
+});
+}
+
+function fetchInventory() {
+
+$.ajax({
+    url: 'php/inventoryfetch.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        let count = 0;
+        $.each(data, function(index, item) {
+            var status;
+            if (item.productsize <= 25){
+              count++;
+            }
+        });
+
+        if (count > 0){
+          $('#badge-info').css('display', 'block');
+        }
+
+        console.log(data);
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+}
+
+fetchInventory();
+
+  fetchTicketNew();
+fetchNew();
+
+</script>
+</body>
+</html>

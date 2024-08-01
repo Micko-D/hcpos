@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="user-select: none;">
+
+  <div class="wrapper" id="allcontent">
+ <!-- Navbar -->
+ <nav class="main-header navbar navbar-expand navbar-dark">
+  <!-- Left navbar links -->
+  <!-- <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+  </ul> -->
+
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+    
+    <li class="nav-item">
+      <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+        <i class="fas fa-expand-arrows-alt"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <div class="form-group nav-link">
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                    <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                  </div>
+                </div>
+    </li>
+  </ul>
+</nav>
+<!-- /.navbar -->
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="../hcpos" class="nav-link ">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>            
+          </li>
+
+
+          <li class="nav-item">
+            <a href="pos.html" class="nav-link ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-info">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ord.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                
+              </p><span class="right badge badge-info" id="navBadgeOrder"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="orderhistory.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manprod.html" class="nav-link ">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Manage Product
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticket.html" class="nav-link active">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>
+                Customer Tickets
+              </p>
+              <span class="right badge badge-info" id="navBadgeTicket"></span>
+            </a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a href="chat.html" class="nav-link" >
+              <i class="nav-icon fas fa-comment-dots"></i>
+              <p>
+                Chat
+              </p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="feedback.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="salesreport.html" class="nav-link ">
+              <i class="nav-icon fas fa-chart-line"></i>
+              
+              <p>
+                Sales Report
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="maginv.html" class="nav-link ">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Inventory
+              </p>
+              <span class="right badge text-danger" style="display: none; font-size: 18px;" id="badge-info"><i class="fas fa-exclamation-triangle"></i></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="usermanage.html" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Manage User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="audit.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Audit Logs
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+          
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <section class="content-header"></section>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row mt-2" style="justify-content: center">
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning">
+              <div class="btn btn-sm" style="width: 100%" onclick="openTab(event, 'tab1')">New<span class="right badge badge-info" style="float: right" id="tabBadgeTicket"></span></div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box bg-warning"> 
+              <div class="btn btn-sm" style="width: 100%"  onclick="openTab(event, 'tab2')">Active</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-12 col-sm-4 col-md-4">
+            <div class="small-box mb-3 bg-warning">
+              <div class="btn btn-sm" style="width: 100%"  onclick="openTab(event, 'tab3')">Settled</div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          
+          <!-- /.col -->
+
+<!--           <div class="input-group mb-2" style="justify-content: center">
+          <input type="text" name="idsearch" class="form-control col-8 col-sm-8 col-md-8" placeholder="ID No.">
+          <span class="input-group-append"><button class="btn btn-primary">Search</button></span>
+        </div> -->
+          
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Order Management</h3>                
+              </div>
+              <div class="card-body">
+                
+                <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <div id="tab1" class="tab-content">
+                
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Ticket ID.</th>
+                    <th>Customer ID</th>
+                    <th>Time</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    
+                  </tbody>
+   
+                </table>
+                </div>
+
+                <div id="tab2" class="tab-content " style="display: none;">
+                <table id="example2" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Customer Ticket ID.</th>
+                    <th>Customer ID</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>000017</td>
+                      <td>99018782637</td>
+                      <td>9mins ago</td>
+                      <td>Unsettled</td>
+                      <td><button class="btn btn-warning btn-tool">Reply</button></td>
+                    </tr>
+                    <tr>
+                      <td>000018</td>
+                      <td>298497398</td>
+                      <td>11mins ago</td>
+                      <td>Unsettled</td>
+                      <td><button class="btn btn-warning btn-tool">Reply</button></td>
+                      
+                    </tr>
+
+                    <tr>
+                      <td>000019</td>
+                      <td>9738979385</td>
+                      <td>30mins ago</td>
+                      <td>Unsettled</td>
+                      <td><button class="btn btn-warning btn-tool">Reply</button></td>
+                      
+                    </tr>
+              
+                  </tbody>
+
+                </table>
+
+                </div>
+
+                <div id="tab3" class="tab-content " style="display: none;">
+
+                  <table id="example3" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Customer Ticket ID.</th>
+                    <th>Customer ID</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                    	
+                      <td>000017</td>
+                      <td>99018782637</td>
+                      <td>9mins ago</td>
+                      <td>Settled</td>
+                      <td><button class="btn btn-warning btn-tool">View</button></td>
+                    </tr>
+                    <tr>
+                      <td>000018</td>
+                      <td>298497398</td>
+                      <td>11mins ago</td>
+                      <td>Settled</td>
+                      <td><button class="btn btn-warning btn-tool">View</button></td>
+                      
+                    </tr>
+
+                    <tr>
+                      <td>000019</td>
+                      <td>9738979385</td>
+                      <td>30mins ago</td>
+                      <td>Settled</td>
+                      <td><button class="btn btn-warning btn-tool">View</button></td>
+                      
+                    </tr>
+              
+                  </tbody>
+
+                </table>
+
+
+                  
+                  
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+              </div>
+              
+            </div>
+          </div>
+          
+
+
+        </div>
+
+
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="mtitle">Default Modal</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modal-list">
+             
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Reply</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="ticketReplyForm" action="php/replyTicket.php" method="post">
+          <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Ticket ID</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+
+            <div > <strong id="category"></strong>
+
+            </div>
+
+            <div id="message">
+
+            </div>
+                              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-warning" id="replyTicketButton">Reply</button>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="viewModalLabel">Ticket ID</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+
+            <div > <strong id="viewcategory"></strong>
+
+            </div>
+
+            <div class="direct-chat-messages" id="viewmessage" style="max-height: 400px;">
+
+            </div>
+                              
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+
+
+
+
+<!-- Fail Modal -->
+<div class="modal fade" id="logfailModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Session Ended.<br>
+              Login again to use...
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+<script>
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      if (!role || !userid) {
+        $('allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#logfailModal').modal('show');
+        // Listen for the modal close event
+        $('#logfailModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+    
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();  
+      
+
+
+    const viewButtons = document.querySelectorAll('.btn-tool');
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+    const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+        const newButtonClass = switchInput.checked ? 'btn-warning' : 'btn-light';
+        const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+        
+        sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+        sidebar.classList.add(newSidebarClass);
+
+        buttonsExample1.forEach(button => {
+            button.classList.remove('btn-light', 'btn-warning');
+            button.classList.add(newButtonClass);
+        });
+
+        buttonsExample2.forEach(button => {
+            button.classList.remove('btn-light', 'btn-warning');
+            button.classList.add(newButtonClass);
+        });
+
+        if (switchInput.checked) {
+            body.classList.remove('dark-mode');
+            navbar.classList.remove('navbar-dark');
+            navbar.classList.add('navbar-warning');
+            switchInput.nextElementSibling.hidden = true;
+            switchInput.nextElementSibling.nextElementSibling.hidden = false;
+        } else {
+            body.classList.add('dark-mode');
+            navbar.classList.remove('navbar-warning');
+            navbar.classList.add('navbar-dark');
+            switchInput.nextElementSibling.hidden = false;
+            switchInput.nextElementSibling.nextElementSibling.hidden = true;
+        }
+
+        // Save switch state to localStorage
+        localStorage.setItem('darkMode', switchInput.checked);
+    }
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+});
+
+
+  function openTab(evt, tabName) {
+      // Get all tab content elements
+      const tabContents = document.getElementsByClassName('tab-content');
+
+      // Hide all tab contents
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove 'active' class from all tab links
+      const tabLinks = document.getElementsByClassName('tab-link');
+      for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = 'block';
+
+      // Add 'active' class to the clicked tab link
+      evt.currentTarget.classList.add('active');
+    }
+
+function fetchTicketNew() {
+    // Destroy the existing DataTable instance
+    if ($.fn.DataTable.isDataTable('#example1')) {
+                $('#example1').DataTable().destroy();
+            }
+
+  $.ajax({
+    url: 'php/ticketNew.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+
+        console.log(data);
+
+      $('#example1 tbody').empty();
+      let countTicketNew = 0;
+      $.each(data, function(index, item) {
+
+    // Calculate the time difference in milliseconds
+const uploadedTime = new Date(item.datetimeticket); // Replace with the correct property name from your 'item' object
+const currentTime = new Date(); // Current time
+
+const timeDifferenceMs = currentTime - uploadedTime;
+
+// Calculate years, months, days, hours, and minutes
+const oneMinuteMs = 60 * 1000;
+const oneHourMs = 60 * oneMinuteMs;
+const oneDayMs = 24 * oneHourMs;
+const oneMonthMs = 30 * oneDayMs; // Approximate value for a month
+const oneYearMs = 365 * oneDayMs; // Approximate value for a year
+
+const years = Math.floor(timeDifferenceMs / oneYearMs);
+const months = Math.floor((timeDifferenceMs % oneYearMs) / oneMonthMs);
+const days = Math.floor((timeDifferenceMs % oneMonthMs) / oneDayMs);
+const hours = Math.floor((timeDifferenceMs % oneDayMs) / oneHourMs);
+const minutes = Math.floor((timeDifferenceMs % oneHourMs) / oneMinuteMs);
+
+// Display the time difference
+let timeAgoMessage = '';
+
+if (years > 0) {
+    timeAgoMessage += `${years}y `;
+}
+if (months > 0) {
+    timeAgoMessage += `${months}m `;
+}
+if (days > 0) {
+    timeAgoMessage += `${days}d `;
+}
+if (hours > 0) {
+    timeAgoMessage += `${hours}h `;
+}
+if (minutes > 0) {
+    timeAgoMessage += `${minutes}m `;
+}
+
+if (timeAgoMessage === '') {
+    timeAgoMessage = 'Just now';
+} else {
+    timeAgoMessage += 'ago';
+}
+
+        
+
+          // Append row to the table with only 'orderid' displayed
+          $('#example1 tbody').append(`
+            <tr>
+              <td>${item.ticketid}</td>
+              <td>${item.userid}</td>
+              <td>${timeAgoMessage}</td>
+              <td hidden>${item.orderid}</td>
+              <td hidden>${item.issue}</td>
+              <td hidden>${item.message}</td>
+              <td hidden>${item.datetimeticket}</td>
+              <td>
+                <button class="btn btn-sm btn-light rounded-lg view-button" data-toggle="modal" data-target="#updateModal">
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </td>
+            </tr>
+          `);
+
+
+          countTicketNew++;
+        
+       
+      });      
+      console.log(`Count new ticket:: ${countTicketNew}`);
+      if (countTicketNew > 0){
+      $('#navBadgeTicket').text(countTicketNew);
+      $('#tabBadgeTicket').text(countTicketNew);
+      } 
+
+      // Initialize DataTables and Buttons
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchTicketActive() {
+    // Destroy the existing DataTable instance
+    if ($.fn.DataTable.isDataTable('#example2')) {
+                $('#example2').DataTable().destroy();
+            }
+
+  $.ajax({
+    url: 'php/ticketActive.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+
+        console.log(data);
+
+      $('#example2 tbody').empty();
+
+      $.each(data, function(index, item) {
+
+    // Calculate the time difference in milliseconds
+const uploadedTime = new Date(item.datetimeticket); // Replace with the correct property name from your 'item' object
+const currentTime = new Date(); // Current time
+
+const timeDifferenceMs = currentTime - uploadedTime;
+
+// Calculate years, months, days, hours, and minutes
+const oneMinuteMs = 60 * 1000;
+const oneHourMs = 60 * oneMinuteMs;
+const oneDayMs = 24 * oneHourMs;
+const oneMonthMs = 30 * oneDayMs; // Approximate value for a month
+const oneYearMs = 365 * oneDayMs; // Approximate value for a year
+
+const years = Math.floor(timeDifferenceMs / oneYearMs);
+const months = Math.floor((timeDifferenceMs % oneYearMs) / oneMonthMs);
+const days = Math.floor((timeDifferenceMs % oneMonthMs) / oneDayMs);
+const hours = Math.floor((timeDifferenceMs % oneDayMs) / oneHourMs);
+const minutes = Math.floor((timeDifferenceMs % oneHourMs) / oneMinuteMs);
+
+// Display the time difference
+let timeAgoMessage = '';
+
+if (years > 0) {
+    timeAgoMessage += `${years}y `;
+}
+if (months > 0) {
+    timeAgoMessage += `${months}m `;
+}
+if (days > 0) {
+    timeAgoMessage += `${days}d `;
+}
+if (hours > 0) {
+    timeAgoMessage += `${hours}h `;
+}
+if (minutes > 0) {
+    timeAgoMessage += `${minutes}m `;
+}
+
+if (timeAgoMessage === '') {
+    timeAgoMessage = 'Just now';
+} else {
+    timeAgoMessage += 'ago';
+}
+
+        
+
+          // Append row to the table with only 'orderid' displayed
+          $('#example2 tbody').append(`
+            <tr>
+              <td>${item.ticketid}</td>
+              <td>${item.userid}</td>
+              <td>${timeAgoMessage}</td>
+              <td>${item.status}</td>
+              <td>
+                <a href="ticketreply.html?role=${role}&userid=${userid}&ticketID=${item.ticketid}" class="btn btn-sm btn-light rounded-lg">
+                  <i class="fas fa-comment"></i> Reply
+                </a>
+              </td>
+            </tr>
+          `);
+        
+       
+      });      
+
+      // Initialize DataTables and Buttons
+      $('#example2').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+fetchTicketActive();
+
+
+function fetchTicketSettled() {
+    // Destroy the existing DataTable instance
+    if ($.fn.DataTable.isDataTable('#example3')) {
+                $('#example3').DataTable().destroy();
+            }
+
+  $.ajax({
+    url: 'php/ticketSettled.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+
+        console.log(data);
+
+      $('#example3 tbody').empty();
+
+      $.each(data, function(index, item) {
+
+    // Calculate the time difference in milliseconds
+const uploadedTime = new Date(item.datetimeticket); // Replace with the correct property name from your 'item' object
+const currentTime = new Date(); // Current time
+
+const timeDifferenceMs = currentTime - uploadedTime;
+
+// Calculate years, months, days, hours, and minutes
+const oneMinuteMs = 60 * 1000;
+const oneHourMs = 60 * oneMinuteMs;
+const oneDayMs = 24 * oneHourMs;
+const oneMonthMs = 30 * oneDayMs; // Approximate value for a month
+const oneYearMs = 365 * oneDayMs; // Approximate value for a year
+
+const years = Math.floor(timeDifferenceMs / oneYearMs);
+const months = Math.floor((timeDifferenceMs % oneYearMs) / oneMonthMs);
+const days = Math.floor((timeDifferenceMs % oneMonthMs) / oneDayMs);
+const hours = Math.floor((timeDifferenceMs % oneDayMs) / oneHourMs);
+const minutes = Math.floor((timeDifferenceMs % oneHourMs) / oneMinuteMs);
+
+// Display the time difference
+let timeAgoMessage = '';
+
+if (years > 0) {
+    timeAgoMessage += `${years}y `;
+}
+if (months > 0) {
+    timeAgoMessage += `${months}m `;
+}
+if (days > 0) {
+    timeAgoMessage += `${days}d `;
+}
+if (hours > 0) {
+    timeAgoMessage += `${hours}h `;
+}
+if (minutes > 0) {
+    timeAgoMessage += `${minutes}m `;
+}
+
+if (timeAgoMessage === '') {
+    timeAgoMessage = 'Just now';
+} else {
+    timeAgoMessage += 'ago';
+}
+
+        
+
+          // Append row to the table with only 'orderid' displayed
+          $('#example3 tbody').append(`
+            <tr>
+              <td>${item.ticketid}</td>
+              <td>${item.userid}</td>
+              <td>${timeAgoMessage}</td>
+              <td>${item.status}</td>
+              <td hidden>${item.orderid}</td>
+              <td>
+                <button class="btn btn-sm btn-light rounded-lg viewset-button" data-toggle="modal" data-target="#viewModal">
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </td>
+            </tr>
+          `);
+        
+       
+      });      
+
+      // Initialize DataTables and Buttons
+      $('#example3').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
+
+      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+fetchTicketSettled();
+
+$(document).on('click', '.btn.view-button', function() {
+    // Get the product data from the row
+    const row = $(this).closest('tr');
+         
+    const ticketID = row.find('td:nth-child(1)').text(); 
+    const customerName = row.find('td:nth-child(2)').text();
+    const ack = row.find('td:nth-child(4)').text();
+    const category = row.find('td:nth-child(5)').text();
+    const message = row.find('td:nth-child(6)').text();
+    const dtm = row.find('td:nth-child(7)').text();
+
+
+    var tickID = document.getElementById('updateModalLabel');
+    var cate = document.getElementById('category');
+    var mess = document.getElementById('message');
+
+
+    tickID.innerHTML = `Ticket ID: ${ticketID}`;
+    cate.innerHTML = `Issue: ${category}`;
+    mess.innerHTML = `<strong>Order ID: ${ack}</strong> <br> ${message}
+    <input type="text" name="ticketID" value="${ticketID}" hidden>
+    <input type="text" name="customerID" value="${customerName}" hidden>
+    <input type="text" name="orderID" value="${ack}" hidden>
+    <input type="text" name="category" value="${category}" hidden>
+    <input type="text" name="message" value="${message}" hidden>
+    <input type="text" name="dtm" value="${dtm}" hidden>
+
+    `;
+          
+          
+          // Show the modal
+          $('#updateModal').modal('show');
+    
+    
+});
+
+$(document).on('click', '.btn.viewset-button', function() {
+    // Get the product data from the row
+    const row = $(this).closest('tr');
+         
+    const ticketID = row.find('td:nth-child(1)').text();
+    const cate = row.find('td:nth-child(5)').text();
+    var tickID = document.getElementById('viewModalLabel');
+    var category = document.getElementById('viewcategory');
+
+    tickID.innerHTML = `Ticket ID: ${ticketID}`;
+    category.innerHTML = `Order ID: ${cate}`;
+
+    console.log("Settled View Called");
+
+    $.ajax({
+      url: 'php/getTicketMessages.php',
+      type: 'POST',
+      data: {
+        convoID: ticketID
+      },
+      success: function(response){
+
+        console.log("Message Loaded");
+
+        $('#viewmessage').empty();
+
+      $.each(response, function(index, item) {
+
+      var img = '';
+
+        if (item.userimg === ""){
+          img = 'dist/img/AdminLTELogo.png';
+        }else{
+          img = `uploads/${item.userimg}`;
+        }
+
+        // Input date and time in ISO format
+const inputDate = new Date(item.datetimetickrep);
+
+// Create an array of month names
+const months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+// Get the day of the month
+const day = inputDate.getDate();
+
+// Get the abbreviated month name
+const month = months[inputDate.getMonth()];
+
+// Get the hours and minutes
+let hours = inputDate.getHours();
+let ampm = "am";
+
+// Convert hours to 12-hour format and set am/pm
+if (hours >= 12) {
+  ampm = "pm";
+  if (hours > 12) {
+    hours -= 12;
+  }
+}
+
+// Get the minutes
+const minutes = inputDate.getMinutes();
+
+// Create the formatted date and time string
+const formattedDate = `${day} ${month} ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
+ 
+
+if (item.state === "Receive") {
+    console.log("Message is Receive");
+
+    // Create a temporary hidden div to measure the content width
+    const tempDiv = document.createElement("div");
+    tempDiv.style.visibility = "hidden";
+    tempDiv.style.position = "absolute";
+    tempDiv.style.width = "auto";
+    tempDiv.style.whiteSpace = "nowrap";
+    tempDiv.textContent = item.message;
+
+    // Append the temporary div to the document body
+    document.body.appendChild(tempDiv);
+
+    // Calculate the content width
+    const contentWidth = tempDiv.clientWidth;
+
+    // Determine the max-width based on the content width
+    let message = '';
+    if (contentWidth > 500) {
+        message = `
+        <div class="direct-chat-text" style="word-wrap: break-word; max-width: 500px;">
+            ${item.message}
+        </div>
+        `;
+    }else{
+      message = `
+        <div class="direct-chat-text" style="word-wrap: break-word; width: fit-content; block-size: fit-content;">
+            ${item.message}
+        </div>
+        `;
+    }
+
+    console.log("Content WIDTH:", contentWidth);
+
+    // Remove the temporary div
+    document.body.removeChild(tempDiv);
+
+    $('#viewmessage').append(`
+    <!-- Message. Default to the left -->
+    <div class="direct-chat-msg">
+        <div class="direct-chat-infos clearfix">
+            <span class="direct-chat-name float-left">${item.fullname}</span>
+            <span class="direct-chat-timestamp" style="margin-left: 10px;">${formattedDate}</span>
+        </div>
+        <!-- /.direct-chat-infos -->
+        <img class="direct-chat-img" src="${img}" alt="message user image">
+        <!-- /.direct-chat-img -->
+        ${message}
+        <!-- /.direct-chat-text -->
+    </div>
+    <!-- /.direct-chat-msg -->
+    `);
+} else {
+    $('#viewmessage').append(`
+    <!-- Message to the right -->
+    <div class="direct-chat-msg right">
+        <div class="direct-chat-infos clearfix">
+            <span class="direct-chat-name float-right">${item.fullname}</span>
+            <span class="direct-chat-timestamp float-right" style="margin-right: 10px;">${formattedDate}</span>
+        </div>
+
+        <div class="direct-chat-msg right" style="float: right;">
+            <!-- /.direct-chat-infos -->
+            <img class="direct-chat-img" src="${img}" alt="message user image">
+            <!-- /.direct-chat-img -->
+            <div class="direct-chat-text float-right" style="margin-right: 10px; word-wrap: break-word; max-width: 500px;">
+                ${item.message}
+            </div>
+            <!-- /.direct-chat-text -->
+        </div>
+    </div>
+    <!-- /.direct-chat-msg -->
+    `);
+}
+
+
+      });
+
+
+
+      },
+      error: function(xhr, status, error){
+        console.error(error);
+      }
+    });
+    
+          
+          
+          // Show the modal
+          $('#viewModal').modal('show');
+    
+    
+});
+
+$(document).on('click', '#replyTicketButton', function() {
+    // Create a new FormData object
+    const formData = new FormData($('#ticketReplyForm')[0]);
+
+    formData.append('userid', userid);
+    formData.append('role', role);
+
+    console.log("Ticket Reply is clicked");
+
+    // Perform an AJAX POST request
+    $.ajax({
+        type: 'POST',
+        url: 'php/replyTicket.php', // Specify your PHP script URL
+        data: formData,
+        processData: false, 
+        contentType: false, 
+        success: function(response) {
+          console.log(response);
+
+          const respo = JSON.parse(response);
+
+          console.log(respo.ticketID);
+
+          window.location.href = `ticketreply.html?role=${role}&userid=${userid}&ticketID=${respo.ticketID}`;
+
+
+
+
+          
+        },
+        error: function(xhr, status, error) {
+            // Handle any errors that occur during the request
+            console.error('Error:', error);
+            // You can display an error message to the user here
+        }
+    });
+});
+
+function fetchNew() {
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadgeOrder').text(count);
+      }      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchInventory() {
+
+$.ajax({
+    url: 'php/inventoryfetch.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        let count = 0;
+        $.each(data, function(index, item) {
+            var status;
+            if (item.productsize <= 25){
+              count++;
+            }
+        });
+
+        if (count > 0){
+          $('#badge-info').css('display', 'block');
+        }
+
+        console.log(data);
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+}
+
+fetchInventory();
+
+fetchNew();
+
+fetchTicketNew();
+</script>
+</body>
+</html>

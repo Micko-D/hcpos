@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+                  <!-- Fail Modal -->
+<div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Session Ended.<br>
+              Login again to use...
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="wrapper" id="allcontent">
+
+  <!-- Preloader -->
+  <div id="preloader" class="preloader flex-column justify-content-center align-items-center" hidden>
+    <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60"><br>
+    <p class="animation__wobble">High-Coffee</p>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <!-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul> -->
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="../hcpos" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>            
+          </li>
+
+
+          <li class="nav-item">
+            <a href="pos.html" class="nav-link ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-info">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ord.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+              </p>
+              <span class="right badge badge-info" style="display: none;" id="navBadge"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="orderhistory" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manprod" class="nav-link">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Manage Product
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticket" class="nav-link">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>
+                Customer Tickets
+              </p>
+              <span class="right badge badge-info" id="navBadgeTicket"></span>
+            </a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a href="chat.html" class="nav-link">
+              <i class="nav-icon fas fa-comment-dots"></i>
+              <p>
+                Chat
+              </p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="feedback.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="salesreport" class="nav-link ">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Sales Report
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="maginv" class="nav-link ">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Inventory
+              </p>
+              <span class="right badge text-danger" style="display: none; font-size: 18px;" id="navInvBadge"><i class="fas fa-exclamation-triangle"></i></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="usermanage" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Manage User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="audit.html" class="nav-link ">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Audit Logs
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+         
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-8 col-sm-8 col-md-8">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+
+          <div class="col-2 col-sm-2 col-md-2 mt-2" id="buttonStore">
+            
+          </div>
+
+          <div class="col-2 col-sm-2 col-md-2 mt-2" id="buttonDeliver">
+            
+          </div>
+
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-calendar-day"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Daily Sales</span>
+                <span class="info-box-number" id ="dailySalesText">
+                  PHP XXXXX.XX
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-calendar-day"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Weekly Sales</span>
+                <span class="info-box-number" id ="weeklySalesText">PHP XXXXX.XX</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-calendar-day"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Monthly Sales</span>
+                <span class="info-box-number" id ="monthlySalesText">PHP XXXXXX.XX</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-calendar-day"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Yearly Sales</span>
+                <span class="info-box-number" id ="yearlySalesText">PHP XXXXXX.XX</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Weekly Summary Sale</h3>                
+              </div>
+              <div class="card-body">
+
+                <div class="card card-secondary">
+                  <div class="card-header">
+                    <h3 class="card-title" id="barChartTitle">Foods # of sales</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="chart barArea">
+                      <!-- <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <div class="card card-secondary">
+                  <div class="card-header">
+                    <h3 class="card-title" id="barChartTitle">Drinks # of sales</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="chart barAreaD">
+                      <!-- <canvas id="barChartD" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                
+                
+              <!-- /.card-header -->
+              <div class="card-body">
+                
+
+
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+<!-- ./wrapper -->
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+
+<script>
+
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      if (!role || !userid) {
+        // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+ function storeCheckUpdate() {
+  $.ajax({
+  url: 'php/storecheck.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(response){
+
+    console.log("STORE CHECKER:::::", JSON.stringify(response));
+
+    const buttonPlace = document.getElementById('buttonStore');
+    const buttonDeliver = document.getElementById('buttonDeliver');
+    if (response[0].activity === "Open"){
+
+      buttonPlace.innerHTML = `
+      <div class="small-box" >
+              <button class="btn btn-sm btn-warning" style="width: 100%; float:right;" id="toggleClose" onclick="toggleButtons(1, 'Close')">Open Store</button>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+      `;
+    }else{
+      buttonPlace.innerHTML = `
+      <div class="small-box" >
+              <button class="btn btn-sm btn-warning" style="width: 100%; float:right;" id="toggleOpen" onclick="toggleButtons(1, 'Open')">Close Store</button>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+      `;
+    }
+
+    if (response[1].activity === "Enabled"){
+
+      buttonDeliver.innerHTML = `
+      <div class="small-box" >
+              <button class="btn btn-sm btn-warning" style="width: 100%; float:right;" id="toggleDisabled" onclick="toggleButtons(2, 'Disabled')">Enabled Delivery</button>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+      `;
+    }else{
+      buttonDeliver.innerHTML = `
+      <div class="small-box" >
+              <button class="btn btn-sm btn-warning" style="width: 100%; float:right;" id="toggleEnabled" onclick="toggleButtons(2, 'Enabled')">Disabled Delivery</button>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+      `;
+    }
+
+
+  },
+  error: function(xhr, status, error){
+    console.error(error);
+  }
+});
+ }
+
+ storeCheckUpdate();
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();    
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+    const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+        const newButtonClass = switchInput.checked ? 'btn-info' : 'btn-light';
+        const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+        
+        sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+        sidebar.classList.add(newSidebarClass);
+
+        buttonsExample1.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        buttonsExample2.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        if (switchInput.checked) {
+            body.classList.remove('dark-mode');
+            navbar.classList.remove('navbar-dark');
+            navbar.classList.add('navbar-warning');
+            switchInput.nextElementSibling.hidden = true;
+            switchInput.nextElementSibling.nextElementSibling.hidden = false;
+        } else {
+            body.classList.add('dark-mode');
+            navbar.classList.remove('navbar-warning');
+            navbar.classList.add('navbar-dark');
+            switchInput.nextElementSibling.hidden = false;
+            switchInput.nextElementSibling.nextElementSibling.hidden = true;
+        }
+
+        // Save switch state to localStorage
+        localStorage.setItem('darkMode', switchInput.checked);
+    }
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+
+});
+</script>
+
+<script>
+
+function dailySales() {
+            $.ajax({
+                url: 'php/timedSales.php', // Modify the URL to match your PHP script
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                  salesType: 'Daily',
+                },
+                success: function (data) {
+                    console.log("For Daily Sales: ", data);
+                    // Process the received data
+                    var dailySalesData = data; // Assuming the response is an array of objects
+                    
+                    // Set the target timezone to "Asia/Manila" (Philippines)
+                    const timeZone = 'Asia/Manila';
+
+                    // Create a new date object with the desired timezone
+                    const date = new Date();
+                    const options = { timeZone: timeZone };
+                    const formatter = new Intl.DateTimeFormat('en-US', options);
+
+                    // Extract the year, month, and day parts
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+
+                    // Combine them into the 'YYYY-MM-DD' format
+                    const currentDate = `${year}-${month}-${day}`;
+                    // var currentDate = formatter.format(date);
+                    console.log("Current Date:", currentDate);
+
+                    // Find the average sales for the current day
+                    var dailySalesTextElement = $('#dailySalesText');
+                    var formattedAverage = 'N/A'; // Default value if data is not found
+
+                    var dailySalesValue = 0;
+
+                    if (data && data.length > 0){
+
+                      // Iterate through the data and sum sales for the current week
+                  for (var i = 0; i < data.length; i++) {
+                    
+                      dailySalesValue += parseFloat(data[i].daily_sales);
+                    
+                  }
+                  formattedAverage = dailySalesValue;
+
+                    }
+                    // Set the dailySalesTextElement with the animated value
+                    dailySalesTextElement.text('PHP 0.00'); // Set initial text to 0
+
+                    // Animate counting to the formatted average value
+                    $({ counter: 0 }).animate(
+                        { counter: formattedAverage },
+                        {
+                            duration: 1000, // Animation duration in milliseconds
+                            easing: 'swing', // Animation easing function
+                            step: function () {
+                                // Update the text with the animated value
+                                dailySalesTextElement.text('PHP ' + this.counter.toFixed(2));
+                            },
+                            complete: function () {
+                                // Set the final value once animation is complete
+                                dailySalesTextElement.text('PHP ' + formattedAverage);
+                            }
+                        }
+                    );
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+
+        }
+
+        // Call timedSales to fetch and update daily sales data
+
+function weeklySales(){
+  $.ajax({
+                url: 'php/timedSales.php', // Modify the URL to match your PHP script
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                  salesType: 'Weekly',
+                },
+                success: function(data) {
+                  console.log("Weekly Sales: ", data);
+                // Process the received data
+                var weeklySalesData = data; // Assuming the response is an array of objects
+
+                // Get the current date
+                var currentDate = new Date();
+
+                // Calculate the start date (Sunday of the current week)
+                var startDate = new Date(currentDate);
+                startDate.setDate(currentDate.getDate() - currentDate.getDay());
+
+                // Calculate the end date (Saturday of the current week)
+                var endDate = new Date(startDate);
+                endDate.setDate(startDate.getDate() + 6);
+
+                // Initialize the sum for the week
+                var sumOfWeeklySales = 0;
+
+                // Find the average sales based on salesType
+                var averageSalesElement = $('#weeklySalesText');
+                var formattedAverage = 'N/A'; // Default value if data is not found
+
+                if (data && data.length > 0) {
+
+                  // Iterate through the data and sum sales for the current week
+                  for (var i = 0; i < data.length; i++) {
+                    var orderDate = new Date(data[i].order_date);
+
+                    // Check if the order date is within the current week
+                    if (orderDate >= startDate && orderDate <= endDate) {
+                      sumOfWeeklySales += parseFloat(data[i].average_sales);
+                    }
+                  }
+
+                  // Display the sum in the console
+                  // console.log("Sum of Weekly Sales (Sunday to Saturday): ", sumOfWeeklySales);
+                  formattedAverage = sumOfWeeklySales;
+                } else {
+                  console.log("DATA IS EMPTY");
+                }
+
+                console.log("sumOfWeeklySales:::", sumOfWeeklySales)
+                
+                if (sumOfWeeklySales == 0){
+                  formattedAverage = 'N/A';
+                }
+
+                averageSalesElement.text('PHP 0.00');
+
+                // Animate counting to the formatted average value
+                $({ counter: 0 }).animate(
+                    { counter: formattedAverage },
+                    {
+                        duration: 1000, // Animation duration in milliseconds
+                        easing: 'swing', // Animation easing function
+                        step: function() {
+                            // Update the text with the animated value
+                            averageSalesElement.text('PHP ' + this.counter.toFixed(2));
+                        },
+                        complete: function() {
+                            // Set the final value once animation is complete
+                            averageSalesElement.text('PHP ' + formattedAverage);
+                        }
+                    }
+                );
+            },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+}
+
+function monthlySales(){
+  $.ajax({
+                url: 'php/timedSales.php', // Modify the URL to match your PHP script
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                  salesType: 'Monthly',
+                },
+                success: function(data) {
+                  console.log("Monthly Sales", data);
+                // Process the received data
+                var monthlySalesData = data; // Assuming the response is an array of objects
+
+                // Get the current date
+                var currentDate = new Date();
+
+                // Calculate the start of the month
+                var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                startDate.setHours(0, 0, 0, 0);
+
+                // Calculate the end of the month
+                var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+                endDate.setHours(0, 0, 0, 0);
+
+                console.warn(`Start Date:::: ${startDate}`);
+                console.warn(`End Date :::::: ${endDate}`)
+
+                // Format the start and end dates as strings in 'YYYY-MM-DD' format
+                var startDateString = startDate.toISOString().split('T')[0];
+                var endDateString = endDate.toISOString().split('T')[0];
+
+                // console.log("Start Date: ", startDate);
+                // console.log("End Date: ", endDate);
+
+                var sumOfMonthlySales = 0;
+
+                // Find the average sales based on salesType
+                var averageSalesElement = $('#monthlySalesText');
+                var formattedAverage = 'N/A'; // Default value if data is not found
+
+                if (data && data.length > 0) {
+                  console.log("DATA IS NOT EMPTY");
+
+                  // Iterate through the data and sum sales for the current week
+                  for (var i = 0; i < data.length; i++) {
+                    var orderDate = new Date(data[i].order_date);
+                    orderDate.setHours(0, 0, 0, 0);
+
+                    console.log(`Data from Month::::: ${orderDate}`);
+
+                    // Check if the order date is within the current Month
+                    if (orderDate >= startDate && orderDate <= endDate) {
+                      console.log(`Value from month ::::: ${data[i].average_sales}`);
+                      sumOfMonthlySales += parseFloat(data[i].average_sales);
+                    }
+                  }
+
+                  // Display the sum in the console
+                  // console.log("Sum of Monthly Sales: ", sumOfMonthlySales);
+                  formattedAverage = sumOfMonthlySales;
+                } else {
+                  console.log("DATA IS EMPTY");
+                }
+
+                console.log(`Sum of monthly::::: ${sumOfMonthlySales}`);
+
+                if (sumOfMonthlySales == 0){
+                  formattedAverage = 'N/A';
+                }
+
+
+                // Set initial text to 0
+                averageSalesElement.text('PHP 0.00');
+
+                // Animate counting to the formatted average value
+                $({ counter: 0 }).animate(
+                    { counter: formattedAverage },
+                    {
+                        duration: 1000, // Animation duration in milliseconds
+                        easing: 'swing', // Animation easing function
+                        step: function() {
+                            // Update the text with the animated value
+                            averageSalesElement.text('PHP ' + this.counter.toFixed(2));
+                        },
+                        complete: function() {
+                            // Set the final value once animation is complete
+                            averageSalesElement.text('PHP ' + formattedAverage);
+                        }
+                    }
+                );
+            },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+}
+
+function yearlySales(){
+  $.ajax({
+                url: 'php/timedSales.php', // Modify the URL to match your PHP script
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                  salesType: 'Yearly',
+                },
+                success: function(data) {
+                  console.log("Yearly Sales: ",data);
+                // Process the received data
+                var yearlySalesData = data; // Assuming the response is an array of objects
+
+                // Get the current date
+                var currentDate = new Date().toISOString().split('T')[0];
+
+                // Find the average sales based on salesType
+                var averageSalesElement = $('#yearlySalesText');
+                var formattedAverage = 'N/A'; // Default value if data is not found
+
+                if (data && data.length > 0){
+                  formattedAverage = parseFloat(yearlySalesData[0].average_sales).toFixed(2 );
+                }
+                
+                
+
+                // Set initial text to 0
+                averageSalesElement.text('PHP 0.00');
+
+                // Animate counting to the formatted average value
+                $({ counter: 0 }).animate(
+                    { counter: formattedAverage },
+                    {
+                        duration: 1000, // Animation duration in milliseconds
+                        easing: 'swing', // Animation easing function
+                        step: function() {
+                            // Update the text with the animated value
+                            averageSalesElement.text('PHP ' + this.counter.toFixed(2));
+                        },
+                        complete: function() {
+                            // Set the final value once animation is complete
+                            averageSalesElement.text('PHP ' + formattedAverage);
+                        }
+                    }
+                );
+            },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+}
+
+
+function getAllOrders(){
+  $.ajax({
+    url : 'php/allOrder.php',
+    type:'GET' ,
+    dataType: 'json',
+    success: function(data){
+      console.log(data);
+
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      $('#example1 tbody').empty();
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          // Format paymentStatus based on item.changepay
+          const paymentStatus = item.changepay < 0
+            ? '<span class="badge badge-info" style="font-size: 24px">Unpaid</span>'
+            : '<span class="badge badge-success" style="font-size: 16px">Paid</span>';
+
+            const input = item.productorderid;
+            const parts = input.split('-');
+            const timestamp = parseInt(parts[1]);
+            let formattedDate = "";
+
+            if (!isNaN(timestamp)) {
+            const date = new Date(timestamp);
+
+            const options = {
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            };
+
+            formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+          }
+
+          // Append row to the table with only 'orderid' displayed
+          $('#example1 tbody').append(`
+            <tr>
+              <td class="text-center">${item.orderid}</td>
+              <td>${item.ordertype}</td>
+              <td>${item.orderstatus}</td>
+              <td class="text-center">${paymentStatus}</td>
+              <td class="text-center">${formattedDate}</td>
+              <td class="text-center">
+                ${item.totalprice}
+              </td>
+            </tr>
+          `);
+        }
+
+       
+      });
+      
+
+      // Initialize DataTables and Buttons
+      $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "ordering": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
+    }
+  });
+}
+
+function fetchNew() {
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadge').text(count);
+      $('#navBage').css('display', 'block');
+      }else{
+        $('#navBage').css('display', 'none');
+      } 
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+
+function fetchTicketNew() {
+
+$.ajax({
+  url: 'php/ticketNew.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+
+      console.log(data);
+
+    let countTicketNew = 0;
+    $.each(data, function(index, item) {
+
+
+        countTicketNew++;
+      
+     
+    });      
+    console.log(`Count new ticket:: ${countTicketNew}`);
+    if (countTicketNew > 0){
+    $('#navBadgeTicket').text(countTicketNew);
+    } 
+
+
+    console.log(data);
+  },
+  error: function(xhr, status, error) {
+    console.error(error);
+  }
+});
+}
+
+  fetchTicketNew();
+
+fetchNew();
+
+function timedSales(){
+  dailySales();
+  monthlySales();
+  yearlySales();
+  weeklySales();
+  getAllOrders();
+}
+        timedSales();
+
+
+function toggleButtons(id, update){
+
+  $.ajax({
+    url: 'php/storecheckupdate.php',
+    type: 'POST',
+    data: {
+      id: id,
+      action: update
+    },
+    success: function(response) {
+      console.log('Open');
+      storeCheckUpdate();
+    },
+    error: function(xhr, status, error){
+      console.error(error);
+    }
+  })
+
+}
+
+function fetchInventory() {
+
+$.ajax({
+    url: 'php/inventoryfetch.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        let count = 0;
+        $.each(data, function(index, item) {
+            var status;
+            if (item.productsize <= 25){
+              count++;
+            }
+        });
+
+        if (count > 0){
+          $('#navInvBadge').css('display', 'block');
+        }
+
+        console.log(data);
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+}
+
+fetchInventory();
+
+function barChart(){
+
+$('#barChart').remove();
+$('#barChartD').remove();
+
+
+    // Create a new canvas for the donut chart
+    $('.barArea').append('<canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+    $('.barAreaD').append('<canvas id="barChartD" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+
+
+$.ajax({
+  url: 'php/foodsBarChart.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(response){
+
+  console.log(`FOODS:::::::::::::: ${JSON.stringify(response)}`);
+
+ // Extract data and labels from the response
+var data = response.datasets[0].data;
+var labels = response.labels;
+
+// Combine data and labels into an array of objects
+var combinedData = data.map((value, index) => ({ label: labels[index], value }));
+
+// Sort the combinedData array based on the 'value' property in descending order
+combinedData.sort((a, b) => b.value - a.value);
+
+// Extract the sorted data and labels
+var sortedData = combinedData.map(item => item.value);
+var sortedLabels = combinedData.map(item => item.label);
+
+// Update the response with sorted data and labels
+response.labels = sortedLabels;
+response.datasets[0].data = sortedData;
+
+  // Create a bar chart with the provided data
+var barChartCanvas = $('#barChart').get(0).getContext('2d');
+var barChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  datasetFill: false,
+  legend: {
+    display: false,
+  },
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      min: 0,
+    },
+  },
+  animation: {
+    onComplete: function () {
+      var ctx = this.chart.ctx;
+      var fontSize = 18;
+
+      ctx.font = Chart.helpers.fontString(fontSize, 'bold', Chart.defaults.global.defaultFontFamily);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+
+      this.data.datasets.forEach(function (dataset) {
+        for (var i = 0; i < dataset.data.length; i++) {
+          var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model;
+          var value = dataset.data[i];
+
+          if (value !== 0) {
+            // Set background color
+            ctx.fillStyle = 'rgba(255, 255, 255, .75)'; // Adjust the color and opacity as needed
+
+            // Draw a rectangle behind the text
+            var textWidth = ctx.measureText(value).width;
+            ctx.fillRect((model.x - textWidth / 2) - 2, model.y, textWidth + 5, fontSize);
+
+            // Set text color
+            ctx.fillStyle = 'black'; // Set the font color to white
+
+            // Draw the text
+            ctx.fillText(value, model.x, model.y); // Adjust the offset as needed
+          }
+        }
+      });
+    },
+  },
+};
+
+
+var barChartData = {
+  labels: response.labels.map((label, index) => label + ' - ' + sortedData[index]),
+  datasets: [{
+    data: sortedData,
+    backgroundColor: response.datasets[0].backgroundColor,
+  }],
+};
+
+
+new Chart(barChartCanvas, {
+  type: 'bar',
+  data: barChartData,
+  options: barChartOptions
+});
+
+
+  },
+  error: function(xhr, status, error){
+
+  }
+  
+});
+
+$.ajax({
+  url: 'php/drinksBarChart.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(response){
+
+  console.log(`DRINKS:::::::::::::: ${JSON.stringify(response)}`);
+
+ // Extract data and labels from the response
+var data = response.datasets[0].data;
+var labels = response.labels;
+
+// Combine data and labels into an array of objects
+var combinedData = data.map((value, index) => ({ label: labels[index], value }));
+
+// Sort the combinedData array based on the 'value' property in descending order
+combinedData.sort((a, b) => b.value - a.value);
+
+// Extract the sorted data and labels
+var sortedData = combinedData.map(item => item.value);
+var sortedLabels = combinedData.map(item => item.label);
+
+// Update the response with sorted data and labels
+response.labels = sortedLabels;
+response.datasets[0].data = sortedData;
+
+
+  // Create a bar chart with the provided data
+var barChartCanvas = $('#barChartD').get(0).getContext('2d');
+var barChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  datasetFill: false,
+  legend: {
+    display: false,
+  },
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      min: 0,
+    },
+  },
+  animation: {
+    onComplete: function () {
+      var ctx = this.chart.ctx;
+      var fontSize = 18;
+
+      ctx.font = Chart.helpers.fontString(fontSize, 'bold', Chart.defaults.global.defaultFontFamily);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+
+      this.data.datasets.forEach(function (dataset) {
+        for (var i = 0; i < dataset.data.length; i++) {
+          var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model;
+          var value = dataset.data[i];
+
+          if (value !== 0) {
+            // Set background color
+            ctx.fillStyle = 'rgba(255, 255, 255, .75)'; // Adjust the color and opacity as needed
+
+            // Draw a rectangle behind the text
+            var textWidth = ctx.measureText(value).width;
+            ctx.fillRect((model.x - textWidth / 2) - 2, model.y, textWidth + 5, fontSize);
+
+            // Set text color
+            ctx.fillStyle = 'black'; // Set the font color to white
+
+            // Draw the text
+            ctx.fillText(value, model.x, model.y); // Adjust the offset as needed
+          }
+        }
+      });
+    },
+  },
+};
+
+
+var barChartData = {
+  labels: response.labels,
+          datasets: [{
+              data: sortedData,
+              backgroundColor: response.datasets[0].backgroundColor,
+          }]  
+};
+
+new Chart(barChartCanvas, {
+  type: 'bar',
+  data: barChartData,
+  options: barChartOptions
+});
+
+
+  },
+  error: function(xhr, status, error){
+
+  }
+  
+});
+
+}
+
+barChart();
+
+</script>
+</body>
+</html>

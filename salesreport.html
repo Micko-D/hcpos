@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>High-Coffee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="user-select: none;">
+<div class="wrapper" id="allcontent">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <!-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul> -->
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link text-dark" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <div class="form-group nav-link">
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                      <label class="custom-control-label" for="customSwitch1"><i class="fas fa-moon"></i></label>
+                      <label class="custom-control-label" for="customSwitch1" hidden><i class="fas fa-sun"></i></label>
+                    </div>
+                  </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar main-sidebar-custom sidebar-dark-warning elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">High-Coffee</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" id="pfpuser">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="username">HCPOS</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="../hcpos" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>            
+          </li>
+
+
+          <li class="nav-item">
+            <a href="pos.html" class="nav-link ">
+              <i class="nav-icon fas fa-terminal"></i>
+              <p>
+                POS
+                <!-- <span class="right badge badge-info">New</span> -->
+              </p>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="ord.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Orders
+                
+              </p><span class="right badge badge-info" id="navBadge"></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="orderhistory.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Order History
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manprod.html" class="nav-link">
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Manage Product
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="ticket.html" class="nav-link">
+              <i class="nav-icon fas fa-ticket-alt"></i>
+              <p>
+                Customer Tickets
+              </p>
+              <span class="right badge badge-info" id="navBadgeTicket"></span>
+            </a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a href="chat.html" class="nav-link">
+              <i class="nav-icon fas fa-comment-dots"></i>
+              <p>
+                Chat
+              </p>
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a href="feedback.html" class="nav-link ">
+              <i class="nav-icon fas fa-comment"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="salesreport.html" class="nav-link active">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Sales Report
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="maginv.html" class="nav-link ">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Inventory
+              </p>
+              <span class="right badge text-danger" style="display: none; font-size: 18px;" id="badge-info"><i class="fas fa-exclamation-triangle"></i></span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="usermanage.html" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Manage User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="audit.html" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>
+                Audit Logs
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" onclick="signout()">
+             <i class="nav-icon fas fa-sign-out-alt fa-lg"></i>
+            <p>Signout</p>
+     </a>
+          </li>
+
+          
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+
+    <!-- <div class="sidebar-custom">
+      <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+      <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+    </div> -->
+    <!-- /.sidebar-custom -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="tab-content" id="tab1">
+          <div class="row" style="justify-content: center">
+            <div class="col-12 col-sm-6 col-md-6">
+              <div class="small-box bg-warning">
+                <div class="btn btn-sm" style="width: 100%; outline: none;" onclick="openTab(event, 'tab2')">Graphs</div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-6">
+              <div class="small-box bg-warning"> 
+                <div class="btn btn-sm" style="width: 100%; outline: none;"  onclick="openTab(event, 'tab3')">Generate Report</div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>          
+          </div>
+          <!-- /.row -->  
+          <div class="row">
+  
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Sales</h3>                
+                </div>
+                <div class="card-body">
+                  
+                  <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Order Type</th>
+                      <th>Order Status</th>
+                      <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Ashlyn Kate Cabunay</td>
+                        <td>Take Away</td>
+                        <td>Order Submitted</td>
+                        <td>PHP 85.00</td>
+                      </tr>
+  
+                      
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+  
+          </div>
+        
+          <div class="tab-content" id="tab2" style="display: none;">
+            <div class="row" style="justify-content: right">
+              <div class="col-12 col-sm-3 col-md-3">
+                <div class="small-box bg-warning">
+                  <div class="btn btn-sm" style="width: 100%; outline: none;" onclick="openTab(event, 'tab1')">Back</div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+              <!-- /.col -->       
+            </div>
+            <!-- /.row -->
+            
+           <div class="col-12"> 
+
+            <!-- Adding the controller on the right side -->
+    <div class="col-2 col-sm-2 col-md-2" style="float: right;">
+      <div class="controller">
+        Controller
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" id="Daily" name="salesControl" value="Daily">
+          <label for="Daily" class="custom-control-label">Daily</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" id="Monthly" name="salesControl" value="Monthly" checked>
+          <label for="Monthly" class="custom-control-label">Monthly</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" id="Yearly" name="salesControl" value="Yearly">
+          <label for="Yearly" class="custom-control-label">Yearly</label>
+        </div>
+
+        <hr>
+
+        Category
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input category-checkbox" type="checkbox" id="catDine" name="catDine" value="Dine-In" checked>
+          <label for="catDine" class="custom-control-label">Dine-in</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input class="custom-control-input category-checkbox" type="checkbox" id="catTake" name="catTake" value="Take-Out" checked>
+          <label for="catTake" class="custom-control-label">Take-away/Pick-up</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input class="custom-control-input category-checkbox" type="checkbox" id="catDel" name="catDel" value="Delivery" checked>
+          <label for="catDel" class="custom-control-label">Delivery</label>
+        </div>
+        <div class="custom-control custom-checkbox" >
+          <input class="custom-control-input category-checkbox" type="checkbox" id="catAR" name="carAR" value="AR" checked>
+          <label for="catAR" class="custom-control-label">AR Customized</label>
+        </div>
+
+
+      </div>
+    </div>
+    <!-- /.col -->
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="sales-report">Monthly Recap Report</h5>
+      
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p class="text-center month-range">
+                            <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                          </p>
+      
+                          <div class="chart">
+                            <!-- Sales Chart Canvas -->
+                            <canvas id="salesChart2" height="180" style="height: 180px;"></canvas>
+                          </div>
+                          <!-- /.chart-responsive -->
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                    </div>
+                    <!-- ./card-body -->       
+                  </div>
+                  <!-- /.card -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+
+
+                  <!-- DONUT CHART -->
+        <div class="card col-12 col-sm-12 col-md-12">
+          <div class="row">
+            <div class="card col-md-4">
+              <div class="card-header">
+                <h3>Total Average Sales</h3>
+              </div>
+              <h1 id="averageSales" style="margin: auto;">PHP 123123</h1>
+            </div>
+            <div class="card col-md-4 donutArea" style="text-align: center;">
+              <!-- <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;" class="col-md-4"></canvas> -->
+            </div>
+            <div class="card col-md-4 pieArea" style="text-align: center;">
+              <!-- <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;" class="col-md-4"></canvas> -->
+            </div>
+            
+            
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+                              <!-- LINE CHART -->
+                              <div class="card card-warning">
+                                <div class="card-header">
+                                  <h3>Chicken Wings</h3>
+                                </div>
+                                <div class="card-body">
+                                  <div class="chart lineArea">
+                                    <!-- <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas> -->
+                                  </div>
+                                </div>
+                                <!-- /.card-body -->
+                              </div>
+                              <!-- /.card -->
+
+        </div>
+
+    
+            </div>
+
+        <div class="row tab-content" id="tab3" style="display: none;">
+          <div class="row" style="justify-content: right">
+
+            <div class="col-12 col-sm-3 col-md-3">
+              <div class="small-box bg-warning"> 
+                <div class="btn btn-sm" style="width: 100%; outline: none;"  onclick="openTab(event, 'tab1')">Back</div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>          
+          </div>
+          <!-- /.row -->  
+          <div class="row">
+  
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="form-group col-sm-12 col-md-12">
+                    
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <select name="dateControlRange" id="dateControlRange" class="form-control">
+                          <option value="Daily" selected>Daily</option>
+                          <option value="Weekly">Weekly</option>
+                          <option value="Monthly">Monthly</option>
+                        </select>
+                      </div>
+                      <div class="input-group-prepend" for="reservation">
+                        <label class="input-group-text" for="reservation" style="cursor: pointer;">
+                          <i class="far fa-calendar-alt"></i>
+                        </label>
+                      </div>
+                      <input type="text" class="form-control " id="reservation">
+                      <button class="btn btn-sm btn-warning col-2" id="printTable"><i class="fas fa-print"></i></button>
+                      
+                    </div>
+                    <!-- /.input group -->
+                  </div> 
+
+                  <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input target-filter" type="radio" id="Food" name="target" value="Food" checked>
+                        <label for="Food" class="custom-control-label">Food</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input target-filter" type="radio" id="Drink" name="target" value="Drink">
+                        <label for="Drink" class="custom-control-label">Drink</label>
+                      </div>
+
+                    </div>
+
+
+
+                  </div>
+                       
+                </div>
+                
+                <div class="card-body">
+                  
+                  <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body" id="tablePlacement">
+                  <table id="example2" class="table table-bordered table-striped">
+                    <thead class="text-center">
+                    <tr>
+                      <th>Date</th>
+                      <th id="rfidColumn">Reference Number</th>
+                      <th>Product Name</th>
+                      <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dateRangeData" class="text-center">
+  
+                      </tbody>
+                      <tfoot class="text-left">
+                        <tr>
+                          <th colspan="3">Grand Total</th>
+
+                          <th id="grandTotal">PHP 0.00</th>
+                        </tr>
+                        
+                      </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+
+
+
+
+
+
+      </div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+</div>
+
+<!-- Fail Modal -->
+<div class="modal fade" id="logfailModal" tabindex="-1" role="dialog" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="failModalLabel">Session Eneded</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              Session Ended.<br>
+              Login again to use...
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- ./wrapper -->
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="plugins/raphael/raphael.min.js"></script>
+<script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<script src="plugins/datatables-buttons/js/buttons.html5.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="dist/js/demo.js"></script>
+
+<script>
+
+function getURLParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+          }
+
+      // Usage:
+      const role = getURLParameter('role');
+      const userid = getURLParameter('userid');
+
+      if (!role || !userid) {
+        $('allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#logfailModal').modal('show');
+        // Listen for the modal close event
+        $('#logfailModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+    }
+
+      function signout() {
+
+$.ajax({
+  type: 'POST',
+  url: 'php/logout.php', // Replace with your actual login endpoint URL
+  data: {
+    role: role,
+    userid: userid
+  },
+  success: function(response) {
+
+    console.log(response);
+
+    
+      
+    // Clear session storage (you can also use localStorage)
+    sessionStorage.clear();
+
+    // Manipulate the browser's history to remove the URL parameters
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.pushState({path:newurl},'',newurl);
+    }
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+    
+  },
+  error: function(xhr, status, error){
+
+  }
+
+});
+
+
+}
+
+
+      document.addEventListener('DOMContentLoaded', function () {
+    
+    // Select the links in the sidebar menu and update their href attributes
+    const sidebarLinks = document.querySelectorAll('.nav-item a.nav-link');
+    sidebarLinks.forEach(function(link) {
+        const originalHref = link.getAttribute('href');
+        if (originalHref){
+        link.setAttribute('href', originalHref + `?role=${role}&userid=${userid}`);
+        }
+    });
+});
+
+let globalUserName = '';
+
+      function fetchEmployeeData(){
+        // Use the extracted parameters in an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'php/fetchuserdata.php', // Replace with the URL of your server-side script
+            data: {
+                role: role,
+                userid: userid
+            },
+            success: function (data) {
+                // Handle the fetched data here
+                console.log('Fetched data:', data);
+                // You can parse and display the data on your page as needed
+
+                if (data.length === 0){
+                  // Set the "allcontent" element's display to "none"
+        $('#allcontent').css('display', 'none');
+        // Redirect to the login page if either parameter is missing
+        $('#failModal').modal('show');
+        // Listen for the modal close event
+        $('#failModal').on('hidden.bs.modal', function (e) {
+            // Redirect to the login page after the modal is closed
+            window.location.href = 'login.html';
+        });
+                }
+
+                $.each(data, function(index, user) {
+
+                  $('#username').text(user.fullname);
+                  globalUserName = user.fullname;
+
+                  if (user.userimg !== null && user.userimg !== undefined && user.userimg !== ''){
+                    var imgSrc = "uploads/" + user.userimg;
+                    $('#pfpuser').attr('src', imgSrc);
+                  }
+
+                  console.log(user.fullname);
+                  console.log(imgSrc);
+                    
+                });
+
+                
+            },
+            error: function () {
+                console.error('An error occurred while fetching data.');
+            }
+        });
+      }
+      
+
+      console.log(role, " ", userid);
+      fetchEmployeeData();  
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const switchInput = document.getElementById('customSwitch1');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const sidebar = document.querySelector('.main-sidebar');
+
+    const buttonsExample1 = document.querySelectorAll('#example1 .btn-sm');
+    const buttonsExample2 = document.querySelectorAll('#example2 .btn-sm');
+
+    // Load switch state from localStorage on page load
+    const savedSwitchState = localStorage.getItem('darkMode');
+    if (savedSwitchState === 'true') {
+        switchInput.checked = true;
+    }
+
+    function updateStyles() {
+        const newButtonClass = switchInput.checked ? 'btn-info' : 'btn-light';
+        const newSidebarClass = switchInput.checked ? 'sidebar-light-warning' : 'sidebar-dark-warning';
+        
+        sidebar.classList.remove('sidebar-dark-warning', 'sidebar-light-warning');
+        sidebar.classList.add(newSidebarClass);
+
+        buttonsExample1.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        buttonsExample2.forEach(button => {
+            button.classList.remove('btn-light', 'btn-info');
+            button.classList.add(newButtonClass);
+        });
+
+        if (switchInput.checked) {
+            body.classList.remove('dark-mode');
+            navbar.classList.remove('navbar-dark');
+            navbar.classList.add('navbar-warning');
+            switchInput.nextElementSibling.hidden = true;
+            switchInput.nextElementSibling.nextElementSibling.hidden = false;
+        } else {
+            body.classList.add('dark-mode');
+            navbar.classList.remove('navbar-warning');
+            navbar.classList.add('navbar-dark');
+            switchInput.nextElementSibling.hidden = false;
+            switchInput.nextElementSibling.nextElementSibling.hidden = true;
+        }
+
+        // Save switch state to localStorage
+        localStorage.setItem('darkMode', switchInput.checked);
+    }
+
+    switchInput.addEventListener('change', updateStyles);
+
+    // Initial update of styles based on switch state
+    updateStyles();
+
+});
+</script>
+
+
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- <script src="dist/js/pages/dashboard2.js"></script> -->
+
+<script>
+
+function fetchSales2() {
+
+  var selectedSalesType = $('input[name="salesControl"]:checked').val();
+var selectedCategories = [];
+
+$('input.category-checkbox:checked').each(function() {
+    selectedCategories.push($(this).val());
+});
+
+if (selectedCategories.length === 0) {
+    selectedCategories = []; // Clear the array if no checkboxes are selected
+}
+
+    console.log(selectedSalesType);
+    console.log(selectedCategories);
+
+    
+    $.ajax({
+        url: 'php/msales.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(dataSales) {
+            // Process dataSales and populate salesChartData2
+            var salesChartCanvas2 = $('#salesChart2').get(0).getContext('2d');
+            
+            var salesChartData2 = {
+                labels: [], // Populate with month_year values
+                datasets: [
+                    {
+                        label: 'Sales',
+                        backgroundColor: 'rgba(60,141,188,0.9)',
+                        borderColor: 'rgba(60,141,188,0.8)',
+                        pointRadius: false,
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [] // Populate with total_sales values
+                    }
+                ]
+            };
+
+            console.log(salesChartData2);
+            
+            // Populate the chart data arrays from the fetched data
+            dataSales.forEach(item => {
+                salesChartData2.labels.push(item.month_year);
+                salesChartData2.datasets[0].data.push(item.total_sales);
+            });
+
+            var salesChartOptions2 = {
+              maintainAspectRatio: false,
+  responsive: true,
+  legend: {
+    display: false
+  },
+  scales: {
+    xAxes: [
+      {
+        gridLines: {
+          display: false
+        }
+      }
+    ],
+    yAxes: [
+      {
+        gridLines: {
+          display: false
+        }
+      }
+    ]
+  }
+            };
+
+            var salesChart2 = new Chart(salesChartCanvas2, {
+                type: 'line',
+                data: salesChartData2,
+                options: salesChartOptions2
+            });
+
+            // Update the date range in the <p> element
+            var lowestMonth = salesChartData2.labels[0];
+            var highestMonth = salesChartData2.labels[salesChartData2.labels.length - 1];
+            var dateRangeElement = $('.month-range strong');
+            dateRangeElement.text('Sales: ' + lowestMonth + ' - ' + highestMonth);
+
+
+            // Check if selectedCategories is empty
+if (selectedCategories.length === 0) {
+    var defaultData = {
+        labels: ['No Data'],
+        datasets: [{
+            data: [0],
+            backgroundColor: ['#d2d6de']
+        }]
+    };
+
+    // Update the date range in the <p> element
+    var dateRangeElement = $('.month-range strong');
+    dateRangeElement.text('No Data');
+} else {
+            // Fetch order types data from a different URL or table
+            $.ajax({
+                url: 'php/monthlyOrders.php', // Modify this URL for order types data
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                  salesType: selectedSalesType,
+                  categories: selectedCategories
+                },
+                success: function(orderTypesData) {
+                  
+// Remove the existing donut chart canvas
+$('#donutChart').remove();
+$('.donutChartLabel').remove();
+
+// Check if both orderTypesData array and selectedCategories are empty
+if (orderTypesData.datasets[0].data.length === 0 || selectedCategories.length === 0) {
+            return; // No data, so don't create the chart
+        }
+
+// Create a new canvas for the donut chart
+$('.donutArea').append('<canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;" class="col-md-4"></canvas>');
+                  
+                    var donutChartCanvas = $('#donutChart').get(0).getContext('2d');
+                    var donutOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+        y: {
+            display: true,
+            ticks: {
+                beginAtZero: true,
+                stepSize: 25,
+                callback: function (value) {
+                    return value + '%';
+                }
+            }
+        }
+    }
+};
+
+// Create the doughnut chart
+var donutChart = new Chart(donutChartCanvas, {
+    type: 'doughnut',
+    data: orderTypesData,
+    options: donutOptions
+});
+
+
+
+// Calculate percentages
+var data = orderTypesData.datasets[0].data.map(parseFloat);
+var total = data.reduce((acc, value) => acc + value, 0);
+var percentages = data.map(value => ((value / total) * 100).toFixed(2) + '%');
+
+// Update content in .donutArea
+$('.donutArea').append(`<p class="donutChartLabel">${orderTypesData.labels[0]}: <u><strong>${percentages[0]}</strong></u> | ${orderTypesData.labels[1]}: <u><strong>${percentages[1]}</strong></u></p>`);
+
+                    // Update the date range in the <p> element
+                    var lowestMonth = salesChartData2.labels[0];
+                    var highestMonth = salesChartData2.labels[salesChartData2.labels.length - 1];
+                    var dateRangeElement = $('.month-range strong');
+                    dateRangeElement.text('Sales: ' + lowestMonth + ' - ' + highestMonth);
+
+
+
+                   
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+          }
+
+            $.ajax({
+    url: 'php/monthlyProducts.php', // Modify the URL to match your PHP script
+    type: 'POST',
+    dataType: 'json',
+    data: {
+                  salesType: selectedSalesType,
+                  categories: selectedCategories
+                },
+    success: function(productTypesData) {
+        console.log(productTypesData);
+
+        // Remove the existing donut chart canvas
+$('#pieChart').remove();
+$('.pieChartLabel').remove();
+
+// Create a new canvas for the donut chart
+$('.pieArea').append('<canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;" class="col-md-4"></canvas>');
+
+        // Get context with jQuery - using jQuery's .get() method.
+        var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+        
+        // Create pie chart data
+        var pieData = {
+            labels: productTypesData.labels,
+            datasets: [{
+                data: productTypesData.datasets[0].data,
+                backgroundColor: productTypesData.datasets[0].backgroundColor,
+            }]
+        };
+
+        var pieOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+        };
+        
+        // Create pie chart
+        new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: pieData,
+            options: pieOptions
+        });
+
+
+        // Calculate percentages
+var data = productTypesData.datasets[0].data.map(parseFloat);
+var total = data.reduce((acc, value) => acc + value, 0);
+var percentages = data.map(value => ((value / total) * 100).toFixed(2) + '%');
+
+// Update content in .pieArea
+$('.pieArea').append(`<p class="pieChartLabel">${productTypesData.labels[0]}: <u><strong>${(percentages[0] || 0)}</strong></u> | ${productTypesData.labels[1] || ''}: <u><strong>${(percentages[1] || '')}</strong></u></p>`);
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+
+$.ajax({
+    url: 'php/averageSales.php', // Modify the URL to match your PHP script
+    type: 'POST',
+    dataType: 'json',
+    data: {
+        salesType: selectedSalesType,
+    },
+    success: function(data) {
+        // Process the received data
+        var averageSalesData = data; // Assuming the response is an array of objects
+
+        // Get the current month and year
+        var currentMonth = new Date().getMonth() + 1; // Months are zero-based
+        var currentYear = new Date().getFullYear();
+
+        // Find the average sales based on salesType
+        var averageSalesElement = $('#averageSales');
+        var formattedAverage = 'N/A'; // Default value if data is not found
+
+        if (selectedSalesType === 'Daily') {
+            // Find the average sales for the current day
+            var currentDate = new Date().toISOString().split('T')[0];
+            var dailySales = averageSalesData.find(function(item) {
+                return item.date === currentDate;
+            });
+
+            if (dailySales) {
+                formattedAverage = parseFloat(dailySales.average_sales).toFixed(2);
+            }
+        } else if (selectedSalesType === 'Monthly') {
+            // Find the average sales for the current month and year
+            var currentMonthSales = averageSalesData.find(function(item) {
+                var parts = item.month_year.split('-');
+                return parseInt(parts[0]) === currentMonth && parseInt(parts[1]) === currentYear;
+            });
+
+            if (currentMonthSales) {
+                formattedAverage = parseFloat(currentMonthSales.average_sales).toFixed(2);
+            }
+        } else if (selectedSalesType === 'Yearly') {
+            // Find the average sales for the current year
+            var yearlySales = averageSalesData.find(function(item) {
+                return parseInt(item.year) === currentYear;
+            });
+
+            if (yearlySales) {
+                formattedAverage = parseFloat(yearlySales.average_sales).toFixed(2);
+            }
+        }
+
+        // Set initial text to 0
+        averageSalesElement.text('PHP 0.00');
+
+        // Animate counting to the formatted average value
+        $({ counter: 0 }).animate(
+            { counter: formattedAverage },
+            {
+                duration: 1000, // Animation duration in milliseconds
+                easing: 'swing', // Animation easing function
+                step: function() {
+                    // Update the text with the animated value
+                    averageSalesElement.text('PHP ' + this.counter.toFixed(2));
+                },
+                complete: function() {
+                    // Set the final value once animation is complete
+                    averageSalesElement.text('PHP ' + formattedAverage);
+                }
+            }
+        );
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+
+
+}
+
+
+let lastFetchedDate = new Date(); // Initialize with current time initially
+console.log(lastFetchedDate);
+
+function fetchDSales() {
+    $.ajax({
+        url: 'php/dsalestable.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+
+          const existingOrder = new Set();
+
+            $('#example1 tbody').empty();
+
+            $.each(data, function(index, item) {
+
+                $('#example1 tbody').append(`
+                    <tr>
+                        <td>${item.customername}</td>
+                        <td>${item.ordertype}</td> <!-- Display the formatted prodid -->
+                        <td>${item.orderstatus}</td>
+                        <td>${item.totalprice}</td>
+                    </tr>
+                `);
+            });
+
+            // Destroy the existing DataTable instance
+            if ($.fn.DataTable.isDataTable('#example1')) {
+                $('#example1').DataTable().destroy();
+            }
+
+            $('#example1').DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+// Function to update sales data and card title
+function updateSalesAndCardTitle() {
+    fetchDSales();
+    
+}
+
+// Initial call to update sales data and card title
+updateSalesAndCardTitle();
+
+// Periodically check for date changes and update sales data
+setInterval(function() {
+    const currentDate = new Date(); 
+
+    // Update the card title with the current date and time
+    const currentDateTime = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'};
+    const formattedDateTime = currentDateTime.toLocaleDateString('en-PH', options).replace('at', '|');;
+    $('.card-title').text(`Sales - ${formattedDateTime}`);
+
+    updateSalesAndCardTitle();
+    
+
+    // Check if the date has changed since the last fetch
+    if (currentDate.toDateString() !== lastFetchedDate.toDateString()) {
+        location.reload(true);
+    }
+}, 60000); // Check every 60 seconds (adjust as needed)
+
+
+// Assuming you have an input field with the id 'reservation'
+const reservationInput = $('#reservation');
+
+// Function to fetch data when the input value changes
+reservationInput.on('change', function () {
+    fetchDateRangeData();
+});
+
+// Alternatively, you can use the 'input' event for real-time updates as the user types
+reservationInput.on('input', function () {
+    fetchDateRangeData();
+});
+
+$('#dateControlRange').on('change', function() {
+        var selectedValue = $(this).val(); // Get the selected option value
+        fetchDateRangeData(selectedValue); // Call the function with the selected value
+    });
+
+    $('input[name="target"]').change(function() {
+      // var variant = $('input[name="foodRadio"]:checked').val();
+        fetchDateRangeData(); // Fetch and update data when radio button changes
+    });
+
+
+function fetchDateRangeData() {
+  console.log("Fetching");
+  const dateRange = $('#reservation').val(); // Get the selected date range
+  const dateControlRange = $('#dateControlRange').val();
+  const targetDisplay = $('input[name="target"]:checked').val();
+
+  console.log(`Date Control Range :: ${dateControlRange}`);
+
+// Split the date range into start and end dates
+const [startDateStr, endDateStr] = dateRange.split(' - ');
+
+// Split the start and end date strings into parts
+const [startMonth, startDay, startYear] = startDateStr.split('/');
+    const [endMonth, endDay, endYear] = endDateStr.split('/');
+
+    // Create Date objects using the parts
+    const startDate = new Date(`${startYear}-${startMonth}-${startDay}`);
+    const endDate = new Date(`${endYear}-${endMonth}-${endDay}`);
+// Format the dates to the 'YYYY-MM-DD' format for SQL
+const formattedStartDate = startDate.toISOString().split('T')[0];
+const formattedEndDate = endDate.toISOString().split('T')[0];
+
+
+ // Check if DataTable has already been initialized
+ if ($.fn.DataTable.isDataTable('#example2')) {
+    // DataTable is already initialized, destroy it first
+    $('#example2').DataTable().destroy();
+  }
+
+    // Make an AJAX request to fetch data for the selected date range
+    $.ajax({
+        url: 'php/rangeofsales.php', // Replace with the correct PHP script
+        type: 'POST', // You may need to change the HTTP method based on your implementation
+        data: {
+          startDate: formattedStartDate,
+            endDate: formattedEndDate,
+            dateControlRange : dateControlRange,
+            target: targetDisplay
+
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log("Fetched ", data);
+          
+            // Update the table data
+            // Initialize grand total
+        let grandTotal = 0;
+
+            
+        $('#tablePlacement').empty();
+
+        if  (dateControlRange === 'Daily') 
+        {
+
+          $('#tablePlacement').append(`
+          <table id="example2" class="table table-bordered table-striped">
+                    <thead class="text-center">
+                    <tr>
+                      <th>Date</th>
+                      <th id="rfidColumn">Reference Number</th>
+                      <th>Product Name</th>
+                      <th>Variant</th>
+                      <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dateRangeData" class="text-center">
+  
+                      </tbody>
+                      <tfoot class="text-left">
+                        <tr>
+                          <th colspan="4">Grand Total</th>
+
+                          <th id="grandTotal">PHP 0.00</th>
+                        </tr>
+                        
+                      </tfoot>
+                  </table>
+          `);
+        }else {
+
+          $('#tablePlacement').append(`
+          <table id="example2" class="table table-bordered table-striped">
+                    <thead class="text-center">
+                    <tr>
+                      <th>Date</th>
+                      <th>Product Name</th>
+                      <th>Variant</th>
+                      <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dateRangeData" class="text-center">
+  
+                      </tbody>
+                      <tfoot class="text-left">
+                        <tr>
+                          <th colspan="3">Grand Total</th>
+
+                          <th id="grandTotal">PHP 0.00</th>
+                        </tr>
+                        
+                      </tfoot>
+                  </table>
+          `);
+          
+        }
+
+            // Populate the table with the fetched data
+            $.each(data, function (index, item) {
+
+              if (dateControlRange === 'Daily'){
+
+                $('#example2 tbody').append(`
+                    <tr>
+                        <td>${item.orderdate}</td>
+                        <td>${item.rfid}</td>
+                        <td>${item.prodname}</td>
+                        <td>${item.productvariant}</td>
+                        <td>PHP ${item.subtotal}</td>
+                    </tr>
+                `);
+
+                  }else{
+                    $('#example2 tbody').append(`
+                    <tr>
+                        <td>${item.orderdate}</td>
+                        <td>${item.prodname}</td>
+                        <td>${item.productvariant}</td>
+                        <td>PHP ${item.total_price}</td>
+                    </tr>
+                `);
+                  }
+                // Extract the numeric value from the "amount" and add it to the grand total
+              if (dateControlRange === 'Daily'){
+                grandTotal += parseFloat(item.subtotal);
+              }else{
+            grandTotal += parseFloat(item.total_price);
+              }
+            });
+
+            // Update the grand total in the tfoot cell
+        $('#grandTotal').text('PHP ' + grandTotal.toFixed(2));
+
+            $("#example2").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false, "order": []
+    }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+            
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+</script>
+
+<script>
+
+$(document).ready(function() {
+    // Attach event listener to radio buttons
+    $('input[name="salesControl"]').change(function() {
+        fetchSales2(); // Fetch and update data when radio button changes
+    });
+
+    // Attach event listener to checkboxes
+    $('input[type="checkbox"]').change(function() {
+        fetchSales2(); // Fetch and update data when checkbox changes
+    });
+    
+});
+
+ // Add a click event handler for the "Print" button
+$('#printTable').click(function () {
+  // Create a new window for printing
+  const selectedDate = $('#dateControlRange').val();
+  let size = 2;
+
+  if (selectedDate === 'Daily'){
+    size = 4;
+  }else{
+    size = 3;
+  }
+
+  const printWindow = window.open("", "width=1,height=1");
+  printWindow.document.open();
+  printWindow.document.write('<html><head><title>Sales Report</title>');
+  printWindow.document.write(`<style>
+      * {
+        text-align: center;
+      }
+      
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      /* Add any other print-specific styles you need */
+    </style>
+  `);
+  printWindow.document.write('</head><body>');
+  printWindow.document.write(`
+  <img src="dist/img/AdminLTELogo.png" style="width: 50px;">
+  <h2>Hi-Coffee Sales Report</h2>`);
+
+  // Get DataTable instance
+  var table = $('#example2').DataTable();
+
+  // Add the table content dynamically
+  printWindow.document.write('<table>');
+  printWindow.document.write('<thead>');
+  printWindow.document.write('<tr>');
+
+  // Add table header
+  table.columns().header().each(function (colIdx) {
+    printWindow.document.write('<th>' + table.column(colIdx).header().innerHTML + '</th>');
+  });
+
+  printWindow.document.write('</tr>');
+  printWindow.document.write('</thead>');
+  printWindow.document.write('<tbody>');
+
+  // Add table rows
+  table.rows().data().each(function (row) {
+    printWindow.document.write('<tr>');
+    row.forEach(function (cell) {
+      printWindow.document.write('<td>' + cell + '</td>');
+    });
+    printWindow.document.write('</tr>');
+  });
+
+  printWindow.document.write('</tbody>');
+
+
+// Assuming the 4th column (index 3) needs to be summed
+var totalColumnIndex = 4;
+
+if (selectedDate === 'Daily'){
+  totalColumnIndex = 4;
+}else{
+  totalColumnIndex = 3;
+}
+
+// Remove "PHP " prefix and convert to numbers
+var values = table.column(totalColumnIndex, { search: 'applied' }).data().toArray();
+var numericValues = values.map(value => parseFloat(value.replace('PHP ', '')));
+
+// Calculate the sum
+var total = numericValues.reduce((acc, value) => acc + value, 0);
+
+printWindow.document.write('<tfoot class="text-left">');
+printWindow.document.write('<tr>');
+printWindow.document.write(`<th colspan="${size}">Grand Total</th>`);
+printWindow.document.write('<th id="grandTotal">PHP ' + total.toFixed(2) + '</th>');
+printWindow.document.write('</tr>');
+printWindow.document.write('</tfoot>');
+
+  printWindow.document.write('</table>');
+
+  printWindow.document.write(`
+  <div style="margin-top: 20px; border-top: 1px solid #000; padding-top: 10px;">
+      <p style="margin-bottom: 0px; font-size: 18px;"><strong><u>${globalUserName}</u></strong></p>
+      <p style="text-align: center; margin-top: 0px;">Signature Over Printed Name</p>
+    </div>
+  </body></html>`);
+  printWindow.document.close();
+
+  // Print the content
+  printWindow.print();
+
+  // Close the print window
+  printWindow.close();
+});
+
+
+
+  function openTab(evt, tabName) {
+      // Get all tab content elements
+      const tabContents = document.getElementsByClassName('tab-content');
+
+      // Hide all tab contents
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+      }
+
+      // Remove 'active' class from all tab links
+      const tabLinks = document.getElementsByClassName('tab-link');
+      for (let i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove('active');
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = 'block';
+      if (tabName === 'tab2'){
+        fetchSales2();
+        wingsLineChart();
+      }
+      if (tabName === 'tab3'){
+        fetchDateRangeData();
+      }
+
+      // Add 'active' class to the clicked tab link
+      evt.currentTarget.classList.add('active');
+
+      // Remove focus from the clicked button after a slight delay
+      setTimeout(() => {
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.blur();
+    }
+}, 10);
+    }
+
+
+$(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    
+
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+  })
+
+  $(document).ready(function() {
+  // Calculate the current date
+  var today = new Date();
+
+  // Calculate the date 6 days ago
+  var sixDaysAgo = new Date();
+  sixDaysAgo.setDate(today.getDate() - 6);
+
+  // Format the dates as "MM/DD/YYYY"
+  var formattedToday = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+  var formattedSixDaysAgo = (sixDaysAgo.getMonth() + 1) + '/' + sixDaysAgo.getDate() + '/' + sixDaysAgo.getFullYear();
+
+  // Set the value of the input field
+  $('#reservation').val(formattedSixDaysAgo + ' - ' + formattedToday);
+});
+
+function fetchNew() {
+  $.ajax({
+    url: 'php/orderfetchonline.php',
+    type: 'POST',
+    data: {
+      orderStatus: "Order Submitted"
+    },
+    success: function(data) {
+      dataget = data;
+      const existingOrderIds = new Set(); // Set to store existing 'orderid' values
+
+      let count = 0;
+
+      $.each(data, function(index, item) {
+        if (!existingOrderIds.has(item.orderid)) { // Check if the 'orderid' is already seen
+          existingOrderIds.add(item.orderid); // Add the 'orderid' to the set
+
+          count++; // Increment count by 1
+        }
+
+       
+      });
+
+      console.log("NEW ORDERS", count);
+      if (count > 0){
+      $('#navBadge').text(count);
+      }      
+
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+}
+function fetchTicketNew() {
+
+$.ajax({
+  url: 'php/ticketNew.php',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+
+      console.log(data);
+
+    let countTicketNew = 0;
+    $.each(data, function(index, item) {
+
+
+        countTicketNew++;
+      
+     
+    });      
+    console.log(`Count new ticket:: ${countTicketNew}`);
+    if (countTicketNew > 0){
+    $('#navBadgeTicket').text(countTicketNew);
+    } 
+
+
+    console.log(data);
+  },
+  error: function(xhr, status, error) {
+    console.error(error);
+  }
+});
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
+// Function to generate month-year values for the last 12 months
+function getLast12Months() {
+    var monthsData = [];
+    var currentDate = new Date();
+    for (var i = 11; i >= 0; i--) {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        var year = currentDate.getFullYear();
+        var month = currentDate.getMonth() + 1; // Month is zero-based
+        var formattedMonth = month < 10 ? '0' + month : month;
+        monthsData.push(year + '-' + formattedMonth);
+    }
+    return monthsData;
+}
+
+// Use getLast12Months to get the last 12 month-year values
+var monthYears = getLast12Months();
+
+// Display the generated month-year values
+console.log(monthYears);
+
+
+function wingsLineChart() {
+  $('#lineChart').remove();
+
+// Create a new canvas for the donut chart
+$('.lineArea').append('<canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>');
+
+
+    // Make an AJAX request to fetch data for the selected date range
+    $.ajax({
+        url: 'php/fetchLinesChicken.php', // Replace with the correct PHP script
+        type: 'GET', // You may need to change the HTTP method based on your implementation
+        dataType: 'json',
+        success: function (data) {
+          console.log("Fetched ", data);
+
+var datasets = {};
+var monthCounts = {};
+
+data.forEach(function(item) {
+    var prodid = item.prodid;
+    var product_name = item.product_name;
+    var order_month_year = item.order_month_year;
+    var total_quantity = parseInt(item.total_quantity);
+
+    if (!datasets[product_name]) {
+        datasets[product_name] = {
+            label: product_name,
+            data: [],
+            backgroundColor: getRandomColor(), // Custom function to get random colors
+            borderColor: getRandomColor(), // Custom function to get random colors
+            borderWidth: 1,
+            fill: false
+        };
+    }
+
+    if (!monthCounts[order_month_year]) {
+        monthCounts[order_month_year] = {};
+    }
+
+    monthCounts[order_month_year][product_name] = total_quantity;
+});
+
+// Create a custom sort function for the 'orderedMonths'
+var sortMonths = function(a, b) {
+    var [aYear, aMonth] = a.split('-');
+    var [bYear, bMonth] = b.split('-');
+    return aYear - bYear || aMonth - bMonth;
+};
+
+// Sort the months and year in chronological order
+var orderedMonths = Object.keys(monthCounts).sort(sortMonths);
+
+var labels = orderedMonths.map(function(month_year) {
+    var [year, month] = month_year.split('-');
+    return new Date(year, month - 1).toLocaleString('default', { month: 'long', year: 'numeric' });
+});
+
+Object.keys(datasets).forEach(function(product) {
+    var dataset = datasets[product];
+    orderedMonths.forEach(function(month_year) {
+        if (monthCounts[month_year][product]) {
+            dataset.data.push(monthCounts[month_year][product]);
+        } else {
+            dataset.data.push(0);
+        }
+    });
+});
+
+
+    // Convert the datasets object into an array
+    var chartDatasets = Object.values(datasets);
+
+    // Create a chart
+var ctx = document.getElementById('lineChart').getContext('2d');
+var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: chartDatasets
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            },
+            x: {
+                type: 'time', // Set X-axis type to time for automatic date formatting
+                time: {
+                    unit: 'month' // Show labels by month
+                },
+                ticks: {
+                    maxRotation: 0, // Set to 0 for horizontal label rotation
+                    minRotation: 0
+                }
+            }
+        },
+        elements: {
+            line: {
+                borderWidth: 10 // Adjust this value to make the lines thicker
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: 'Monthly Sales' // Chart title
+            }
+        },
+        interaction: {
+            mode: 'index',
+            intersect: false
+        },
+        pan: {
+            enabled: true,
+            mode: 'x'
+        },
+        zoom: {
+            mode: 'x',
+            limits: {
+                max: 10,
+                min: 0.5
+            }
+        }
+    }
+});
+
+},
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+function fetchInventory() {
+
+$.ajax({
+    url: 'php/inventoryfetch.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        let count = 0;
+        $.each(data, function(index, item) {
+            var status;
+            if (item.productsize <= 25){
+              count++;
+            }
+        });
+
+        if (count > 0){
+          $('#badge-info').css('display', 'block');
+        }
+
+        console.log(data);
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+}
+
+fetchInventory();
+
+
+
+  fetchTicketNew();
+fetchNew();
+  
+</script>
+</body>
+</html>
